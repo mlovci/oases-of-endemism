@@ -510,8 +510,8 @@ We project the 15-dimensional environmental space of all 1121 springs into a 2D 
 *   **Environmental Vector Fitting (envfit)**:
     - To show the interactions and directions of all 15 environmental variables in the same 2D projection, we fit a linear gradient for each feature across the centered t-SNE coordinates.
     - For each environmental variable, we fit the linear regression model:
-      $$y_i = \beta_1 \cdot \text{tSNE}_{1,i} + \beta_2 \cdot \text{tSNE}_{2,i} + \beta_0$$
-      where $y_i$ is the observed feature value for spring $i$, and $\text{tSNE}_{1,i}, \text{tSNE}_{2,i}$ are the coordinates.
+      $$y_i = \beta_1 \cdot \text{tSNE}\_{1,i} + \beta_2 \cdot \text{tSNE}\_{2,i} + \beta_0$$
+      where $y_i$ is the observed feature value for spring $i$, and $\text{tSNE}\_{1,i}, \text{tSNE}\_{2,i}$ are the coordinates.
     - The direction of the vector is defined by the normalized regression coefficients:
       $$\tilde{\beta} = \frac{(\beta_1, \beta_2)}{\sqrt{\beta_1^2 + \beta_2^2}}$$
     - The length of the vector in the biplot is scaled by the correlation $R = \sqrt{R^2}$ of the fit:
