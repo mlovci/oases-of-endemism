@@ -530,7 +530,7 @@ We project the 15-dimensional environmental space of all 1121 springs into a 2D 
       ![Supplementary Figure S1: t-SNE Environmental Gradients Grid](figures/Figure_S1_tSNE_Environmental_Grid.png)
 *Supplementary Figure S1: 15-Variable Environmental Gradient Grid mapped onto t-SNE space. A distance-weighted K-Nearest Neighbors (KNN) regressor ($k=25$) was used to interpolate continuous background contours for each variable, overlaid with the observed spring coordinates. Points are shaped by aquifer type (circles for Regional Aquifer, downward triangles for Local Geothermal/Hot, and diamonds for Local Cold) and scaled by size proportional to endemic richness. [Download Print-Quality PDF](figures/Figure_S1_tSNE_Environmental_Grid.pdf)*
 
-### D. Global Spring Site-Clustering Heatmap (visualize_sites_clustermap.py)
+### D. Global Spring Site-Clustering Heatmap ([visualize_sites_clustermap.py](visualize_sites_clustermap.py))
 
 To investigate how the 1121 springs group together based on their biological communities and validate our three-way hydrogeological classification, we perform average-linkage hierarchical clustering on both rows (spring sites, N=1121) and columns (the 5 standardized biological richness variables) using the Euclidean distance metric for rows and correlation distance for columns. 
 *   **Methodology**: To ensure optimal ordering of clusters, we apply the **Optimal Leaf Ordering (OLO)** algorithm to both row and column linkage trees. The biological features are z-score standardized to ensure they are on the same visual scale (Z-score limits from -2.5 to 2.5). We map row side-colors to indicate the spring aquifer types (Teal: Regional Aquifer, Red: Local Geothermal/Hot, Dark Blue: Local Cold) and include custom legend elements. The y-labels are hidden due to overcrowding.
@@ -538,7 +538,7 @@ To investigate how the 1121 springs group together based on their biological com
     ![Figure 6: Global Spring Site-Clustering Heatmap](figures/Figure_6_Global_Site_Clustering.png)
 *Figure 6: Global Spring Site-Clustering Heatmap ($N=1121$). Clustermap represents average-linkage hierarchical clustering optimized via Optimal Leaf Ordering (OLO) on 1121 springs across 5 standardized biological variables. Row side-colors code the spring aquifer groups (Teal: Regional Aquifer, Red: Local Geothermal/Hot, Dark Blue: Local Cold). [Download Print-Quality PDF](figures/Figure_6_Global_Site_Clustering.pdf)*
 
-### E. Biological Taxa Co-occurrence Clustermap (visualize_cooccurrence.py)
+### E. Biological Taxa Co-occurrence Clustermap ([visualize_cooccurrence.py](visualize_cooccurrence.py))
 
 To evaluate how the five biological richness variables (Endemics, Crenophilies, Springsnails, Non Natives, Native Fish) co-occur and group together within the stable Regional Aquifer oases ($N=45$), we compute their Spearman rank correlation matrix ($r_s$) and perform average-linkage hierarchical clustering.
 *   **Methodology**: We define pairwise distances using correlation distance ($d(u,v) = 1 - r_s(u,v)$). We apply the OLO algorithm to order the branches and leaves of the dendrogram. The y-ticks of the heatmap include tick lines directly connecting labels to the dendrogram leaf ends. The top three environmental drivers for each biological variable are annotated on the right, color-coded by relationship type: green for positive correlates, red for negative filters, and orange for anthropogenic disturbances.
@@ -548,7 +548,7 @@ To evaluate how the five biological richness variables (Endemics, Crenophilies, 
 
 ---
 
-### F. Multi-Taxon Regression and Feature Importance Analysis (taxa_regression_analysis.py)
+### F. Multi-Taxon Regression and Feature Importance Analysis ([taxa_regression_analysis.py](taxa_regression_analysis.py))
 
 To map and compare the physical habitat requirements, environmental drivers, and anthropogenic threats across different biological groups in Regional Aquifer oases ($N=45$), we performed parallelized bootstrap Random Forest regression and standardized Poisson Generalized Linear Models (GLMs) for each of the five biological richness variables independently.
 *   **Methodology**:
