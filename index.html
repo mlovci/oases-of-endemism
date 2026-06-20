@@ -447,6 +447,11 @@
         };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Mermaid for Flowcharts -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
 </head>
 <body>
 
@@ -1440,7 +1445,7 @@
 <p>The conversion process is executed via a Python-based pipeline that leverages two core libraries:
 - <strong><code>python-docx</code></strong>: Parses the underlying Word Open XML document structure to extract table data.
 - <strong><code>openpyxl</code></strong>: Constructs the Excel workbook, populates the cells with typed data, and applies professional formatting.</p>
-<pre><code class="language-mermaid">graph TD
+<div class="mermaid">graph TD
     A[Data_Table_S5.docx] --&gt; B(python-docx Table Parser)
     B --&gt; C{Row Index Checker}
     C --&gt;|Row 0 &amp; 1: Header/Units| D[Clean Whitespace &amp; Non-breaking Spaces]
@@ -1450,7 +1455,7 @@
     F --&gt; G[Apply Alignment &amp; Styling]
     G --&gt; H[Calculate Dynamic Column Widths]
     H --&gt; I[Data_Table_S5.xlsx]
-</code></pre>
+</div>
 <hr />
 <h2 id="2-core-python-script-convertpy">2. Core Python Script: <code>convert.py</code></h2>
 <p>The script is stored locally as <a href="convert.py">convert.py</a>. Below is the annotated codebase:</p>

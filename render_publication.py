@@ -451,6 +451,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Mermaid for Flowcharts -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
 </head>
 <body>
 
@@ -655,6 +660,13 @@ def convert_to_html(md_text):
     html = re.sub(
         r'href="file:///.*?/Oases of Endemism/([a-zA-Z0-9_\-\.]+)\.md"',
         r'href="#\1"',  # Link to section/tab conceptually
+        html
+    )
+    
+    # 6. Convert mermaid code blocks to <div class="mermaid"> tags for Mermaid.js rendering
+    html = re.sub(
+        r'<pre><code class="language-mermaid">([\s\S]*?)</code></pre>',
+        r'<div class="mermaid">\1</div>',
         html
     )
     
