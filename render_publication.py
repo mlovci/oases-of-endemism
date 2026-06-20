@@ -192,62 +192,59 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             gap: 40px;
         }
 
-        /* Navigation Tabs */
-        .nav-tabs {
-            display: flex;
-            gap: 8px;
-            padding: 6px;
-            background-color: var(--code-bg);
-            border-radius: 12px;
-            align-self: flex-start;
-            border: 1px solid var(--border-color);
+        html {
+            scroll-behavior: smooth;
         }
 
-        .tab-btn {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-family: var(--font-header);
-            font-weight: 600;
-            font-size: 14px;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.2s, color 0.2s;
+        /* Sidebar Navigation Links */
+        .sidebar-nav {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            margin-bottom: auto;
+        }
+
+        .nav-link {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-family: var(--font-header);
+            font-weight: 500;
+            font-size: 14px;
+            padding: 10px 16px;
+            border-radius: 8px;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
         }
 
-        .tab-btn:hover {
+        .nav-link:hover {
             color: var(--header-text);
+            background-color: var(--border-color);
         }
 
-        .tab-btn.active {
-            background-color: var(--bg-color);
+        .nav-link.active {
             color: var(--accent-primary);
-            box-shadow: 0 4px 6px -1px var(--shadow-color);
+            background-color: rgba(16, 185, 129, 0.1);
+            font-weight: 600;
+        }
+        
+        [data-theme="light"] .nav-link.active {
+            background-color: rgba(5, 150, 105, 0.08);
         }
 
         /* Content Sections */
         .content-section {
-            display: none;
             background-color: var(--container-bg);
             border: 1px solid var(--border-color);
             border-radius: 20px;
             padding: 48px;
             backdrop-filter: blur(12px);
             box-shadow: 0 10px 30px -10px var(--shadow-color);
-            animation: fadeIn 0.4s ease;
-        }
-
-        .content-section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            margin-bottom: 40px;
         }
 
         /* Markdown Styling */
@@ -485,6 +482,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             </div>
         </div>
 
+        <nav class="sidebar-nav">
+            <a href="#results-sec" class="nav-link active"><i class="fa-solid fa-chart-line"></i> Scientific Findings</a>
+            <a href="#methods-sec" class="nav-link"><i class="fa-solid fa-gears"></i> Methodology</a>
+            <a href="#walkthrough-sec" class="nav-link"><i class="fa-solid fa-clipboard-check"></i> Verification Log</a>
+        </nav>
+
         <div class="theme-switch-container">
             <span class="theme-label">Switch Theme</span>
             <button class="theme-toggle-btn" id="theme-toggle">
@@ -495,31 +498,18 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     <!-- Main Content Panel -->
     <main>
-        <!-- Navigation Bar -->
-        <nav class="nav-tabs">
-            <button class="tab-btn active" onclick="switchTab('results-tab')">
-                <i class="fa-solid fa-chart-line"></i> Scientific Findings
-            </button>
-            <button class="tab-btn" onclick="switchTab('methods-tab')">
-                <i class="fa-solid fa-gears"></i> Methodology
-            </button>
-            <button class="tab-btn" onclick="switchTab('walkthrough-tab')">
-                <i class="fa-solid fa-clipboard-check"></i> Verification Log
-            </button>
-        </nav>
-
         <!-- Findings Section (results.md) -->
-        <section id="results-tab" class="content-section active">
+        <section id="results-sec" class="content-section">
             {RESULTS_HTML}
         </section>
 
         <!-- Methodology Section (methods.md) -->
-        <section id="methods-tab" class="content-section">
+        <section id="methods-sec" class="content-section">
             {METHODS_HTML}
         </section>
 
         <!-- Verification Section (walkthrough.md) -->
-        <section id="walkthrough-tab" class="content-section">
+        <section id="walkthrough-sec" class="content-section">
             {WALKTHROUGH_HTML}
         </section>
     </main>
@@ -532,26 +522,27 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     <!-- JavaScript Navigation Logic -->
     <script>
-        function switchTab(tabId) {
-            // Hide all sections
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            // Deactivate all buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
+        // Scroll Spy Logic
+        const sections = document.querySelectorAll('.content-section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 250)) {
+                    current = section.getAttribute('id');
+                }
             });
 
-            // Show target section
-            document.getElementById(tabId).classList.add('active');
-            
-            // Find the active tab button and highlight it
-            const activeIndex = ['results-tab', 'methods-tab', 'walkthrough-tab'].indexOf(tabId);
-            document.querySelectorAll('.tab-btn')[activeIndex].classList.add('active');
-
-            // Scroll window to top of content
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
 
         // Theme Toggle Logic
         const themeToggle = document.getElementById('theme-toggle');
