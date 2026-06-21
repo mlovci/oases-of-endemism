@@ -674,7 +674,6 @@ The partial dependence function shows the marginal effect of one or two features
             <li><a href="#f-unsupervised-decomposition-manifold-learning-unsupervised_analysispy" class="nav-sub-link sub-h3" title="F. Unsupervised Decomposition &amp; Manifold Learning">F. Unsupervised Decomposition &amp; Manifold Learning</a></li>
             <li><a href="#g-community-dissimilarity-model-goodness-of-fit-simper-and-aicbic" class="nav-sub-link sub-h3" title="G. Community Dissimilarity &amp; Model Goodness-of-Fit">G. Community Dissimilarity &amp; Model Goodness-of-Fit</a></li>
             <li><a href="#4-synthesis-and-findings-files" class="nav-sub-link sub-h2" title="4. Synthesis and Findings Files">4. Synthesis and Findings Files</a></li>
-            <li><a href="#5-markdown-line-breaks-and-bulleted-list-repair" class="nav-sub-link sub-h2" title="5. Markdown Line Breaks and Bulleted List Repair">5. Markdown Line Breaks and Bulleted List Repair</a></li>
         </ul>
             </div>
         </nav>
@@ -2630,15 +2629,6 @@ $$\text{Contribution } \% = \frac{\bar{\delta}^k}{\bar{\Delta}} \times 100$$</p>
 <ul>
 <li><strong><a href="publication.html">publication.html</a></strong> (fully styled, including responsive layout, interactive data downloads, custom legends, and aligned figures).</li>
 </ul>
-<hr />
-<h2 id="5-markdown-line-breaks-and-bulleted-list-repair">5. Markdown Line Breaks and Bulleted List Repair</h2>
-<p>We resolved formatting issues where paragraph text, headers, and bulleted lists were smashed together due to missing blank lines in the raw markdown files:</p>
-<ol>
-<li><strong>Diagnostic Identification</strong>: Run scan showing missing blank lines before list blocks, before headers, and after lists.</li>
-<li><strong>Indentation and Nested List Corrections</strong>: Corrected parent-child indentation from 6 spaces to 8 spaces for nested blocks under 4-space parents in <code>results.md</code> (e.g., <code>Methodological Choice</code> and <code>Methodological Incommensurability</code>). Added missing blank lines.</li>
-<li><strong>HTML Structural Verification</strong>: Verified that compiled HTML (<code>publication.html</code> and <code>index.html</code>) correctly uses nested <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, and <code>&lt;li&gt;</code> elements, resolving issues where sub-lists were rendered as plain paragraph text or flattened bullets.</li>
-<li><strong>Git Integration</strong>: Committed changes to <code>fix-smashed-formatting</code> and merged using the GitHub CLI pull request flow.</li>
-</ol>
         </section>
     </main>
 
