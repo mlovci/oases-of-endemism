@@ -197,10 +197,34 @@
             margin-top: 30px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 12px;
             border-top: 1px solid var(--border-color);
             padding-top: 20px;
             margin-bottom: auto;
+            overflow-y: auto;
+            max-height: calc(100vh - 350px);
+            padding-right: 4px;
+        }
+
+        /* Custom Scrollbar for Sidebar Navigation */
+        .sidebar-nav::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar-nav::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .sidebar-nav::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+        .sidebar-nav::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        .nav-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
         }
 
         .nav-link {
@@ -210,7 +234,7 @@
             color: var(--text-muted);
             text-decoration: none;
             font-family: var(--font-header);
-            font-weight: 500;
+            font-weight: 600;
             font-size: 14px;
             padding: 10px 16px;
             border-radius: 8px;
@@ -225,11 +249,62 @@
         .nav-link.active {
             color: var(--accent-primary);
             background-color: rgba(16, 185, 129, 0.1);
-            font-weight: 600;
+            font-weight: 700;
         }
         
         [data-theme="light"] .nav-link.active {
             background-color: rgba(5, 150, 105, 0.08);
+        }
+
+        .nav-sub-list {
+            list-style: none;
+            padding-left: 0;
+            display: none;
+            flex-direction: column;
+            gap: 2px;
+            border-left: 1px solid var(--border-color);
+            margin-left: 28px;
+            margin-top: 4px;
+            margin-bottom: 8px;
+        }
+
+        .nav-group.active .nav-sub-list {
+            display: flex;
+        }
+
+        .nav-sub-link {
+            display: block;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 12px;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: color var(--transition-speed), background-color var(--transition-speed);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 240px;
+        }
+
+        .nav-sub-link:hover {
+            color: var(--header-text);
+            background-color: var(--border-color);
+        }
+
+        .nav-sub-link.active {
+            color: var(--accent-secondary);
+            font-weight: 600;
+            background-color: rgba(14, 165, 233, 0.08);
+        }
+        
+        [data-theme="light"] .nav-sub-link.active {
+            background-color: rgba(2, 132, 199, 0.06);
+        }
+
+        .nav-sub-link.sub-h3 {
+            padding-left: 20px;
+            font-size: 11.5px;
+            opacity: 0.85;
         }
 
         /* Content Sections */
@@ -479,9 +554,119 @@
         </div>
 
         <nav class="sidebar-nav">
-            <a href="#results-sec" class="nav-link active"><i class="fa-solid fa-chart-line"></i> Scientific Findings</a>
-            <a href="#methods-sec" class="nav-link"><i class="fa-solid fa-gears"></i> Methodology</a>
-            <a href="#walkthrough-sec" class="nav-link"><i class="fa-solid fa-clipboard-check"></i> Verification Log</a>
+            <div class="nav-group active">
+                <a href="#results-sec" class="nav-link"><i class="fa-solid fa-chart-line"></i> Scientific Findings</a>
+                <ul class="nav-sub-list">
+            <li><a href="#letter-to-the-editor-a-prologue-on-scaling-vs-non-linear-modeling-in-desert-spring-ecology" class="nav-sub-link sub-h2" title="Letter to the Editor">Letter to the Editor</a></li>
+            <li><a href="#introduction-and-rationale-for-reanalysis" class="nav-sub-link sub-h2" title="Introduction">Introduction</a></li>
+            <li><a href="#previous-work-and-dataset" class="nav-sub-link sub-h3" title="Previous Work and Dataset
+The baseline analysis of the desert spring ecosystem">Previous Work and Dataset
+The baseline analysis of the desert spring ecosystem</a></li>
+            <li><a href="#objectives-and-conceptual-extensions-of-the-analysis" class="nav-sub-link sub-h3" title="Objectives & Extensions">Objectives & Extensions</a></li>
+            <li><a href="#rationale-multicollinearity-and-limitations-of-ordination" class="nav-sub-link sub-h3" title="Ordination Limits">Ordination Limits</a></li>
+            <li><a href="#executive-summary" class="nav-sub-link sub-h2" title="Executive Summary">Executive Summary</a></li>
+            <li><a href="#1-unsupervised-latent-axis-discovery" class="nav-sub-link sub-h2" title="1. Unsupervised Latent Axis Discovery">1. Unsupervised Latent Axis Discovery</a></li>
+            <li><a href="#a-factor-analysis-the-benthic-habitat-quality-axis-regional-aquifers-n45" class="nav-sub-link sub-h3" title="A. Factor Analysis: The Benthic Habitat Quality Axis">A. Factor Analysis: The Benthic Habitat Quality Axis</a></li>
+            <li><a href="#b-global-pca-the-grazing-habitat-degradation-axis-n1121" class="nav-sub-link sub-h3" title="B. Global PCA: The Grazing &amp; Habitat Degradation Axis">B. Global PCA: The Grazing &amp; Habitat Degradation Axis</a></li>
+            <li><a href="#c-replicated-20-variable-pca-axis-loadings" class="nav-sub-link sub-h3" title="C. Replicated 20-Variable PCA &amp; Axis Loadings">C. Replicated 20-Variable PCA &amp; Axis Loadings</a></li>
+            <li><a href="#d-manifold-learning-t-sne-cluster-analysis-n1121" class="nav-sub-link sub-h3" title="D. Manifold Learning: t-SNE Cluster Analysis">D. Manifold Learning: t-SNE Cluster Analysis</a></li>
+            <li><a href="#e-global-spring-site-clustering-heatmap-figure-6" class="nav-sub-link sub-h3" title="E. Global Spring Site-Clustering Heatmap">E. Global Spring Site-Clustering Heatmap</a></li>
+            <li><a href="#f-biological-taxa-co-occurrence-heatmap-figure-7" class="nav-sub-link sub-h3" title="F. Biological Taxa Co-occurrence Heatmap">F. Biological Taxa Co-occurrence Heatmap</a></li>
+            <li><a href="#g-scale-dependent-dendrogram-divergence-global-vs-regional-scales-figure-6-vs-figure-7" class="nav-sub-link sub-h3" title="G. Scale-Dependent Dendrogram Divergence: Global vs. Regional Scales">G. Scale-Dependent Dendrogram Divergence: Global vs. Regional Scales</a></li>
+            <li><a href="#h-similarity-percentages-simper-and-model-selection-statistics-aic-bic" class="nav-sub-link sub-h3" title="H. Similarity Percentages">H. Similarity Percentages</a></li>
+            <li><a href="#2-integration-with-supervised-analyses" class="nav-sub-link sub-h2" title="2. Integration with Supervised Analyses">2. Integration with Supervised Analyses</a></li>
+            <li><a href="#a-the-siltation-driven-endemic-decline" class="nav-sub-link sub-h3" title="A. The Siltation-Driven Endemic Decline">A. The Siltation-Driven Endemic Decline</a></li>
+            <li><a href="#b-hydrological-permanence-pool-depth" class="nav-sub-link sub-h3" title="B. Hydrological Permanence">B. Hydrological Permanence</a></li>
+            <li><a href="#c-the-invasion-diversity-oasis-coupling-shared-abiotic-filtering-carrying-capacity" class="nav-sub-link sub-h3" title="C. The Invasion-Diversity Oasis Coupling">C. The Invasion-Diversity Oasis Coupling</a></li>
+            <li><a href="#d-multi-taxon-regression-feature-importance-analysis-figure-s6" class="nav-sub-link sub-h3" title="D. Multi-Taxon Regression &amp; Feature Importance Analysis">D. Multi-Taxon Regression &amp; Feature Importance Analysis</a></li>
+            <li><a href="#e-multicollinearity-variance-inflation-factors-vif-and-model-predictability" class="nav-sub-link sub-h3" title="E. Multicollinearity, Variance Inflation Factors">E. Multicollinearity, Variance Inflation Factors</a></li>
+            <li><a href="#3-comparative-synthesis-across-aquifer-types" class="nav-sub-link sub-h2" title="3. Comparative Synthesis Across Aquifer Types">3. Comparative Synthesis Across Aquifer Types</a></li>
+            <li><a href="#discussion-novel-insights-and-literature-comparison" class="nav-sub-link sub-h2" title="Discussion: Novel Insights and Literature Comparison">Discussion: Novel Insights and Literature Comparison</a></li>
+            <li><a href="#1-resolution-of-the-invasion-diversity-paradox-via-abiotic-filtering" class="nav-sub-link sub-h3" title="1. Resolution of the "Invasion-Diversity Paradox" via Abiotic Filtering
+A major finding in our reanalysis is the strong positive co-occurrence between native endemics and non-native invaders in Regional Aquifer springs">1. Resolution of the "Invasion-Diversity Paradox" via Abiotic Filtering
+A major finding in our reanalysis is the strong positive co-occurrence between native endemics and non-native invaders in Regional Aquifer springs</a></li>
+            <li><a href="#6-the-mathematical-and-ecological-meaning-of-low-predictive-power" class="nav-sub-link sub-h3" title="Low Predictability Meaning">Low Predictability Meaning</a></li>
+            <li><a href="#environmental-conditions-that-preserve-endemic-taxa" class="nav-sub-link sub-h2" title="Conditions Preserving Endemics">Conditions Preserving Endemics</a></li>
+            <li><a href="#1-hydrological-permanence-pool-depth-thresholds" class="nav-sub-link sub-h3" title="1. Hydrological Permanence">1. Hydrological Permanence</a></li>
+            <li><a href="#2-microhabitat-cleanliness-benthic-siltation-limits" class="nav-sub-link sub-h3" title="2. Microhabitat Cleanliness">2. Microhabitat Cleanliness</a></li>
+            <li><a href="#3-thermal-and-chemical-stability-aquifer-source" class="nav-sub-link sub-h3" title="3. Thermal and Chemical Stability">3. Thermal and Chemical Stability</a></li>
+            <li><a href="#4-riparian-structural-integrity-bank-cover" class="nav-sub-link sub-h3" title="4. Riparian Structural Integrity">4. Riparian Structural Integrity</a></li>
+            <li><a href="#4-conservation-and-management-recommendations" class="nav-sub-link sub-h2" title="4. Conservation and Management Recommendations">4. Conservation and Management Recommendations</a></li>
+            <li><a href="#1-protect-regional-aquifer-flows-to-maintain-pool-depth" class="nav-sub-link sub-h3" title="1. Protect Regional Aquifer Flows to Maintain Pool Depth">1. Protect Regional Aquifer Flows to Maintain Pool Depth</a></li>
+            <li><a href="#2-mitigate-benthic-siltation-through-grazing-exclusion" class="nav-sub-link sub-h3" title="2. Mitigate Benthic Siltation Through Grazing Exclusion">2. Mitigate Benthic Siltation Through Grazing Exclusion</a></li>
+            <li><a href="#3-adopt-nuanced-non-native-species-management" class="nav-sub-link sub-h3" title="3. Adopt Nuanced Non-Native Species Management">3. Adopt Nuanced Non-Native Species Management</a></li>
+            <li><a href="#5-perspectives-and-targeted-site-selection-for-conservation" class="nav-sub-link sub-h2" title="5. Perspectives and Targeted Site Selection for Conservation">5. Perspectives and Targeted Site Selection for Conservation</a></li>
+            <li><a href="#a-high-priority-regional-aquifer-sites-the-oases-of-endemism" class="nav-sub-link sub-h3" title="A. High-Priority Regional Aquifer Sites">A. High-Priority Regional Aquifer Sites</a></li>
+            <li><a href="#b-targeted-local-aquifer-refugia" class="nav-sub-link sub-h3" title="B. Targeted Local Aquifer Refugia">B. Targeted Local Aquifer Refugia</a></li>
+        </ul>
+            </div>
+            <div class="nav-group">
+                <a href="#methods-sec" class="nav-link"><i class="fa-solid fa-gears"></i> Methodology</a>
+                <ul class="nav-sub-list">
+            <li><a href="#source-publication-citation" class="nav-sub-link sub-h2" title="Source Publication &amp; Citation">Source Publication &amp; Citation</a></li>
+            <li><a href="#1-overview-of-the-pipeline" class="nav-sub-link sub-h2" title="1. Overview of the Pipeline">1. Overview of the Pipeline</a></li>
+            <li><a href="#3-data-extraction-and-transformation-details" class="nav-sub-link sub-h2" title="3. Data Extraction and Transformation Details">3. Data Extraction and Transformation Details</a></li>
+            <li><a href="#a-parsing-multiline-cell-text" class="nav-sub-link sub-h3" title="A. Parsing Multiline Cell Text
+Cells in Microsoft Word table rows can contain multiple paragraphs. Simply reading a cell's .text property can lead to run-on words or losing newline formatting. The converter loops through cell paragraphs explicitly and joins them using \n to preserve spacing and structure.
+B. Cleaning Artifacts &amp; Non-Breaking Spaces">A. Parsing Multiline Cell Text
+Cells in Microsoft Word table rows can contain multiple paragraphs. Simply reading a cell's .text property can lead to run-on words or losing newline formatting. The converter loops through cell paragraphs explicitly and joins them using \n to preserve spacing and structure.
+B. Cleaning Artifacts &amp; Non-Breaking Spaces</a></li>
+            <li><a href="#c-numerical-representation-type-casting" class="nav-sub-link sub-h3" title="C. Numerical Representation">C. Numerical Representation</a></li>
+            <li><a href="#4-visual-styling-standards" class="nav-sub-link sub-h2" title="4. Visual Styling Standards">4. Visual Styling Standards</a></li>
+            <li><a href="#5-instructions-for-running" class="nav-sub-link sub-h2" title="5. Instructions for Running">5. Instructions for Running</a></li>
+            <li><a href="#dependencies" class="nav-sub-link sub-h3" title="Dependencies">Dependencies</a></li>
+            <li><a href="#execution" class="nav-sub-link sub-h3" title="Execution">Execution</a></li>
+            <li><a href="#6-re-creating-the-papers-analysis-recreate_analysispy" class="nav-sub-link sub-h3" title="6. Re-creating the Paper's Analysis">6. Re-creating the Paper's Analysis</a></li>
+            <li><a href="#7-latent-pattern-discovery-discover_latent_patternspy" class="nav-sub-link sub-h2" title="7. Latent Pattern Discovery">7. Latent Pattern Discovery</a></li>
+            <li><a href="#modeling-counts-why-standard-linear-regression-fails" class="nav-sub-link sub-h3" title="Modeling Counts: Why Standard Linear Regression Fails
+To evaluate these relationships rigorously, we avoid traditional Ordinary Least Squares">Modeling Counts: Why Standard Linear Regression Fails
+To evaluate these relationships rigorously, we avoid traditional Ordinary Least Squares</a></li>
+            <li><a href="#b-pattern-2-the-conservationmanagement-disconnect-abiotic-dominance" class="nav-sub-link sub-h3" title="B. Pattern 2: The Conservation/Management Disconnect">B. Pattern 2: The Conservation/Management Disconnect</a></li>
+            <li><a href="#c-pattern-3-benthic-siltation-impact-in-regional-springs" class="nav-sub-link sub-h3" title="C. Pattern 3: Benthic Siltation Impact in Regional Springs">C. Pattern 3: Benthic Siltation Impact in Regional Springs</a></li>
+            <li><a href="#8-non-parametric-exploratory-analyses-non_parametric_analysispy" class="nav-sub-link sub-h2" title="8. Non-parametric Exploratory Analyses">8. Non-parametric Exploratory Analyses</a></li>
+            <li><a href="#a-spearman-rank-correlation-r_s" class="nav-sub-link sub-h3" title="A. Spearman Rank Correlation">A. Spearman Rank Correlation</a></li>
+            <li><a href="#c-lowess-local-regression-curve-fitting" class="nav-sub-link sub-h3" title="C. LOWESS Local Regression Curve Fitting">C. LOWESS Local Regression Curve Fitting</a></li>
+            <li><a href="#9-bootstrap-regression-and-feature-importance-analysis-analyze_all_aquiferspy" class="nav-sub-link sub-h2" title="9. Bootstrap Regression and Feature Importance Analysis">9. Bootstrap Regression and Feature Importance Analysis</a></li>
+            <li><a href="#bootstrap-validation-architecture" class="nav-sub-link sub-h3" title="Bootstrap Validation Architecture
+For each aquifer type independently, we run $N = 1000$ bootstrap iterations:
+1.  Bootstrap Training Set: We draw a sample with replacement of size equal to the group sample size">Bootstrap Validation Architecture
+For each aquifer type independently, we run $N = 1000$ bootstrap iterations:
+1.  Bootstrap Training Set: We draw a sample with replacement of size equal to the group sample size</a></li>
+            <li><a href="#bootstrap-feature-importance-distribution" class="nav-sub-link sub-h3" title="Bootstrap Feature Importance Distribution">Bootstrap Feature Importance Distribution</a></li>
+            <li><a href="#10-partial-dependence-plots-analyze_all_aquiferspy" class="nav-sub-link sub-h2" title="10. Partial Dependence Plots">10. Partial Dependence Plots</a></li>
+            <li><a href="#mathematical-formulation" class="nav-sub-link sub-h3" title="Mathematical Formulation
+The partial dependence function shows the marginal effect of one or two features on the predicted outcome of a machine learning model. Let $X_S$ be the feature of interest">Mathematical Formulation
+The partial dependence function shows the marginal effect of one or two features on the predicted outcome of a machine learning model. Let $X_S$ be the feature of interest</a></li>
+            <li><a href="#11-unsupervised-decomposition-and-manifold-learning-unsupervised_analysispy" class="nav-sub-link sub-h2" title="11. Unsupervised Decomposition and Manifold Learning">11. Unsupervised Decomposition and Manifold Learning</a></li>
+            <li><a href="#a-factor-analysis-vs-pca" class="nav-sub-link sub-h3" title="A. Factor Analysis vs. PCA">A. Factor Analysis vs. PCA</a></li>
+            <li><a href="#b-global-pca-the-grazing-habitat-degradation-axis-n1121" class="nav-sub-link sub-h3" title="B. Global PCA: The Grazing &amp; Habitat Degradation Axis">B. Global PCA: The Grazing &amp; Habitat Degradation Axis</a></li>
+            <li><a href="#c-manifold-learning-t-sne-cluster-projection-n1121" class="nav-sub-link sub-h3" title="C. Manifold Learning: t-SNE Cluster Projection">C. Manifold Learning: t-SNE Cluster Projection</a></li>
+            <li><a href="#d-global-spring-site-clustering-heatmap-visualize_sites_clustermappy" class="nav-sub-link sub-h3" title="D. Global Spring Site-Clustering Heatmap">D. Global Spring Site-Clustering Heatmap</a></li>
+            <li><a href="#e-biological-taxa-co-occurrence-clustermap-visualize_cooccurrencepy" class="nav-sub-link sub-h3" title="E. Biological Taxa Co-occurrence Clustermap">E. Biological Taxa Co-occurrence Clustermap</a></li>
+            <li><a href="#f-multi-taxon-regression-and-feature-importance-analysis-taxa_regression_analysispy" class="nav-sub-link sub-h3" title="F. Multi-Taxon Regression and Feature Importance Analysis">F. Multi-Taxon Regression and Feature Importance Analysis</a></li>
+            <li><a href="#g-similarity-percentages-simper-analysis-run_simperpy" class="nav-sub-link sub-h3" title="G. Similarity Percentages">G. Similarity Percentages</a></li>
+        </ul>
+            </div>
+            <div class="nav-group">
+                <a href="#walkthrough-sec" class="nav-link"><i class="fa-solid fa-clipboard-check"></i> Verification Log</a>
+                <ul class="nav-sub-list">
+            <li><a href="#1-summary-of-changes" class="nav-sub-link sub-h2" title="1. Summary of Changes">1. Summary of Changes</a></li>
+            <li><a href="#2-verification-and-testing-results" class="nav-sub-link sub-h2" title="2. Verification and Testing Results">2. Verification and Testing Results</a></li>
+            <li><a href="#step-1-dependencies-and-environment-setup" class="nav-sub-link sub-h3" title="Step 1: Dependencies and Environment Setup">Step 1: Dependencies and Environment Setup</a></li>
+            <li><a href="#step-2-running-the-conversion" class="nav-sub-link sub-h3" title="Step 2: Running the Conversion">Step 2: Running the Conversion</a></li>
+            <li><a href="#step-3-structured-validation-check" class="nav-sub-link sub-h3" title="Step 3: Structured Validation Check
+We verified the generated spreadsheet using a diagnostic python script:
+- Sheet Name: Data Table S5
+- Spreadsheet Size: 1123 rows x 22 columns">Step 3: Structured Validation Check
+We verified the generated spreadsheet using a diagnostic python script:
+- Sheet Name: Data Table S5
+- Spreadsheet Size: 1123 rows x 22 columns</a></li>
+            <li><a href="#d-bootstrap-regressor-validation-box-plots-analyze_all_aquiferspy" class="nav-sub-link sub-h3" title="D. Bootstrap Regressor Validation &amp; Box Plots">D. Bootstrap Regressor Validation &amp; Box Plots</a></li>
+            <li><a href="#e-partial-dependence-plots-analyze_all_aquiferspy" class="nav-sub-link sub-h3" title="E. Partial Dependence Plots">E. Partial Dependence Plots</a></li>
+            <li><a href="#f-unsupervised-decomposition-manifold-learning-unsupervised_analysispy" class="nav-sub-link sub-h3" title="F. Unsupervised Decomposition &amp; Manifold Learning">F. Unsupervised Decomposition &amp; Manifold Learning</a></li>
+            <li><a href="#4-synthesis-and-findings-files" class="nav-sub-link sub-h2" title="4. Synthesis and Findings Files">4. Synthesis and Findings Files</a></li>
+        </ul>
+            </div>
         </nav>
 
         <div class="theme-switch-container">
@@ -1948,18 +2133,18 @@ where $x_{C,i}$ are the values of the other features for observation $i$, and $n
 <hr />
 <h3 id="h-model-selection-goodness-of-fit-comparisons-check_aic_bicpy">H. Model Selection &amp; Goodness-of-Fit Comparisons (<a href="scratch/check_aic_bic.py">check_aic_bic.py</a>)</h3>
 <p>To evaluate the mathematical validity and goodness-of-fit of our univariate regression models, we calculate the Akaike Information Criterion (AIC), Bayesian Information Criterion (BIC), and residual deviance metrics for each of the fitted Poisson GLMs:
-*   <strong>Poisson Likelihood Function</strong>: For count variable $y_i$ with expected value $\lambda_i = \exp(\mathbf{x}<em>i^T \boldsymbol{\beta})$, the log-likelihood is:
-    $$\ln(L(\boldsymbol{\beta})) = \sum</em>{i=1}^n \left( y_i \mathbf{x}<em>i^T \boldsymbol{\beta} - \exp(\mathbf{x}_i^T \boldsymbol{\beta}) - \ln(y_i!) \right)$$
+*   <strong>Poisson Likelihood Function</strong>: For count variable $y_i$ with expected value $\lambda_i = \exp(\mathbf{x}_i^T \boldsymbol{\beta})$, the log-likelihood is:
+    $$\ln(L(\boldsymbol{\beta})) = \sum_{i=1}^n \left( y_i \mathbf{x}_i^T \boldsymbol{\beta} - \exp(\mathbf{x}_i^T \boldsymbol{\beta}) - \ln(y_i!) \right)$$
 *   <strong>Information Criteria</strong>:
     - <strong>AIC</strong>: Optimizes prediction error and is defined as:
       $$\text{AIC} = -2\ln(L) + 2k$$
       where $k$ is the number of estimated parameters (predictors plus the intercept; $k=17$ for models including the biological co-predictor, $k=16$ for the non-native model).
     - <strong>BIC (Deviance-Based)</strong>: Measures fit relative to a saturated model with a penalty for complexity:
-      $$\text{BIC}</em>{\text{deviance}} = D - (n - k)\ln(n)$$
+      $$\text{BIC}_{\text{deviance}} = D - (n - k)\ln(n)$$
     - <strong>BIC (Standard/Absolute)</strong>: Computes absolute Bayesian Information Criterion:
-      $$\text{BIC}<em>{\text{standard}} = D + k\ln(n)$$
+      $$\text{BIC}_{\text{standard}} = D + k\ln(n)$$
       where $D$ is the residual deviance, calculated as:
-      $$D = 2 \sum</em>{i=1}^n \left[ y_i \ln\left(\frac{y_i}{\lambda_i}\right) - (y_i - \lambda_i) \right]$$
+      $$D = 2 \sum_{i=1}^n \left[ y_i \ln\left(\frac{y_i}{\lambda_i}\right) - (y_i - \lambda_i) \right]$$
 *   <strong>Methodological Comparison to Published Work (Table S1)</strong>:
     - <strong>Incommensurability of AIC/BIC</strong>: In Table S1, the original publication by Forrest et al. (2026) employs <strong>Distance-based Linear Models (DistLM)</strong> to evaluate environmental influences. DistLM models a multivariate biological distance matrix (resemblance matrix) using pseudo-F statistics and selects models using multivariate AICc (AIC with a correction for small sample size) or BIC. 
     - Because our Poisson GLMs model independent univariate count responses using a Poisson probability mass function while the published DistLM models a multivariate resemblance matrix using distance-based sum-of-squares, <strong>their AIC/BIC values are mathematically incommensurable and cannot be directly compared numerically</strong>.
@@ -2160,25 +2345,74 @@ where $x_{C,i}$ are the values of the other features for observation $i$, and $n
 
     <!-- JavaScript Navigation Logic -->
     <script>
-        // Scroll Spy Logic
-        const sections = document.querySelectorAll('.content-section');
-        const navLinks = document.querySelectorAll('.nav-link');
+        // Scroll Spy Logic for Sections and Headings
+        const contentSections = document.querySelectorAll('.content-section');
+        const mainNavLinks = document.querySelectorAll('.nav-link');
+        const subNavLinks = document.querySelectorAll('.nav-sub-link');
+        
+        // Track H2 and H3 tags with IDs inside content sections
+        const headings = [];
+        contentSections.forEach(section => {
+            const hTags = section.querySelectorAll('h2, h3');
+            hTags.forEach(h => {
+                if (h.id) {
+                    headings.push(h);
+                }
+            });
+        });
 
         window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
+            let currentSection = '';
+            contentSections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= (sectionTop - 250)) {
-                    current = section.getAttribute('id');
+                if (window.pageYOffset >= (sectionTop - 280)) {
+                    currentSection = section.getAttribute('id');
                 }
             });
 
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
+            // Highlight main section link and expand active group
+            mainNavLinks.forEach(link => {
+                const group = link.closest('.nav-group');
+                if (link.getAttribute('href') === `#${currentSection}`) {
                     link.classList.add('active');
+                    if (group) group.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                    if (group) group.classList.remove('active');
                 }
+            });
+
+            // Highlight active sub-heading link
+            let currentHeading = '';
+            for (let i = 0; i < headings.length; i++) {
+                const headingTop = headings[i].offsetTop;
+                if (window.pageYOffset >= (headingTop - 150)) {
+                    currentHeading = headings[i].getAttribute('id');
+                } else {
+                    break;
+                }
+            }
+
+            subNavLinks.forEach(link => {
+                if (link.getAttribute('href') === `#${currentHeading}`) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+
+        // Snappy navigation on click
+        mainNavLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const group = link.closest('.nav-group');
+                mainNavLinks.forEach(l => {
+                    l.classList.remove('active');
+                    const g = l.closest('.nav-group');
+                    if (g) g.classList.remove('active');
+                });
+                link.classList.add('active');
+                if (group) group.classList.add('active');
             });
         });
 

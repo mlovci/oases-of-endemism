@@ -584,18 +584,18 @@ To identify the specific biological variables driving community dissimilarity be
 ### H. Model Selection & Goodness-of-Fit Comparisons ([check_aic_bic.py](scratch/check_aic_bic.py))
 
 To evaluate the mathematical validity and goodness-of-fit of our univariate regression models, we calculate the Akaike Information Criterion (AIC), Bayesian Information Criterion (BIC), and residual deviance metrics for each of the fitted Poisson GLMs:
-*   **Poisson Likelihood Function**: For count variable $y_i$ with expected value $\lambda_i = \exp(\mathbf{x}_i^T \boldsymbol{\beta})$, the log-likelihood is:
-    $$\ln(L(\boldsymbol{\beta})) = \sum_{i=1}^n \left( y_i \mathbf{x}_i^T \boldsymbol{\beta} - \exp(\mathbf{x}_i^T \boldsymbol{\beta}) - \ln(y_i!) \right)$$
+*   **Poisson Likelihood Function**: For count variable $y\_i$ with expected value $\lambda\_i = \exp(\mathbf{x}\_i^T \boldsymbol{\beta})$, the log-likelihood is:
+    $$\ln(L(\boldsymbol{\beta})) = \sum\_{i=1}^n \left( y\_i \mathbf{x}\_i^T \boldsymbol{\beta} - \exp(\mathbf{x}\_i^T \boldsymbol{\beta}) - \ln(y\_i!) \right)$$
 *   **Information Criteria**:
     - **AIC**: Optimizes prediction error and is defined as:
       $$\text{AIC} = -2\ln(L) + 2k$$
       where $k$ is the number of estimated parameters (predictors plus the intercept; $k=17$ for models including the biological co-predictor, $k=16$ for the non-native model).
     - **BIC (Deviance-Based)**: Measures fit relative to a saturated model with a penalty for complexity:
-      $$\text{BIC}_{\text{deviance}} = D - (n - k)\ln(n)$$
+      $$\text{BIC}\_{\text{deviance}} = D - (n - k)\ln(n)$$
     - **BIC (Standard/Absolute)**: Computes absolute Bayesian Information Criterion:
-      $$\text{BIC}_{\text{standard}} = D + k\ln(n)$$
+      $$\text{BIC}\_{\text{standard}} = D + k\ln(n)$$
       where $D$ is the residual deviance, calculated as:
-      $$D = 2 \sum_{i=1}^n \left[ y_i \ln\left(\frac{y_i}{\lambda_i}\right) - (y_i - \lambda_i) \right]$$
+      $$D = 2 \sum\_{i=1}^n \left[ y\_i \ln\left(\frac{y\_i}{\lambda\_i}\right) - (y\_i - \lambda\_i) \right]$$
 *   **Methodological Comparison to Published Work (Table S1)**:
     - **Incommensurability of AIC/BIC**: In Table S1, the original publication by Forrest et al. (2026) employs **Distance-based Linear Models (DistLM)** to evaluate environmental influences. DistLM models a multivariate biological distance matrix (resemblance matrix) using pseudo-F statistics and selects models using multivariate AICc (AIC with a correction for small sample size) or BIC. 
     - Because our Poisson GLMs model independent univariate count responses using a Poisson probability mass function while the published DistLM models a multivariate resemblance matrix using distance-based sum-of-squares, **their AIC/BIC values are mathematically incommensurable and cannot be directly compared numerically**.

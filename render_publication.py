@@ -201,10 +201,34 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             margin-top: 30px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 12px;
             border-top: 1px solid var(--border-color);
             padding-top: 20px;
             margin-bottom: auto;
+            overflow-y: auto;
+            max-height: calc(100vh - 350px);
+            padding-right: 4px;
+        }
+
+        /* Custom Scrollbar for Sidebar Navigation */
+        .sidebar-nav::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar-nav::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .sidebar-nav::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+        .sidebar-nav::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        .nav-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
         }
 
         .nav-link {
@@ -214,7 +238,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             color: var(--text-muted);
             text-decoration: none;
             font-family: var(--font-header);
-            font-weight: 500;
+            font-weight: 600;
             font-size: 14px;
             padding: 10px 16px;
             border-radius: 8px;
@@ -229,11 +253,62 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         .nav-link.active {
             color: var(--accent-primary);
             background-color: rgba(16, 185, 129, 0.1);
-            font-weight: 600;
+            font-weight: 700;
         }
         
         [data-theme="light"] .nav-link.active {
             background-color: rgba(5, 150, 105, 0.08);
+        }
+
+        .nav-sub-list {
+            list-style: none;
+            padding-left: 0;
+            display: none;
+            flex-direction: column;
+            gap: 2px;
+            border-left: 1px solid var(--border-color);
+            margin-left: 28px;
+            margin-top: 4px;
+            margin-bottom: 8px;
+        }
+
+        .nav-group.active .nav-sub-list {
+            display: flex;
+        }
+
+        .nav-sub-link {
+            display: block;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 12px;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: color var(--transition-speed), background-color var(--transition-speed);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 240px;
+        }
+
+        .nav-sub-link:hover {
+            color: var(--header-text);
+            background-color: var(--border-color);
+        }
+
+        .nav-sub-link.active {
+            color: var(--accent-secondary);
+            font-weight: 600;
+            background-color: rgba(14, 165, 233, 0.08);
+        }
+        
+        [data-theme="light"] .nav-sub-link.active {
+            background-color: rgba(2, 132, 199, 0.06);
+        }
+
+        .nav-sub-link.sub-h3 {
+            padding-left: 20px;
+            font-size: 11.5px;
+            opacity: 0.85;
         }
 
         /* Content Sections */
@@ -483,9 +558,18 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         </div>
 
         <nav class="sidebar-nav">
-            <a href="#results-sec" class="nav-link active"><i class="fa-solid fa-chart-line"></i> Scientific Findings</a>
-            <a href="#methods-sec" class="nav-link"><i class="fa-solid fa-gears"></i> Methodology</a>
-            <a href="#walkthrough-sec" class="nav-link"><i class="fa-solid fa-clipboard-check"></i> Verification Log</a>
+            <div class="nav-group active">
+                <a href="#results-sec" class="nav-link"><i class="fa-solid fa-chart-line"></i> Scientific Findings</a>
+                {RESULTS_TOC}
+            </div>
+            <div class="nav-group">
+                <a href="#methods-sec" class="nav-link"><i class="fa-solid fa-gears"></i> Methodology</a>
+                {METHODS_TOC}
+            </div>
+            <div class="nav-group">
+                <a href="#walkthrough-sec" class="nav-link"><i class="fa-solid fa-clipboard-check"></i> Verification Log</a>
+                {WALKTHROUGH_TOC}
+            </div>
         </nav>
 
         <div class="theme-switch-container">
@@ -522,25 +606,74 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     <!-- JavaScript Navigation Logic -->
     <script>
-        // Scroll Spy Logic
-        const sections = document.querySelectorAll('.content-section');
-        const navLinks = document.querySelectorAll('.nav-link');
+        // Scroll Spy Logic for Sections and Headings
+        const contentSections = document.querySelectorAll('.content-section');
+        const mainNavLinks = document.querySelectorAll('.nav-link');
+        const subNavLinks = document.querySelectorAll('.nav-sub-link');
+        
+        // Track H2 and H3 tags with IDs inside content sections
+        const headings = [];
+        contentSections.forEach(section => {
+            const hTags = section.querySelectorAll('h2, h3');
+            hTags.forEach(h => {
+                if (h.id) {
+                    headings.push(h);
+                }
+            });
+        });
 
         window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
+            let currentSection = '';
+            contentSections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= (sectionTop - 250)) {
-                    current = section.getAttribute('id');
+                if (window.pageYOffset >= (sectionTop - 280)) {
+                    currentSection = section.getAttribute('id');
                 }
             });
 
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
+            // Highlight main section link and expand active group
+            mainNavLinks.forEach(link => {
+                const group = link.closest('.nav-group');
+                if (link.getAttribute('href') === `#${currentSection}`) {
                     link.classList.add('active');
+                    if (group) group.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                    if (group) group.classList.remove('active');
                 }
+            });
+
+            // Highlight active sub-heading link
+            let currentHeading = '';
+            for (let i = 0; i < headings.length; i++) {
+                const headingTop = headings[i].offsetTop;
+                if (window.pageYOffset >= (headingTop - 150)) {
+                    currentHeading = headings[i].getAttribute('id');
+                } else {
+                    break;
+                }
+            }
+
+            subNavLinks.forEach(link => {
+                if (link.getAttribute('href') === `#${currentHeading}`) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+
+        // Snappy navigation on click
+        mainNavLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const group = link.closest('.nav-group');
+                mainNavLinks.forEach(l => {
+                    l.classList.remove('active');
+                    const g = l.closest('.nav-group');
+                    if (g) g.classList.remove('active');
+                });
+                link.classList.add('active');
+                if (group) group.classList.add('active');
             });
         });
 
@@ -663,6 +796,61 @@ def convert_to_html(md_text):
     
     return html
 
+def extract_outline(html_content):
+    # Match h2 or h3 tags with id attribute
+    headers = re.findall(r'<h([23])\s+id="([^"]+)">([^<]+(?:<[^>]+>[^<]+)*)</h\1>', html_content)
+    outline = []
+    for level, header_id, text in headers:
+        # Strip HTML tags
+        clean_text = re.sub(r'<[^>]+>', '', text).strip()
+        # Clean up links and script filenames
+        clean_text = clean_text.split('[')[0].strip()
+        clean_text = clean_text.split('(')[0].strip()
+        clean_text = clean_text.strip()
+        # Don't add the section if it is the broad document title or letter title
+        if clean_text in [
+            "Scientific Findings and Synthesis: Latent Conditions Preserving Endemic Taxa",
+            "Letter to the Editor: A Prologue on Scaling vs. Non-Linear Modeling in Desert Spring Ecology"
+        ]:
+            pass
+        
+        # Shorten some extremely long titles to fit well in the sidebar
+        if "Letter to the Editor" in clean_text:
+            clean_text = "Letter to the Editor"
+        elif "Introduction and Rationale" in clean_text:
+            clean_text = "Introduction"
+        elif "Objectives and Conceptual Extensions" in clean_text:
+            clean_text = "Objectives & Extensions"
+        elif "Key Analytical Advancements" in clean_text:
+            clean_text = "Analytical Advancements"
+        elif "Rationale, Multicollinearity" in clean_text:
+            clean_text = "Ordination Limits"
+        elif "Diverging Management Prescriptions" in clean_text:
+            clean_text = "Taxon-Specific Planning"
+        elif "Mathematical and Ecological Meaning" in clean_text:
+            clean_text = "Low Predictability Meaning"
+        elif "Diverging Management Prescriptions Across Taxa" in clean_text:
+            clean_text = "Management Across Taxa"
+        elif "Environmental Conditions That Preserve" in clean_text:
+            clean_text = "Conditions Preserving Endemics"
+            
+        outline.append({
+            'level': int(level),
+            'id': header_id,
+            'text': clean_text
+        })
+    return outline
+
+def build_outline_html(outline_list):
+    if not outline_list:
+        return ""
+    html = ['<ul class="nav-sub-list">']
+    for item in outline_list:
+        indent_class = "sub-h3" if item['level'] == 3 else "sub-h2"
+        html.append(f'            <li><a href="#{item["id"]}" class="nav-sub-link {indent_class}" title="{item["text"]}">{item["text"]}</a></li>')
+    html.append('        </ul>')
+    return '\n'.join(html)
+
 def main():
     print("Compiling markdown articles to publication.html...")
     
@@ -676,10 +864,25 @@ def main():
     methods_html = convert_to_html(methods_md)
     walkthrough_html = convert_to_html(walkthrough_md)
     
+    # Extract outlines from HTML
+    results_outline = extract_outline(results_html)
+    methods_outline = extract_outline(methods_html)
+    walkthrough_outline = extract_outline(walkthrough_html)
+    
+    # Build TOC HTML
+    results_toc = build_outline_html(results_outline)
+    methods_toc = build_outline_html(methods_outline)
+    walkthrough_toc = build_outline_html(walkthrough_outline)
+    
     # Format template using replace() to avoid CSS/JS brace escaping issues
     compiled_html = HTML_TEMPLATE.replace('{RESULTS_HTML}', results_html)
     compiled_html = compiled_html.replace('{METHODS_HTML}', methods_html)
     compiled_html = compiled_html.replace('{WALKTHROUGH_HTML}', walkthrough_html)
+    
+    # Inject TOC HTML
+    compiled_html = compiled_html.replace('{RESULTS_TOC}', results_toc)
+    compiled_html = compiled_html.replace('{METHODS_TOC}', methods_toc)
+    compiled_html = compiled_html.replace('{WALKTHROUGH_TOC}', walkthrough_toc)
     
     output_paths = ['publication.html', 'index.html']
     for output_path in output_paths:
