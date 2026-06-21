@@ -15,6 +15,16 @@ The foundational work by Forrest et al. (2026) established a vital baseline and 
 
 To implement these extensions, we integrated **unsupervised manifold learning (t-SNE)** and **Factor Analysis (FA)** with **supervised machine learning (Random Forests)**, **non-parametric bootstrapping (2,000 resamples)**, **Poisson Generalized Linear Models (GLMs)** with robust standard errors, and **Partial Dependence Plots (PDPs)**. This hybrid workflow isolates key latent environmental axes, maps their thresholds, and provides a complementary, mathematically sound ecological framework for desert spring conservation.
 
+### Rationale and Limitations of Non-Linear Ordination
+
+The decision to introduce non-linear decomposition (such as t-SNE) to complement standard linear PCA is driven by both theoretical ecological motivations and the unique constraints of this desert springs dataset:
+
+*   **Ecological Motivations for Non-Linearity**: Species richness patterns along environmental gradients are rarely linear. They typically follow unimodal (bell-shaped) distributions corresponding to biological tolerance thresholds (e.g., minimum depth required to sustain fish populations). Standard linear PCA, while excellent for summarizing orthogonal axes of maximum variance, assumes linear combinations and can produce geometric distortions (such as the "horseshoe effect") when mapping long gradients. Non-linear ordination preserves local neighbor similarities to map these step-wise boundaries and threshold filters more faithfully.
+*   **Methodological Limitations of the Dataset**: While non-linear methods reveal distinct habitat clusters, they are subject to major constraints when applied to this specific dataset:
+    1.  *Zero-Inflation (Presence/Absence Dominance)*: Out of 1121 springs, 1014 are Local Cold springs with very low or zero endemic species richness. This massive zero-inflation collapses the local similarity calculations, grouping the cold springs into a single dense, undifferentiated cloud that compresses the remaining environmental variance.
+    2.  *Mixed Data Scales*: The dataset combines continuous parameters (e.g., temperature, substrate fractions) with discrete ordinal disturbance ranks (e.g., grazing indexes from 1 to 4). Using standard Euclidean distance metrics on these mixed types can cause t-SNE to create artificial coordinate bands along the integer ranks of the disturbances.
+    3.  *Global Distance Distortion*: Because t-SNE prioritizes local neighbor structures, the global distance between separate clusters (such as Regional Aquifer vs. Local Hot springs) is mathematically arbitrary. Straight linear vector projections (like standard `envfit` vectors) cannot be interpreted linearly across the coordinate space, requiring localized non-linear surface interpolation (e.g., K-Nearest Neighbors grid mapping) for rigorous gradient representation.
+    4.  *Subpopulation Sparsity*: The Regional Aquifer springs ($N=45$) contain almost all the endemic richness but represent a very small fraction of the total dataset. In this low-density region of the manifold, t-SNE can overfit to local noise or fluctuate across random seeds, requiring validation from robust, non-parametric regression.
 
 ---
 
