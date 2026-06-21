@@ -611,7 +611,7 @@ Our synthesis of unsupervised axes, bootstrapped regressions, and partial depend
 
 ## 4. Conservation and Management Recommendations
 
-The primary goal of this work is to preserve endemic taxa. Based on our synthesis of latent and supervised analyses, we propose three key conservation strategies:
+The primary goal of this work is to preserve endemic taxa. Based on our synthesis of latent and supervised analyses, we propose four key conservation strategies:
 
 ### 1. Protect Regional Aquifer Flows to Maintain Pool Depth
 *   **Rationale**: Pool depth is the single most critical physical factor driving endemic richness. Because regional springs rely on deep carbonate aquifers, groundwater pumping and surface water diversions directly threaten pool depth.
@@ -624,6 +624,14 @@ The primary goal of this work is to preserve endemic taxa. Based on our synthesi
 ### 3. Adopt Nuanced Non-Native Species Management
 *   **Rationale**: The positive coupling between endemics and non-natives shows that stable refugia support both. Simple eradication efforts (e.g., using chemical treatments or intensive mechanical removal) must be carefully designed so they do not inadvertently disrupt the physical habitat or harm the sensitive endemics that share the same pools.
 *   **Action**: Focus on non-disruptive, species-specific control methods (such as physical trapping of non-native fish or hand-removal of bullfrog egg masses) rather than broad-spectrum habitat modifications. Prioritize habitat complexity (e.g., adding cobble and maintaining bank cover) to allow endemics and non-natives to co-exist with minimized predation.
+
+### 4. Implement Robust Aquatic Biosecurity Protocols
+*   **Rationale**: Because regional aquifer springs are stable, high-permanence resource patches, they are highly vulnerable to biological invasion. Furthermore, moving between isolated spring pools can easily spread microscopic pathogens or invasive snails. Physical cattle fencing cannot block aquatic invaders or pathogens, necessitating strict biosecurity protocols for researchers, managers, and visitors.
+*   **Action**: 
+    - **Check, Clean, Dry Decontamination**: Before leaving any spring site, inspect and physically clean all footwear, nets, and sampling equipment to remove mud, organic debris, and seeds. Use stiff-bristle brushes to thoroughly clear boot treads.
+    - **Chemical Disinfection**: Submerge all waders, boots, and sampling equipment in a **3% bleach solution** (or equivalent quaternary ammonium compound) for at least 10 minutes to kill pathogens like chytrid fungus (*Batrachochytrium dendrobatidis*) and Ranavirus, as well as invasive larvae. Rinse equipment with clean, pathogen-free water away from the spring, disposing of rinse water at least 100 feet away from natural water sources.
+    - **Dedicated Site Gear**: Dedicate specific sets of waders, nets, and measuring equipment for use *only* at the highest-value oases (such as Springs 5, 8, 13, 23) to eliminate the risk of cross-contamination entirely.
+    - **Early Detection and Rapid Response (EDRR)**: Set up seasonal environmental DNA (eDNA) monitoring grids at these key strongholds to detect early arrivals of non-native species (like New Zealand mudsnails) before they can establish reproducing populations.
 
 ---
 

@@ -185,7 +185,7 @@ To test the generality of our findings, we compare the Great Basin spring dynami
 
 ## 5. Conservation and Management Implications
 
-Based on our synthesis of latent and supervised analyses, we propose three target conservation strategies to preserve desert spring endemics:
+Based on our synthesis of latent and supervised analyses, we propose four target conservation strategies to preserve desert spring endemics:
 
 ### A. Protect Regional Aquifer Flows to Maintain Pool Depth
 *   **Target**: Maintain spring pool depth $>30$ cm.
@@ -199,7 +199,15 @@ Based on our synthesis of latent and supervised analyses, we propose three targe
 *   **Target**: Control aquatic biological invasion without disrupting native communities.
 *   **Action**: Avoid broad-spectrum chemical treatments that disrupt delicate endemics. Implement species-specific control methods (such as physical trapping of non-native fish or hand-removal of bullfrog egg masses) and maintain habitat complexity to minimize predation.
 
-### D. Prioritized Sites for Field Re-Survey and Restoration
+### D. Implement Robust Aquatic Biosecurity Protocols
+*   **Target**: Prevent the introduction and spread of invasive aquatic species (e.g., New Zealand mudsnails) and lethal pathogens (e.g., chytrid fungus *Batrachochytrium dendrobatidis*, Ranavirus) between isolated spring sites.
+*   **Action**: Establish a mandatory decontamination protocol for all field researchers, monitoring crews, and land managers:
+    1.  **Check, Clean, Dry Protocol**: Before leaving any spring site, inspect and physically clean all footwear, nets, and sampling equipment to remove mud, organic debris, and seeds. Use stiff-bristle brushes to thoroughly clear boot treads.
+    2.  **Chemical Disinfection**: Submerge all waders, boots, and sampling equipment in a **3% bleach solution** (or equivalent quaternary ammonium compound) for at least 10 minutes. Thoroughly rinse disinfected gear with clean, pathogen-free water away from the spring, disposing of rinse water at least 100 feet away from natural water sources.
+    3.  **Dedicated Site Gear**: Dedicate specific sets of waders, nets, and measuring equipment for use *only* at the highest-value oases (such as Springs 5, 8, 13, 23) to eliminate the risk of cross-contamination entirely.
+    4.  **Early Detection Grids**: Establish a regional Early Detection and Rapid Response (EDRR) program using seasonal environmental DNA (eDNA) water filtration to scan for early-stage biological invasions.
+
+### E. Prioritized Sites for Field Re-Survey and Restoration
 Because these ecological censuses are based on static historical field surveys, targeted field re-surveys are critical to verify the current hydrological and biological status of the highest-value sites prior to physical interventions:
 1. **Spring 5 (9 Endemics - Primary Stronghold)**: Urgently monitor to verify that its high pool depth ($100\text{ cm}$) is intact, and that the level 1 diversion has not introduced new non-native invaders.
 2. **Spring 23 (8 Endemics - Highest Threat)**: Severely threatened by water extraction (Diversion $= 4$) and shallow pool depth ($20\text{ cm}$). Re-survey to check for drying and prioritize for flow restoration and silt clearing.
@@ -207,7 +215,7 @@ Because these ecological censuses are based on static historical field surveys, 
 4. **Spring 13 (4 Endemics - Hydrological Collapse)**: Critically endangered by extreme shallowing (pool depth of $2.0\text{ cm}$). Re-survey immediately to verify if the spring has dried out.
 5. **Spring 96 (Local Hot - 4 Endemics)** and **Spring 510 (Local Cold - 3 Endemics)**: High-priority local refugia experiencing active livestock disturbance (Cattle $= 2$ and $3$, respectively); construct exclusion fencing to stabilize riparian banks.
 
-### E. Technological Advancements in Monitoring (2026 Outlook)
+### F. Technological Advancements in Monitoring (2026 Outlook)
 To maximize the efficiency of desert spring monitoring across remote basins, conservation programs should leverage four key technologies:
 1. **Environmental DNA (eDNA) Metabarcoding**: Non-invasively detecting endemic and non-native presence from water samples, dropping survey costs by 80% and eliminating habitat disturbance.
 2. **Multispectral UAV (Drone) Remote Sensing**: Using thermal and multispectral sensors to screen remote spring surface areas, drying trends, and riparian bank damage from the air.
