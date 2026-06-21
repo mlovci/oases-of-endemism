@@ -97,7 +97,7 @@ def main():
         vmin=0,
         vmax=1.0,
         fmt=".3f",
-        cbar_kws={"label": "Spearman Correlation ($r_s$)", "orientation": "horizontal", "pad": 0.18, "shrink": 0.6},
+        cbar_kws={"label": "Spearman Correlation ($r_s$)", "orientation": "horizontal", "pad": 0.28, "shrink": 0.6},
         ax=ax_heat,
         square=True,
         cbar=True,

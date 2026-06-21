@@ -2028,11 +2028,11 @@ where $x_{C,i}$ are the values of the other features for observation $i$, and $n
 2. <strong>Random Forest Regression Importance</strong>:
    - Trained a Random Forest Regressor ($N=500$) to predict endemic richness.
    - Identified pool <code>Depth</code> as the single most critical feature (Gini importance $= 0.281$), highlighting hydrological stability as the primary driver of endemic survival.
-   - Visualized in <img alt="Supplementary Figure S3: Random Forest Feature Importance" src="figures/Figure_S3_Random_Forest_Importance.png" />.
+   - Visualized in <img alt="Supplementary Figure S3: Random Forest Feature Importance" src="figures/Figure_S3_Random_Forest_Importance.png" />
 3. <strong>LOWESS Smoothing Curves</strong>:
    - Plotted locally weighted scatterplot smoothing (LOWESS) curves directly on coordinates.
    - LOWESS trends confirm the monotonic, non-linear decline of endemics with increased siltation, and the monotonic increase with non-native count.
-   - Visualized in <img alt="Supplementary Figure S4: LOWESS Invasion" src="figures/Figure_S4_LOWESS_Invasion.png" /> and <img alt="Supplementary Figure S5: LOWESS Siltation" src="figures/Figure_S5_LOWESS_Siltation.png" />.</p>
+   - Visualized in <img alt="Supplementary Figure S4: LOWESS Invasion" src="figures/Figure_S4_LOWESS_Invasion.png" /> and <img alt="Supplementary Figure S5: LOWESS Siltation" src="figures/Figure_S5_LOWESS_Siltation.png" /></p>
 <h3 id="d-bootstrap-regressor-validation-box-plots-analyze_all_aquiferspy">D. Bootstrap Regressor Validation &amp; Box Plots (<code>analyze_all_aquifers.py</code>)</h3>
 <p>We implemented a robust bootstrap regression workflow to calculate feature importances and their variance over $N=1000$ splits independently for each aquifer type:
 1.  <strong>Validation Metrics</strong>:
@@ -2074,12 +2074,12 @@ where $x_{C,i}$ are the values of the other features for observation $i$, and $n
     - Extracted a latent factor (Factor 2) that loads heavily on high temperature ($+0.630$), coarse substrate (cobble $+0.659$, gravel $+0.410$), and very low silt ($-0.839$).
     - Factor 2 correlates significantly with endemic species richness ($r_s = 0.346, p = 0.020$), confirming that open benthic substrates free of siltation represent the primary environmental condition preserving high endemic levels in regional thermal springs.
     - Fitted Poisson GLM: Verified that Factor 2 is a significant positive predictor.
-    - Visualized in: <img alt="Figure 3: Benthic Habitat Quality Factor vs Endemic Richness" src="figures/Figure_3_Regional_FA_Benthic_Quality.png" />.
+    - Visualized in: <img alt="Figure 3: Benthic Habitat Quality Factor vs Endemic Richness" src="figures/Figure_3_Regional_FA_Benthic_Quality.png" />
 2.  <strong>Global PCA (Grazing &amp; Habitat Degradation Axis)</strong>:
     - Global PC3 represents a degradation axis loading heavily on cattle grazing ($+0.542$), water diversion ($+0.276$), equine disturbance ($+0.251$), and low bank cover ($-0.527$).
     - PC3 correlates negatively with endemic richness globally ($r_s = -0.159, p = 9.522 \times 10^{-8}$), showing how habitat destruction across the landscape decreases endemic occurrence.
     - Fitted Poisson GLM: Verified PC3 is highly significant.
-    - Visualized in: <img alt="Figure 4: Grazing &amp; Habitat Degradation PC3 vs Endemic Richness" src="figures/Figure_4_Global_PCA_Habitat_Degradation.png" />.
+    - Visualized in: <img alt="Figure 4: Grazing &amp; Habitat Degradation PC3 vs Endemic Richness" src="figures/Figure_4_Global_PCA_Habitat_Degradation.png" />
 3.  <strong>Global t-SNE Manifold &amp; Environmental Driver Gradients</strong>:
     - The t-SNE 2D mapping shows a clear separation of springs. Regional Aquifer oases form a tight, distinct, and highly localized cluster in environmental parameter space.
     - Fitted linear environmental vectors (using the envfit algorithm) directly onto the t-SNE space to show how environmental variables interact. Silt and Sand point opposite to Gravel and Cobble along Dimension 1 (substrate sorting axis), while Cattle grazing and Water diversion point opposite to Bank Cover along Dimension 2 (habitat degradation axis).
@@ -2090,11 +2090,11 @@ where $x_{C,i}$ are the values of the other features for observation $i$, and $n
     - Visualized in: <img alt="Supplementary Figure S1: t-SNE Environmental Gradients Grid" src="figures/Figure_S1_tSNE_Environmental_Grid.png" /> (with overlay points shaped by aquifer type and sized by endemic species richness).
 5.  <strong>Global Site-Clustering Heatmap (OLO, <code>visualize_sites_clustermap.py</code>)</strong>:
     - Groups the 1121 springs based on their biological communities using hierarchical clustering on both rows (spring sites) and columns (the 5 biological variables) with row colors coding the spring aquifer types.
-    - Visualized in: <img alt="Figure 6: Global Spring Site-Clustering Heatmap" src="figures/Figure_6_Global_Site_Clustering.png" />.
+    - Visualized in: <img alt="Figure 6: Global Spring Site-Clustering Heatmap" src="figures/Figure_6_Global_Site_Clustering.png" />
 6.  <strong>Biological Taxa Co-occurrence Clustermap (OLO, <code>visualize_cooccurrence.py</code>)</strong>:
     - Applied average-linkage hierarchical clustering with Optimal Leaf Ordering (OLO) on the Spearman correlation coefficients of the five biological variables in Regional Aquifer springs.
     - Revealed a tight core native group (Endemics, Crenophilies, Native Fish) that clusters with Non-Natives, while benthic-specialist Springsnails cluster completely apart, merging last.
-    - Visualized in: <img alt="Figure 7: Biological Taxa Co-occurrence Clustermap" src="figures/Figure_7_Biological_Cooccurrence.png" />.
+    - Visualized in: <img alt="Figure 7: Biological Taxa Co-occurrence Clustermap" src="figures/Figure_7_Biological_Cooccurrence.png" />
 7.  <strong>Scale-Dependent Dendrogram Divergence (Figure 6 vs. Figure 7)</strong>:
     - We analyzed the scale-dependent reorganization of biological variables:
       - <em>Global Scale</em>: The massive presence/absence gradient across all 1121 springs forces all native taxa (including Springsnails) to cluster together. <code>Non Natives</code> clusters completely apart (merging last), driven by human-mediated introduction pathways.

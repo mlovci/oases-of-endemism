@@ -94,11 +94,11 @@ To ensure that the log-linear assumptions of the Poisson GLM do not bias our con
 2. **Random Forest Regression Importance**:
    - Trained a Random Forest Regressor ($N=500$) to predict endemic richness.
    - Identified pool `Depth` as the single most critical feature (Gini importance $= 0.281$), highlighting hydrological stability as the primary driver of endemic survival.
-   - Visualized in ![Supplementary Figure S3: Random Forest Feature Importance](figures/Figure_S3_Random_Forest_Importance.png).
+   - Visualized in ![Supplementary Figure S3: Random Forest Feature Importance](figures/Figure_S3_Random_Forest_Importance.png)
 3. **LOWESS Smoothing Curves**:
    - Plotted locally weighted scatterplot smoothing (LOWESS) curves directly on coordinates.
    - LOWESS trends confirm the monotonic, non-linear decline of endemics with increased siltation, and the monotonic increase with non-native count.
-   - Visualized in ![Supplementary Figure S4: LOWESS Invasion](figures/Figure_S4_LOWESS_Invasion.png) and ![Supplementary Figure S5: LOWESS Siltation](figures/Figure_S5_LOWESS_Siltation.png).
+   - Visualized in ![Supplementary Figure S4: LOWESS Invasion](figures/Figure_S4_LOWESS_Invasion.png) and ![Supplementary Figure S5: LOWESS Siltation](figures/Figure_S5_LOWESS_Siltation.png)
 ### D. Bootstrap Regressor Validation & Box Plots (`analyze_all_aquifers.py`)
 We implemented a robust bootstrap regression workflow to calculate feature importances and their variance over $N=1000$ splits independently for each aquifer type:
 1.  **Validation Metrics**:
@@ -142,12 +142,12 @@ We ran unsupervised decomposition to explore the latent conditions preserving en
     - Extracted a latent factor (Factor 2) that loads heavily on high temperature ($+0.630$), coarse substrate (cobble $+0.659$, gravel $+0.410$), and very low silt ($-0.839$).
     - Factor 2 correlates significantly with endemic species richness ($r_s = 0.346, p = 0.020$), confirming that open benthic substrates free of siltation represent the primary environmental condition preserving high endemic levels in regional thermal springs.
     - Fitted Poisson GLM: Verified that Factor 2 is a significant positive predictor.
-    - Visualized in: ![Figure 3: Benthic Habitat Quality Factor vs Endemic Richness](figures/Figure_3_Regional_FA_Benthic_Quality.png).
+    - Visualized in: ![Figure 3: Benthic Habitat Quality Factor vs Endemic Richness](figures/Figure_3_Regional_FA_Benthic_Quality.png)
 2.  **Global PCA (Grazing & Habitat Degradation Axis)**:
     - Global PC3 represents a degradation axis loading heavily on cattle grazing ($+0.542$), water diversion ($+0.276$), equine disturbance ($+0.251$), and low bank cover ($-0.527$).
     - PC3 correlates negatively with endemic richness globally ($r_s = -0.159, p = 9.522 \times 10^{-8}$), showing how habitat destruction across the landscape decreases endemic occurrence.
     - Fitted Poisson GLM: Verified PC3 is highly significant.
-    - Visualized in: ![Figure 4: Grazing & Habitat Degradation PC3 vs Endemic Richness](figures/Figure_4_Global_PCA_Habitat_Degradation.png).
+    - Visualized in: ![Figure 4: Grazing & Habitat Degradation PC3 vs Endemic Richness](figures/Figure_4_Global_PCA_Habitat_Degradation.png)
 3.  **Global t-SNE Manifold & Environmental Driver Gradients**:
     - The t-SNE 2D mapping shows a clear separation of springs. Regional Aquifer oases form a tight, distinct, and highly localized cluster in environmental parameter space.
     - Fitted linear environmental vectors (using the envfit algorithm) directly onto the t-SNE space to show how environmental variables interact. Silt and Sand point opposite to Gravel and Cobble along Dimension 1 (substrate sorting axis), while Cattle grazing and Water diversion point opposite to Bank Cover along Dimension 2 (habitat degradation axis).
@@ -158,11 +158,11 @@ We ran unsupervised decomposition to explore the latent conditions preserving en
     - Visualized in: ![Supplementary Figure S1: t-SNE Environmental Gradients Grid](figures/Figure_S1_tSNE_Environmental_Grid.png) (with overlay points shaped by aquifer type and sized by endemic species richness).
 5.  **Global Site-Clustering Heatmap (OLO, `visualize_sites_clustermap.py`)**:
     - Groups the 1121 springs based on their biological communities using hierarchical clustering on both rows (spring sites) and columns (the 5 biological variables) with row colors coding the spring aquifer types.
-    - Visualized in: ![Figure 6: Global Spring Site-Clustering Heatmap](figures/Figure_6_Global_Site_Clustering.png).
+    - Visualized in: ![Figure 6: Global Spring Site-Clustering Heatmap](figures/Figure_6_Global_Site_Clustering.png)
 6.  **Biological Taxa Co-occurrence Clustermap (OLO, `visualize_cooccurrence.py`)**:
     - Applied average-linkage hierarchical clustering with Optimal Leaf Ordering (OLO) on the Spearman correlation coefficients of the five biological variables in Regional Aquifer springs.
     - Revealed a tight core native group (Endemics, Crenophilies, Native Fish) that clusters with Non-Natives, while benthic-specialist Springsnails cluster completely apart, merging last.
-    - Visualized in: ![Figure 7: Biological Taxa Co-occurrence Clustermap](figures/Figure_7_Biological_Cooccurrence.png).
+    - Visualized in: ![Figure 7: Biological Taxa Co-occurrence Clustermap](figures/Figure_7_Biological_Cooccurrence.png)
 7.  **Scale-Dependent Dendrogram Divergence (Figure 6 vs. Figure 7)**:
     - We analyzed the scale-dependent reorganization of biological variables:
       - *Global Scale*: The massive presence/absence gradient across all 1121 springs forces all native taxa (including Springsnails) to cluster together. `Non Natives` clusters completely apart (merging last), driven by human-mediated introduction pathways.
