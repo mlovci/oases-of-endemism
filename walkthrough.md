@@ -70,7 +70,7 @@ Running the analysis script reproduced the three-way spring categorization (Loca
 
 ### B. Latent Pattern Discovery (`discover_latent_patterns.py`)
 We uncovered and plotted three latent patterns:
-1. **Invasion-Diversity Oasis Coupling (Simpson's Paradox)**:
+1. **Invasion-Diversity Oasis Coupling (Shared Abiotic Filtering)**:
    - Within Regional Aquifer oases, there is a strong positive correlation ($R = 0.574$) between endemic richness and non-native counts.
    - Standardized Poisson GLM (Log link): `Non Natives` is highly significant ($\beta_{std} = 0.3687, \text{HC3 SE} = 0.0950, z = 3.8792, p = 1.048 \times 10^{-4}$).
    - Non-parametric bootstrapping (2000 resamples) yields a 95% confidence interval entirely above zero ($[0.1872, 0.5963]$).

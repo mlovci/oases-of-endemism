@@ -307,7 +307,7 @@ We run a global PCA on all 20 standardized variables (15 environmental parameter
 The script [discover_latent_patterns.py](discover_latent_patterns.py) uncovers three previously undocumented or latent relationships.
 
 ### Modeling Counts: Why Standard Linear Regression Fails
-To evaluate these relationships rigorously, we cannot use standard linear regression (OLS). OLS assumes that the dependent variable (species richness) is continuous and normally distributed. Applying OLS to counts has two major flaws:
+To evaluate these relationships rigorously, we avoid traditional Ordinary Least Squares (OLS) linear regressions. In Supplementary S1, the original authors (Forrest et al. 2026) explicitly noted that OLS is mathematically inappropriate for species richness count data, which motivated their use of non-parametric distance-based linear models (DistLM). We expand on this rationale by detailing the core statistical limitations of applying OLS to count distributions:
 1.  **Impossible Predictions**: A linear equation ($Y = \beta_0 + \beta_1 X$) will eventually predict a negative number of species at extreme values of $X$, which is biologically impossible.
 2.  **Heteroscedasticity**: The variance of count data typically scales with its mean (the Poisson property), violating the OLS assumption of constant variance and biasing standard error calculations.
 
@@ -330,7 +330,7 @@ To ensure the model is robust and statistically sound, we implement several adva
 
 ### Discovered Relationships:
 
-### A. Pattern 1: The Invasion-Diversity Oasis Coupling (Simpson's Paradox & Abiotic Filtering)
+### A. Pattern 1: The Invasion-Diversity Oasis Coupling (Shared Abiotic Filtering & Carrying Capacity)
 We discover a strong *positive* co-occurrence between endemics and non-natives within regional oases ($R = 0.574$). 
 *   **Statistical Results**: The standardized non-native coefficient in our Poisson GLM is highly significant ($\beta_{std} = 0.3687, \text{HC3 SE} = 0.0950, z = 3.879, p = 1.048 \times 10^{-4}$), and non-parametric bootstrapping yields a robust 95% confidence interval entirely above zero ($[0.1872, 0.5963]$). Residuals are independent ($\text{DW} \approx 1.90$).
 *   **Mechanism (Shared Abiotic Filtering)**: While sometimes described as the "Invasion-Diversity Paradox" in management, it is not a true ecological paradox. Rather, it represents **shared abiotic filtering**. Both endemics and non-natives are aquatic organisms that share a fundamental physical requirement for **hydrological permanence and environmental stability**. In regional aquifer springs, extreme ecological permanence and habitat size support both high native/endemic diversity and high non-native establishment, which is absent in ephemeral cold springs ($R = 0.022$). Even after controlling for spring dimensions (`Depth` and `Width`), this positive coupling remains highly significant ($p = 0.005$).
