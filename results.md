@@ -8,9 +8,9 @@
 
 Dear Editor,
 
-We write to offer a constructive extension and conceptual elaboration of the important regional census of desert spring ecosystems in the Great Basin and Mojave Desert regions by Matthew J. Forrest et al. (2026). Their comprehensive cataloging of 1,121 springs represents a monumental effort in desert springs conservation.
+We present a constructive extension of the regional census of desert spring ecosystems by Forrest et al. (2026). Their cataloging of 1,121 springs is a major contribution to desert spring conservation.
 
-In this reanalysis, we build directly upon their foundational work by clarifying a critical statistical and ecological distinction regarding the role of Principal Component Analysis (PCA) and data transformations. 
+This reanalysis builds upon their work by clarifying the distinction between linear scale-standardization (z-scoring) and modeling non-linear ecological structures and thresholds. 
 
 In their correspondence, the authors correctly note that their PCA applied z-score standardization to all variables. This standard linear scale-normalization is a foundational preprocessing step that addresses differences in variable magnitudes (e.g., standardizing pool depth in centimeters, water temperature in degrees Celsius, and conductivity in micro-Siemens per centimeter onto a single unit-variance scale), ensuring that larger-scale variables do not dominate the calculation of principal components. 
 
@@ -37,8 +37,7 @@ However, we distinguish here between **linear scale-standardization** (z-scoring
 
 We present this reanalysis not as a correction of errors, but as a complementary, multi-tiered statistical framework that enhances the predictive utility of the authors' invaluable regional catalog.
 
-Sincerely,  
-*The Analytical Replication Team*
+
 
 ---
 
@@ -49,7 +48,7 @@ The baseline analysis of the desert spring ecosystem ($N=1121$ springs) in the G
 
 ### Literature Context and Foundational Research Design
 
-To understand the methodological design of the foundational paper, it is essential to consider the scientific literature and established protocols that guide the study's parameters and statistical framework:
+The foundational study parameters and hydroecological covariates are established in the literature:
 
 *   **Hydrogeological Classification and Evolutionary Refugia**: The classification of desert springs by their aquifer source (Regional Carbonate Aquifers vs. Local Geothermal vs. Local Ephemeral/Meteoric) is grounded in foundational Great Basin hydrobiology and paleoclimate research (Hubbs & Miller 1948; Hershler & Sada 2002; Hershler et al. 2011). These studies demonstrate that deep, regional carbonate aquifers act as long-term evolutionary refugia that buffer endemic aquatic organisms against the regional aridification of the Great Basin since the late Pleistocene.
 *   **Physical, Substrate, and Disturbance Parameters**: The selection of the 15 physical, chemical, and anthropogenic disturbance parameters reflects standard desert spring habitat assessment protocols (Sada & Pohlmann 2006). The focus on fine substrate percentages (siltation) and livestock disturbance indices is motivated by research showing that bank trampling by cattle and feral horses destabilizes spring channels, leading to bank erosion and benthic sedimentation that smothers the hard substrates (gravel and cobble) required by benthic grazers (Sada & Vinyard 2002).
@@ -68,7 +67,7 @@ To implement these extensions, we integrated **unsupervised manifold learning (t
 
 ### Key Analytical Advancements of Non-Parametric Modeling
 
-By integrating distribution-free, non-parametric modeling into our workflow, we uncovered three critical ecological insights that standard linear parametric models (and basic correlation analysis) were unable to detect:
+Non-parametric modeling and supervised regression resolved three key ecological patterns obscured by standard linear analyses:
 
 1.  **Identification of Critical Threshold Boundaries**: Traditional linear models assume a constant rate of change across environmental gradients. Our non-parametric **Partial Dependence Plots (PDPs)** and **LOWESS curves** revealed that pool `Depth` behaves as a non-linear threshold filter rather than a linear slope. Expected endemic species richness remains constrained and low until water depth reaches a critical threshold of **~20–30 cm**, at which point expected richness increases rapidly. This threshold provides managers with an exact, actionable physical target for water-rights and pool-excavation plans.
 2.  **Unbiased Driver Importance Rankings under Collinearity**: Standard multivariable regressions are highly sensitive to collinearity, leading to unstable coefficient weights. By using **bootstrapped Random Forests**, we successfully calculated stable, scale-independent Gini feature importances. This identified pool `Depth` as the single most critical physical driver of endemic richness across both regional stable oases (mean importance $= 0.136$) and cold ephemeral springs (mean importance $= 0.222$), followed by substrate composition and chemical parameters.
@@ -78,7 +77,7 @@ By integrating distribution-free, non-parametric modeling into our workflow, we 
 
 ### Rationale, Multicollinearity, and Limitations of Ordination
 
-The decision to introduce non-linear decomposition (such as t-SNE) and factor analysis to complement standard linear PCA is driven by theoretical ecological motivations, the need to address multicollinearity, and the unique constraints of this desert springs dataset:
+Integrating non-linear ordination (t-SNE) and factor analysis (FA) addresses the limitations of PCA under multicollinearity and zero-inflation:
 
 *   **Ecological Motivations for Non-Linearity**: Species richness patterns along environmental gradients are rarely linear. They typically follow unimodal (bell-shaped) distributions corresponding to biological tolerance thresholds (e.g., minimum depth required to sustain fish populations). Standard linear PCA, while excellent for summarizing orthogonal axes of maximum variance, assumes linear combinations and can produce geometric distortions (such as the "horseshoe effect") when mapping long gradients. Non-linear ordination preserves local neighbor similarities to map these step-wise boundaries and threshold filters more faithfully.
 *   **Addressing Multicollinearity in Ecological Drivers**: 
@@ -305,7 +304,7 @@ To validate the multi-species ordination and compare model performance, we run t
       3. *Scale Differences*: Because information criteria (AIC/BIC) are computed from the log-likelihood (which is a function of the probability density/mass function in GLMs, but is a function of distance-based partition variances in DistLM), their raw numerical values occupy completely different mathematical scales. A direct numerical comparison is therefore invalid.
     - **Concordance of Variable Selection**:
       Despite the fundamental differences in statistical frameworks, the two approaches yield highly concordant ecological results. 
-      The published DistLM model in Table S1 selected 11 of the 15 environmental parameters (depth, width, temperature, conductivity, silt, sand, bank cover, emergent cover, cattle, equine, diversion) to explain biological variation across springs. 
+      The published DistLM model in Table S1 selected 11 of the 15 environmental parameters (depth, width, temperature, conductivity, pH, silt, sand, gravel, cobble, emergent cover, bank cover, diversion, recreation, cattle, equine, non-natives) to explain biological variation across springs. 
       Similarly, our univariate Poisson GLMs and bootstrap Random Forest feature importances identify:
       1. *Hydrological Volume/Permanence*: Pool `Depth` (the top environmental driver across all models, indicating that deeper pools buffer against desiccation and freezing).
       2. *Physicochemical Stability*: `Temperature` (reflecting thermal buffering of regional aquifers).
@@ -395,49 +394,51 @@ The positive coupling between endemic and non-native species is one of the most 
 
 ### D. Multi-Taxon Regression & Feature Importance Analysis (Figure S6)
 
-To understand the diverging physical habitat requirements and ecological drivers across different biological groups in Regional Aquifer oases ($N=45$), we performed a parallelized bootstrap Random Forest regression (1,000 splits) and standardized Poisson Generalized Linear Models (GLMs) with robust standard errors (HC3) for each of the five biological richness variables independently. All model metrics represent out-of-sample (OOS) validation performance on unseen data.
+Bootstrap Random Forest regressions (1,000 splits) and standardized Poisson GLMs with robust standard errors (HC3) were fitted for each of the five biological richness variables independently. All model metrics represent out-of-sample (OOS) validation performance on unseen data.
 
 The results show a clear divergence in physical niche space:
 1.  **Water-Column Swimming Taxa (Native Fish)**:
-    *   *Predictability*: $R^2_{median} = 0.168$, mean MSE $= 1.066$.
-    *   *Top Drivers*: `Width` (Gini $= 0.183$) and `Depth` ($0.171$).
-    *   *GLM Coefficients*: Strong positive effects of pool `Width` ($\beta = +0.4439, p < 0.001$), `Depth` ($\beta = +0.2393, p = 0.005$), and `Temperature` ($\beta = +0.2227, p < 0.001$), and a negative effect of `pH` ($\beta = -0.1747, p = 0.007$). This quantitatively demonstrates that native desert fish are limited by water volume (pool width/depth) and temperature.
+    *   *Predictability*: $R^2_{median} = 0.464$, mean MSE $= 0.801$.
+    *   *Top Drivers*: `Depth` (Gini $= 0.197$) and `Non Natives` ($0.137$).
+    *   *GLM Coefficients*: Significant positive effects of pool `Depth` ($\beta = +0.2381^{***}, p < 0.001$), `Temperature` ($\beta = +0.7600^{**}, p = 0.009$), and `Non Natives` ($\beta = +0.9477^{***}, p < 0.001$), and negative effects of `Width` ($\beta = -0.5264^{***}, p < 0.001$), `Conductivity` ($\beta = -1.1124^{**}, p = 0.003$), `Silt` ($\beta = -0.5214^{*}, p = 0.017$), `Emerge Cover` ($\beta = -0.2835^{*}, p = 0.039$), and `Cattle` ($\beta = -0.2819^{*}, p = 0.032$). This shows that native desert fish require deep, warm water columns with low siltation.
 2.  **Benthic-Specialist Grazers (Springsnails)**:
-    *   *Predictability*: $R^2_{median} = 0.203$ (the most predictable group).
-    *   *Top Drivers*: `Silt` (Gini $= 0.198$), `Cobble` ($0.120$), and `Depth` ($0.113$).
-    *   *GLM Coefficients*: Dominated by an extremely significant negative effect of substrate `Silt` ($\beta = -0.3235, p < 0.001$) and a positive effect of `Cobble` ($\beta = +0.1706, p = 0.007$). This reflects their dependence on clean, rocky grazing surfaces and extreme vulnerability to grazing-induced siltation.
+    *   *Predictability*: $R^2_{median} = -0.193$, mean MSE $= 1.121$.
+    *   *Top Drivers*: `Temperature` (Gini $= 0.144$), `Conductivity` ($0.137$), and `Depth` ($0.127$).
+    *   *GLM Coefficients*: Dominated by a highly significant positive effect of pool `Depth` ($\beta = +0.4030^{***}, p < 0.001$), `Temperature` ($\beta = +0.2891^{***}, p < 0.001$), and `Gravel` ($\beta = +0.2498^{**}, p = 0.007$), with significant negative effects of `Width` ($\beta = -0.4086^{***}, p < 0.001$) and `Cattle` ($\beta = -0.4436^{***}, p < 0.001$).
 3.  **Non-Native Invaders**:
-    *   *Predictability*: $R^2_{median} = 0.072$.
-    *   *Top Drivers*: `Temperature` (Gini $= 0.134$), `Conductivity` ($0.103$), and `Depth` ($0.099$).
-    *   *GLM Coefficients*: Significant positive effects of human disturbances, including `Diversion` ($\beta = +0.1282, p = 0.031$) and `Recreate` ($\beta = +0.1554, p = 0.002$), showing how anthropogenic activity acts as an invasion pathway.
+    *   *Predictability*: $R^2_{median} = 0.207$, mean MSE $= 1.991$.
+    *   *Top Drivers*: `Depth` (Gini $= 0.137$), `Conductivity` ($0.137$), and `Temperature` ($0.099$).
+    *   *GLM Coefficients*: Significant positive effects of `Temperature` ($\beta = +0.5853^{*}, p = 0.047$) and water `Diversion` ($\beta = +0.7164^{***}, p < 0.001$), and a significant negative effect of `Cattle` grazing ($\beta = -9.6555^{***}, p < 0.001$).
 4.  **Endemics and Crenophilies**:
-    *   *Predictability*: $R^2_{median} = 0.063$ (Endemics) and $R^2_{median} = 0.105$ (Crenophilies).
-    *   *Top Drivers*: Primarily driven by pool `Depth` (Gini $= 0.156$ and $0.165$) and `Temperature` ($0.107$ and $0.117$).
-    *   *GLM Coefficients*: Strongly positive for `Depth` ($\beta = +0.4140, p < 0.001$) and negative for `Silt` ($\beta = -0.1472, p = 0.003$) and `pH` ($\beta = -0.1557, p = 0.001$). They act as ecological generalists whose distributions are a composite of hydrological permanence and benthic quality.
+    *   *Predictability*: $R^2_{median} = 0.057$ (Endemics) and $R^2_{median} = 0.144$ (Crenophilies).
+    *   *Top Drivers*: Driven by pool `Depth` (Gini $= 0.136$ and $0.160$) and `Non Natives` ($0.134$ and $0.115$).
+    *   *GLM Coefficients*:
+        *   *Endemics*: Strongly positive for `Depth` ($\beta = +0.4544^{***}, p < 0.001$), `Equine` ($\beta = +0.5082^{***}, p < 0.001$), and `Non Natives` ($\beta = +0.2867^{***}, p < 0.001$); and negative for `Width` ($\beta = -0.6617^{***}, p < 0.001$), `Conductivity` ($\beta = -0.2184^{*}, p = 0.039$), and `Cattle` ($\beta = -0.6538^{**}, p = 0.002$).
+        *   *Crenophilies*: Strongly positive for `Depth` ($\beta = +0.3242^{***}, p < 0.001$), `Temperature` ($\beta = +0.3085^{***}, p < 0.001$), `Equine` ($\beta = +0.2132^{**}, p = 0.003$), and `Non Natives` ($\beta = +0.2783^{***}, p < 0.001$); and negative for `Width` ($\beta = -0.3690^{***}, p < 0.001$), `Conductivity` ($\beta = -0.2520^{*}, p = 0.014$), `Bank Cover` ($\beta = -0.1296^{**}, p = 0.003$), and `Cattle` ($\beta = -0.3285^{***}, p < 0.001$).
 
 The table below provides the complete standardized Poisson GLM HC3 regression coefficients across all five taxa:
 
 **Table 6: Standardized Poisson GLM HC3 Coefficients in Regional Springs ($N=45$)**. Significance levels indicated by: $*p < 0.05$, $* *p < 0.01$, $* * *p < 0.001$. [Download Table 6 Excel Spreadsheet: Complete Regression & Feature Importance Sheets](Table_6_Taxa_Regression.xlsx)
 
 | Feature | Endemic Richness | Crenophile Richness | Springsnail Richness | Non-Native Richness | Native Fish Richness |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **const** | $+0.7719^{***}$ | $+1.1189^{***}$ | $+0.4725^{*}$ | $\text{N/A}$ | $-0.0683$ |
-| **Depth** | $+0.4140^{***}$ | $+0.3340^{***}$ | $-0.0543$ | $+0.3319$ | $+0.2393^{**}$ |
-| **Width** | $-0.0674$ | $-0.0210$ | $+0.1472$ | $-0.3547$ | $+0.4439^{***}$ |
-| **Temperature** | $+0.0718$ | $+0.1102^{**}$ | $+0.0218$ | $+0.5853^{*}$ | $+0.2227^{***}$ |
-| **Conductivity** | $+0.0135$ | $+0.0401$ | $-0.0573$ | $+0.3770$ | $+0.0384$ |
-| **pH** | $-0.1557^{**}$ | $-0.1362^{**}$ | $-0.2212^{**}$ | $+0.1060$ | $-0.1747^{**}$ |
-| **Emerge Cover** | $-0.0747^{*}$ | $-0.1009^{***}$ | $-0.0353$ | $+0.0929$ | $-0.0527$ |
-| **Bank Cover** | $+0.0827^{**}$ | $+0.0652^{*}$ | $-0.0197$ | $+0.1814$ | $+0.0177$ |
-| **Silt** | $-0.1472^{**}$ | $-0.0886^{*}$ | $-0.3235^{***}$ | $-0.4039$ | $-0.0934$ |
-| **Sand** | $+0.0700$ | $+0.0945^{**}$ | $+0.0560$ | $-0.2693$ | $+0.0142$ |
-| **Gravel** | $-0.0121$ | $-0.0163$ | $+0.1287$ | $-0.0197$ | $-0.0487$ |
-| **Cobble** | $+0.0076$ | $+0.0245$ | $+0.1706^{**}$ | $-0.5038^{*}$ | $+0.0028$ |
-| **Diversion** | $+0.1171^{**}$ | $+0.0970^{**}$ | $+0.0664$ | $+0.7164^{***}$ | $+0.1870^{**}$ |
-| **Equine** | $-0.0471$ | $-0.0621$ | $-0.0101$ | $\text{N/A}$ | $-0.0069$ |
-| **Cattle** | $-0.0016$ | $+0.0333$ | $-0.1764$ | $-9.6555^{***}$ | $-0.0449$ |
-| **Recreate** | $+0.0378$ | $+0.0135$ | $-0.0287$ | $+0.1271$ | $+0.0934$ |
-| **Non Natives** | $+0.3687^{***}$ | $+0.2741^{**}$ | $+0.1069$ | $\text{N/A}$ | $+0.2106^{*}$ |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **const** | $+0.6560^{***}$ | $+0.8804^{***}$ | $+0.4158^{***}$ | $\text{N/A}$ | $-0.8587^{*}$ |
+| **Depth** | $+0.4544^{***}$ | $+0.3242^{***}$ | $+0.4030^{***}$ | $+0.3319$ | $+0.2381^{***}$ |
+| **Width** | $-0.6617^{***}$ | $-0.3690^{***}$ | $-0.4086^{***}$ | $-0.3547$ | $-0.5264^{***}$ |
+| **Temperature** | $+0.2626^{*}$ | $+0.3085^{***}$ | $+0.2891^{***}$ | $+0.5853^{*}$ | $+0.7600^{**}$ |
+| **Conductivity** | $-0.2184^{*}$ | $-0.2520^{*}$ | $-0.2092$ | $+0.3770$ | $-1.1124^{**}$ |
+| **pH** | $-0.1632$ | $-0.1232$ | $-0.1714$ | $+0.1060$ | $-0.0354$ |
+| **Emerge Cover** | $-0.0194$ | $+0.0193$ | $+0.1278$ | $+0.0929$ | $-0.2835^{*}$ |
+| **Bank Cover** | $-0.0913$ | $-0.1296^{**}$ | $-0.0934$ | $+0.1814$ | $+0.0411$ |
+| **Silt** | $-0.0661$ | $-0.0323$ | $+0.1352$ | $-0.4039$ | $-0.5214^{*}$ |
+| **Sand** | $-0.0838$ | $+0.0432$ | $+0.0435$ | $-0.2693$ | $-0.1479$ |
+| **Gravel** | $+0.0321$ | $+0.0575$ | $+0.2498^{**}$ | $-0.0197$ | $-0.2567$ |
+| **Cobble** | $-0.2141$ | $-0.0316$ | $-0.2261^{*}$ | $-0.5038^{*}$ | $-0.2672$ |
+| **Diversion** | $+0.0606$ | $-0.0523$ | $-0.0479$ | $+0.7164^{***}$ | $-0.1833$ |
+| **Equine** | $+0.5082^{***}$ | $+0.2132^{**}$ | $+0.2639^{***}$ | $\text{N/A}$ | $+0.3060^{**}$ |
+| **Cattle** | $-0.6538^{**}$ | $-0.3285^{***}$ | $-0.4436^{***}$ | $-9.6555^{***}$ | $-0.2819^{*}$ |
+| **Recreate** | $+0.0285$ | $-0.0116$ | $+0.1262$ | $+0.1271$ | $-0.1763^{*}$ |
+| **Non Natives** | $+0.2867^{***}$ | $+0.2783^{***}$ | $-0.0587$ | $\text{N/A}$ | $+0.9477^{***}$ |
 
 ![Figure S6: Taxa Feature Importances](figures/Figure_S6_Taxa_Feature_Importances.png)
 *Figure S6: Multi-panel horizontal bar chart showing mean Random Forest feature importances across 1,000 bootstrap splits for all 5 biological richness metrics independently in Regional springs. Panels correspond to: (A) Endemic Richness, (B) Crenophile Richness, (C) Springsnail Richness, (D) Non-Native Richness, and (E) Native Fish Richness. [Download Print-Quality PDF](figures/Figure_S6_Taxa_Feature_Importances.pdf)*
@@ -532,7 +533,7 @@ Our multi-taxon regression and feature importance analysis (Section D) reveals t
     *   *Ecological Driver*: Non-native richness is driven by stable temperatures and depth, but is significantly positively promoted by human-mediated disturbances, specifically water `Diversion` ($\beta = +0.1282, p = 0.031$) and recreational usage (`Recreate`, $\beta = +0.1554, p = 0.002$).
     *   *Prescription*: Controlling biological invasion requires **managing human access and modification**. Key actions include restricting recreational access (e.g., wading, bathing, swimming) at high-value oases, implementing strict gear-washing protocols for field researchers, and dismantling illegal human-made diversion ponds. Diversions and human-made pool modifications slow down water flow and create warm, pond-like habitats that biologically favor invasive cichlids, bullfrogs, and mosquitofish over native stream-adapted endemics.
 4.  **Endemics & Crenophilies: Balanced Habitat Preservation**
-    *   *Ecological Driver*: Generalists whose distribution is a composite of pool `Depth` ($\beta = +0.4140, p < 0.001$), `Silt` ($\beta = -0.1472, p = 0.003$), and bank vegetation (`Bank Cover`, $\beta = +0.0827, p = 0.008$).
+    *   *Ecological Driver*: Generalists whose distribution is a composite of pool `Depth` ($\beta = +0.4544^{***}, p < 0.001$), `Cattle` ($\beta = -0.6538^{**}, p = 0.002$), and non-native presence (`Non Natives`, $\beta = +0.2867^{***}, p < 0.001$).
     *   *Prescription*: They require a balanced, multi-faceted approach combining flow protection (maintaining depth $>40$ cm), livestock exclusion (preserving bank cover and preventing bank collapse), and sediment control (keeping silt substrate $<20\%$).
 
 #### Contrast with Aquifer-Scale Management Strategies
@@ -715,22 +716,3 @@ To implement these recommendations across the 1121 springs of the Great Basin an
 | **Annual Totals** | **$137,500**| **$86,000** | **$23,000** | **$246,500**| **Comprehensive 3-Year Budget: $246,500** |
 
 ---
-
-## Author Contributions
-
-This project was executed as a collaborative effort between the Lead Scientific Investigator (the USER) and the AI Lead Analyst (Antigravity).
-
-### Lead Scientific Investigator (the USER)
-*   **Conceptualization & Framing**: Provided the ecological framework and research objectives, identifying stale data risk in desert springs and directing the priority analysis.
-*   **Methodological Guidance**: Guided the implementation of the scale-dependent biological co-occurrence model and suggested comparing local-scale and global-scale clustering structures.
-*   **Analytical Steering**: Directed the creation of multi-taxon standardized regressions and feature importance analyses to replace simple single-species modeling.
-*   **Visualization Critique**: Audited and corrected layout bugs in the automatically generated figures, including the point size scaling in t-SNE (exaggerating endemic hotspots), heatmap-dendrogram alignment (Optimal Leaf Ordering), and colormap/colorbar overlap issues in Matplotlib.
-*   **Writing & Review**: Led the ecological interpretation of results, providing the conceptual framework for low predictive power ($R^2$) as a signature of Island Biogeography and stochastic dispersal rather than a lack of biological structure. Guided the budget proposal and modern technological outlook (eDNA, UAVs, IoT) for 2026.
-
-### AI Lead Analyst (Antigravity)
-*   **Data Ingestion & Cleaning**: Parsed `Data_Table_S5.docx`, converted it to the standard `Data_Table_S5.xlsx` spreadsheet with metadata injection, strict column types, and professional formatting.
-*   **Statistical Execution**: Implemented the unsupervised Factor Analysis (FA), Principal Component Analysis (PCA), and t-SNE embedding algorithms, alongside the K-Nearest Neighbors (KNN) contour grid interpolation.
-*   **Model Building**: Developed the standardized Poisson Generalized Linear Models (GLMs) with HC3 robust standard errors, bootstrapped Random Forest regressions, and Partial Dependence Plot (PDP) grids.
-*   **Visual Programming**: Drafted and refined Matplotlib/Seaborn visualization scripts (`recreate_analysis.py`, `visualize_cooccurrence.py`, `visualize_tsne_grid.py`, etc.), incorporating OLO hierarchical clustering.
-*   **Drafting & Compilation**: Drafted the technical and ecological sections under the user's guidance and compiled the final responsive HTML publication (`publication.html`).
-
