@@ -81,9 +81,14 @@ def run_pca_analysis(df):
     X = df[features].astype(float)
     y = df["Aquifer Type"]
     
+    # Square root transform biological variables prior to scaling as described in the paper's methods
+    bio_cols = ["Endemics", "Crenophilies", "Springsnails", "Non Natives", "Native Fish"]
+    X_transformed = X.copy()
+    X_transformed[bio_cols] = np.sqrt(X_transformed[bio_cols])
+    
     # Standardize features
     scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(X)
+    X_scaled = scaler.fit_transform(X_transformed)
     
     # Run PCA
     pca = PCA(n_components=2)

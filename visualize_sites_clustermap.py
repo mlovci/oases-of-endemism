@@ -28,10 +28,13 @@ def main():
     # 5 biological variables to cluster
     features = ["Endemics", "Crenophilies", "Springsnails", "Non Natives", "Native Fish"]
     
-    # Extract data and standardize (z-score normalization) to put all metrics on the same visual scale
+    # Extract data, apply square root transformation to the biological data prior to analysis as described in the paper
     X = df[features].astype(float)
+    X_transformed = np.sqrt(X)
+    
+    # Standardize (z-score normalization) to put all metrics on the same visual scale
     scaler = StandardScaler()
-    X_scaled = pd.DataFrame(scaler.fit_transform(X), columns=features)
+    X_scaled = pd.DataFrame(scaler.fit_transform(X_transformed), columns=features)
     
     # 1. Row Clustering (Spring Sites, N = 1121) using Euclidean distance and OLO
     print("Clustering rows (1121 springs)...")
