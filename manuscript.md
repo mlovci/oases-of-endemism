@@ -111,23 +111,23 @@ We performed parallelized bootstrap Random Forest regressions (1,000 splits) and
 
 | Feature | Endemic Richness | Crenophile Richness | Springsnail Richness | Non-Native Richness | Native Fish Richness |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| **const** | $+0.6560^{***}$ | $+0.8804^{***}$ | $+0.4158^{***}$ | $\text{N/A}$ | $-0.8587^{*}$ |
-| **Depth** | $+0.4544^{***}$ | $+0.3242^{***}$ | $+0.4030^{***}$ | $+0.3319$ | $+0.2381^{***}$ |
-| **Width** | $-0.6617^{***}$ | $-0.3690^{***}$ | $-0.4086^{***}$ | $-0.3547$ | $-0.5264^{***}$ |
-| **Temperature** | $+0.2626^{*}$ | $+0.3085^{***}$ | $+0.2891^{***}$ | $+0.5853^{*}$ | $+0.7600^{**}$ |
-| **Conductivity** | $-0.2184^{*}$ | $-0.2520^{*}$ | $-0.2092$ | $+0.3770$ | $-1.1124^{**}$ |
+| **const** | $+0.6560^{\ast\ast\ast}$ | $+0.8804^{\ast\ast\ast}$ | $+0.4158^{\ast\ast\ast}$ | $\text{N/A}$ | $-0.8587^{\ast}$ |
+| **Depth** | $+0.4544^{\ast\ast\ast}$ | $+0.3242^{\ast\ast\ast}$ | $+0.4030^{\ast\ast\ast}$ | $+0.3319$ | $+0.2381^{\ast\ast\ast}$ |
+| **Width** | $-0.6617^{\ast\ast\ast}$ | $-0.3690^{\ast\ast\ast}$ | $-0.4086^{\ast\ast\ast}$ | $-0.3547$ | $-0.5264^{\ast\ast\ast}$ |
+| **Temperature** | $+0.2626^{\ast}$ | $+0.3085^{\ast\ast\ast}$ | $+0.2891^{\ast\ast\ast}$ | $+0.5853^{\ast}$ | $+0.7600^{\ast\ast}$ |
+| **Conductivity** | $-0.2184^{\ast}$ | $-0.2520^{\ast}$ | $-0.2092$ | $+0.3770$ | $-1.1124^{\ast\ast}$ |
 | **pH** | $-0.1632$ | $-0.1232$ | $-0.1714$ | $+0.1060$ | $-0.0354$ |
-| **Emerge Cover** | $-0.0194$ | $+0.0193$ | $+0.1278$ | $+0.0929$ | $-0.2835^{*}$ |
-| **Bank Cover** | $-0.0913$ | $-0.1296^{**}$ | $-0.0934$ | $+0.1814$ | $+0.0411$ |
-| **Silt** | $-0.0661$ | $-0.0323$ | $+0.1352$ | $-0.4039$ | $-0.5214^{*}$ |
+| **Emerge Cover** | $-0.0194$ | $+0.0193$ | $+0.1278$ | $+0.0929$ | $-0.2835^{\ast}$ |
+| **Bank Cover** | $-0.0913$ | $-0.1296^{\ast\ast}$ | $-0.0934$ | $+0.1814$ | $+0.0411$ |
+| **Silt** | $-0.0661$ | $-0.0323$ | $+0.1352$ | $-0.4039$ | $-0.5214^{\ast}$ |
 | **Sand** | $-0.0838$ | $+0.0432$ | $+0.0435$ | $-0.2693$ | $-0.1479$ |
-| **Gravel** | $+0.0321$ | $+0.0575$ | $+0.2498^{**}$ | $-0.0197$ | $-0.2567$ |
-| **Cobble** | $-0.2141$ | $-0.0316$ | $-0.2261^{*}$ | $-0.5038^{*}$ | $-0.2672$ |
-| **Diversion** | $+0.0606$ | $-0.0523$ | $-0.0479$ | $+0.7164^{***}$ | $-0.1833$ |
-| **Equine** | $+0.5082^{***}$ | $+0.2132^{**}$ | $+0.2639^{***}$ | $\text{N/A}$ | $+0.3060^{**}$ |
-| **Cattle** | $-0.6538^{**}$ | $-0.3285^{***}$ | $-0.4436^{***}$ | $-9.6555^{***}$ | $-0.2819^{*}$ |
-| **Recreate** | $+0.0285$ | $-0.0116$ | $+0.1262$ | $+0.1271$ | $-0.1763^{*}$ |
-| **Non Natives** | $+0.2867^{***}$ | $+0.2783^{***}$ | $-0.0587$ | $\text{N/A}$ | $+0.9477^{***}$ |
+| **Gravel** | $+0.0321$ | $+0.0575$ | $+0.2498^{\ast\ast}$ | $-0.0197$ | $-0.2567$ |
+| **Cobble** | $-0.2141$ | $-0.0316$ | $-0.2261^{\ast}$ | $-0.5038^{\ast}$ | $-0.2672$ |
+| **Diversion** | $+0.0606$ | $-0.0523$ | $-0.0479$ | $+0.7164^{\ast\ast\ast}$ | $-0.1833$ |
+| **Equine** | $+0.5082^{\ast\ast\ast}$ | $+0.2132^{\ast\ast}$ | $+0.2639^{\ast\ast\ast}$ | $\text{N/A}$ | $+0.3060^{\ast\ast}$ |
+| **Cattle** | $-0.6538^{\ast\ast}$ | $-0.3285^{\ast\ast\ast}$ | $-0.4436^{\ast\ast\ast}$ | $-9.6555^{\ast\ast\ast}$ | $-0.2819^{\ast}$ |
+| **Recreate** | $+0.0285$ | $-0.0116$ | $+0.1262$ | $+0.1271$ | $-0.1763^{\ast}$ |
+| **Non Natives** | $+0.2867^{\ast\ast\ast}$ | $+0.2783^{\ast\ast\ast}$ | $-0.0587$ | $\text{N/A}$ | $+0.9477^{\ast\ast\ast}$ |
 
 ![Figure S6: Taxa Feature Importances](figures/Figure_S6_Taxa_Feature_Importances.png)
 *Figure S6: Mean bootstrap feature importances across 1,000 splits for each target taxon. [Download Print-Quality PDF](figures/Figure_S6_Taxa_Feature_Importances.pdf)*
@@ -143,7 +143,7 @@ Substrate fractions (`Silt`, `Sand`, `Gravel`, `Cobble`) represent compositional
 All other environmental variables display VIF values below $2.9$.
 
 #### 2. Physical Covariation and GLM Suppression Effects
-Pool `Depth` and `Width` are positively correlated ($r = 0.52$ globally). When fitted simultaneously in the Poisson GLM, this physical covariation triggers a suppression effect: the model attributes the positive effect of pool size entirely to `Depth` ($\beta = +0.4544^{***}$) and assigns a compensatory negative slope to `Width` ($\beta = -0.6617^{***}$). This negative coefficient for width is a statistical artifact of multicollinearity rather than a biological process. Ecologists and managers are cautioned against interpreting individual GLM coefficients in isolation.
+Pool `Depth` and `Width` are positively correlated ($r = 0.52$ globally). When fitted simultaneously in the Poisson GLM, this physical covariation triggers a suppression effect: the model attributes the positive effect of pool size entirely to `Depth` ($\beta = +0.4544^{\ast\ast\ast}$) and assigns a compensatory negative slope to `Width` ($\beta = -0.6617^{\ast\ast\ast}$). This negative coefficient for width is a statistical artifact of multicollinearity rather than a biological process. Ecologists and managers are cautioned against interpreting individual GLM coefficients in isolation.
 
 #### 3. High Stochasticity and Low Predictability in Regional Oases
 Out-of-sample (OOS) validation reveals low predictive power for the Regional Aquifer Random Forest models ($R^2_{median} = 0.063$ for Endemics, $0.105$ for Crenophilies). 

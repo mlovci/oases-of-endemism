@@ -420,21 +420,21 @@ The results show a clear divergence in physical niche space:
 1.  **Water-Column Swimming Taxa (Native Fish)**:
     *   *Predictability*: $R^2_{median} = 0.464$, mean MSE $= 0.801$.
     *   *Top Drivers*: `Depth` (Gini $= 0.197$) and `Non Natives` ($0.137$).
-    *   *GLM Coefficients*: Significant positive effects of pool `Depth` ($\beta = +0.2381^{***}, p < 0.001$), `Temperature` ($\beta = +0.7600^{**}, p = 0.009$), and `Non Natives` ($\beta = +0.9477^{***}, p < 0.001$), and negative effects of `Width` ($\beta = -0.5264^{***}, p < 0.001$), `Conductivity` ($\beta = -1.1124^{**}, p = 0.003$), `Silt` ($\beta = -0.5214^{*}, p = 0.017$), `Emerge Cover` ($\beta = -0.2835^{*}, p = 0.039$), and `Cattle` ($\beta = -0.2819^{*}, p = 0.032$). This shows that native desert fish require deep, warm water columns with low siltation.
+    *   *GLM Coefficients*: Significant positive effects of pool `Depth` ($\beta = +0.2381^{\ast\ast\ast}, p < 0.001$), `Temperature` ($\beta = +0.7600^{\ast\ast}, p = 0.009$), and `Non Natives` ($\beta = +0.9477^{\ast\ast\ast}, p < 0.001$), and negative effects of `Width` ($\beta = -0.5264^{\ast\ast\ast}, p < 0.001$), `Conductivity` ($\beta = -1.1124^{\ast\ast}, p = 0.003$), `Silt` ($\beta = -0.5214^{\ast}, p = 0.017$), `Emerge Cover` ($\beta = -0.2835^{\ast}, p = 0.039$), and `Cattle` ($\beta = -0.2819^{\ast}, p = 0.032$). This shows that native desert fish require deep, warm water columns with low siltation.
 2.  **Benthic-Specialist Grazers (Springsnails)**:
     *   *Predictability*: $R^2_{median} = -0.193$, mean MSE $= 1.121$.
     *   *Top Drivers*: `Temperature` (Gini $= 0.144$), `Conductivity` ($0.137$), and `Depth` ($0.127$).
-    *   *GLM Coefficients*: Dominated by a highly significant positive effect of pool `Depth` ($\beta = +0.4030^{***}, p < 0.001$), `Temperature` ($\beta = +0.2891^{***}, p < 0.001$), and `Gravel` ($\beta = +0.2498^{**}, p = 0.007$), with significant negative effects of `Width` ($\beta = -0.4086^{***}, p < 0.001$) and `Cattle` ($\beta = -0.4436^{***}, p < 0.001$).
+    *   *GLM Coefficients*: Dominated by a highly significant positive effect of pool `Depth` ($\beta = +0.4030^{\ast\ast\ast}, p < 0.001$), `Temperature` ($\beta = +0.2891^{\ast\ast\ast}, p < 0.001$), and `Gravel` ($\beta = +0.2498^{\ast\ast}, p = 0.007$), with significant negative effects of `Width` ($\beta = -0.4086^{\ast\ast\ast}, p < 0.001$) and `Cattle` ($\beta = -0.4436^{\ast\ast\ast}, p < 0.001$).
 3.  **Non-Native Invaders**:
     *   *Predictability*: $R^2_{median} = 0.207$, mean MSE $= 1.991$.
     *   *Top Drivers*: `Depth` (Gini $= 0.137$), `Conductivity` ($0.137$), and `Temperature` ($0.099$).
-    *   *GLM Coefficients*: Significant positive effects of `Temperature` ($\beta = +0.5853^{*}, p = 0.047$) and water `Diversion` ($\beta = +0.7164^{***}, p < 0.001$), and a significant negative effect of `Cattle` grazing ($\beta = -9.6555^{***}, p < 0.001$).
+    *   *GLM Coefficients*: Significant positive effects of `Temperature` ($\beta = +0.5853^{\ast}, p = 0.047$) and water `Diversion` ($\beta = +0.7164^{\ast\ast\ast}, p < 0.001$), and a significant negative effect of `Cattle` grazing ($\beta = -9.6555^{\ast\ast\ast}, p < 0.001$).
 4.  **Endemics and Crenophilies**:
     *   *Predictability*: $R^2_{median} = 0.057$ (Endemics) and $R^2_{median} = 0.144$ (Crenophilies).
     *   *Top Drivers*: Driven by pool `Depth` (Gini $= 0.136$ and $0.160$) and `Non Natives` ($0.134$ and $0.115$).
     *   *GLM Coefficients*:
-        *   *Endemics*: Strongly positive for `Depth` ($\beta = +0.4544^{***}, p < 0.001$), `Equine` ($\beta = +0.5082^{***}, p < 0.001$), and `Non Natives` ($\beta = +0.2867^{***}, p < 0.001$); and negative for `Width` ($\beta = -0.6617^{***}, p < 0.001$), `Conductivity` ($\beta = -0.2184^{*}, p = 0.039$), and `Cattle` ($\beta = -0.6538^{**}, p = 0.002$).
-        *   *Crenophilies*: Strongly positive for `Depth` ($\beta = +0.3242^{***}, p < 0.001$), `Temperature` ($\beta = +0.3085^{***}, p < 0.001$), `Equine` ($\beta = +0.2132^{**}, p = 0.003$), and `Non Natives` ($\beta = +0.2783^{***}, p < 0.001$); and negative for `Width` ($\beta = -0.3690^{***}, p < 0.001$), `Conductivity` ($\beta = -0.2520^{*}, p = 0.014$), `Bank Cover` ($\beta = -0.1296^{**}, p = 0.003$), and `Cattle` ($\beta = -0.3285^{***}, p < 0.001$).
+        *   *Endemics*: Strongly positive for `Depth` ($\beta = +0.4544^{\ast\ast\ast}, p < 0.001$), `Equine` ($\beta = +0.5082^{\ast\ast\ast}, p < 0.001$), and `Non Natives` ($\beta = +0.2867^{\ast\ast\ast}, p < 0.001$); and negative for `Width` ($\beta = -0.6617^{\ast\ast\ast}, p < 0.001$), `Conductivity` ($\beta = -0.2184^{\ast}, p = 0.039$), and `Cattle` ($\beta = -0.6538^{\ast\ast}, p = 0.002$).
+        *   *Crenophilies*: Strongly positive for `Depth` ($\beta = +0.3242^{\ast\ast\ast}, p < 0.001$), `Temperature` ($\beta = +0.3085^{\ast\ast\ast}, p < 0.001$), `Equine` ($\beta = +0.2132^{\ast\ast}, p = 0.003$), and `Non Natives` ($\beta = +0.2783^{\ast\ast\ast}, p < 0.001$); and negative for `Width` ($\beta = -0.3690^{\ast\ast\ast}, p < 0.001$), `Conductivity` ($\beta = -0.2520^{\ast}, p = 0.014$), `Bank Cover` ($\beta = -0.1296^{\ast\ast}, p = 0.003$), and `Cattle` ($\beta = -0.3285^{\ast\ast\ast}, p < 0.001$).
 
 The table below provides the complete standardized Poisson GLM HC3 regression coefficients across all five taxa:
 
@@ -442,23 +442,23 @@ The table below provides the complete standardized Poisson GLM HC3 regression co
 
 | Feature | Endemic Richness | Crenophile Richness | Springsnail Richness | Non-Native Richness | Native Fish Richness |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| **const** | $+0.6560^{***}$ | $+0.8804^{***}$ | $+0.4158^{***}$ | $\text{N/A}$ | $-0.8587^{*}$ |
-| **Depth** | $+0.4544^{***}$ | $+0.3242^{***}$ | $+0.4030^{***}$ | $+0.3319$ | $+0.2381^{***}$ |
-| **Width** | $-0.6617^{***}$ | $-0.3690^{***}$ | $-0.4086^{***}$ | $-0.3547$ | $-0.5264^{***}$ |
-| **Temperature** | $+0.2626^{*}$ | $+0.3085^{***}$ | $+0.2891^{***}$ | $+0.5853^{*}$ | $+0.7600^{**}$ |
-| **Conductivity** | $-0.2184^{*}$ | $-0.2520^{*}$ | $-0.2092$ | $+0.3770$ | $-1.1124^{**}$ |
+| **const** | $+0.6560^{\ast\ast\ast}$ | $+0.8804^{\ast\ast\ast}$ | $+0.4158^{\ast\ast\ast}$ | $\text{N/A}$ | $-0.8587^{\ast}$ |
+| **Depth** | $+0.4544^{\ast\ast\ast}$ | $+0.3242^{\ast\ast\ast}$ | $+0.4030^{\ast\ast\ast}$ | $+0.3319$ | $+0.2381^{\ast\ast\ast}$ |
+| **Width** | $-0.6617^{\ast\ast\ast}$ | $-0.3690^{\ast\ast\ast}$ | $-0.4086^{\ast\ast\ast}$ | $-0.3547$ | $-0.5264^{\ast\ast\ast}$ |
+| **Temperature** | $+0.2626^{\ast}$ | $+0.3085^{\ast\ast\ast}$ | $+0.2891^{\ast\ast\ast}$ | $+0.5853^{\ast}$ | $+0.7600^{\ast\ast}$ |
+| **Conductivity** | $-0.2184^{\ast}$ | $-0.2520^{\ast}$ | $-0.2092$ | $+0.3770$ | $-1.1124^{\ast\ast}$ |
 | **pH** | $-0.1632$ | $-0.1232$ | $-0.1714$ | $+0.1060$ | $-0.0354$ |
-| **Emerge Cover** | $-0.0194$ | $+0.0193$ | $+0.1278$ | $+0.0929$ | $-0.2835^{*}$ |
-| **Bank Cover** | $-0.0913$ | $-0.1296^{**}$ | $-0.0934$ | $+0.1814$ | $+0.0411$ |
-| **Silt** | $-0.0661$ | $-0.0323$ | $+0.1352$ | $-0.4039$ | $-0.5214^{*}$ |
+| **Emerge Cover** | $-0.0194$ | $+0.0193$ | $+0.1278$ | $+0.0929$ | $-0.2835^{\ast}$ |
+| **Bank Cover** | $-0.0913$ | $-0.1296^{\ast\ast}$ | $-0.0934$ | $+0.1814$ | $+0.0411$ |
+| **Silt** | $-0.0661$ | $-0.0323$ | $+0.1352$ | $-0.4039$ | $-0.5214^{\ast}$ |
 | **Sand** | $-0.0838$ | $+0.0432$ | $+0.0435$ | $-0.2693$ | $-0.1479$ |
-| **Gravel** | $+0.0321$ | $+0.0575$ | $+0.2498^{**}$ | $-0.0197$ | $-0.2567$ |
-| **Cobble** | $-0.2141$ | $-0.0316$ | $-0.2261^{*}$ | $-0.5038^{*}$ | $-0.2672$ |
-| **Diversion** | $+0.0606$ | $-0.0523$ | $-0.0479$ | $+0.7164^{***}$ | $-0.1833$ |
-| **Equine** | $+0.5082^{***}$ | $+0.2132^{**}$ | $+0.2639^{***}$ | $\text{N/A}$ | $+0.3060^{**}$ |
-| **Cattle** | $-0.6538^{**}$ | $-0.3285^{***}$ | $-0.4436^{***}$ | $-9.6555^{***}$ | $-0.2819^{*}$ |
-| **Recreate** | $+0.0285$ | $-0.0116$ | $+0.1262$ | $+0.1271$ | $-0.1763^{*}$ |
-| **Non Natives** | $+0.2867^{***}$ | $+0.2783^{***}$ | $-0.0587$ | $\text{N/A}$ | $+0.9477^{***}$ |
+| **Gravel** | $+0.0321$ | $+0.0575$ | $+0.2498^{\ast\ast}$ | $-0.0197$ | $-0.2567$ |
+| **Cobble** | $-0.2141$ | $-0.0316$ | $-0.2261^{\ast}$ | $-0.5038^{\ast}$ | $-0.2672$ |
+| **Diversion** | $+0.0606$ | $-0.0523$ | $-0.0479$ | $+0.7164^{\ast\ast\ast}$ | $-0.1833$ |
+| **Equine** | $+0.5082^{\ast\ast\ast}$ | $+0.2132^{\ast\ast}$ | $+0.2639^{\ast\ast\ast}$ | $\text{N/A}$ | $+0.3060^{\ast\ast}$ |
+| **Cattle** | $-0.6538^{\ast\ast}$ | $-0.3285^{\ast\ast\ast}$ | $-0.4436^{\ast\ast\ast}$ | $-9.6555^{\ast\ast\ast}$ | $-0.2819^{\ast}$ |
+| **Recreate** | $+0.0285$ | $-0.0116$ | $+0.1262$ | $+0.1271$ | $-0.1763^{\ast}$ |
+| **Non Natives** | $+0.2867^{\ast\ast\ast}$ | $+0.2783^{\ast\ast\ast}$ | $-0.0587$ | $\text{N/A}$ | $+0.9477^{\ast\ast\ast}$ |
 
 ![Figure S6: Taxa Feature Importances](figures/Figure_S6_Taxa_Feature_Importances.png)
 *Figure S6: Multi-panel horizontal bar chart showing mean Random Forest feature importances across 1,000 bootstrap splits for all 5 biological richness metrics independently in Regional springs. Panels correspond to: (A) Endemic Richness, (B) Crenophile Richness, (C) Springsnail Richness, (D) Non-Native Richness, and (E) Native Fish Richness. [Download Print-Quality PDF](figures/Figure_S6_Taxa_Feature_Importances.pdf)*
@@ -562,7 +562,7 @@ Our multi-taxon regression and feature importance analysis (Section D) reveals t
     *   *Ecological Driver*: Non-native richness is driven by stable temperatures and depth, but is significantly positively promoted by human-mediated disturbances, specifically water `Diversion` ($\beta = +0.1282, p = 0.031$) and recreational usage (`Recreate`, $\beta = +0.1554, p = 0.002$).
     *   *Prescription*: Controlling biological invasion requires **managing human access and modification**. Key actions include restricting recreational access (e.g., wading, bathing, swimming) at high-value oases, implementing strict gear-washing protocols for field researchers, and dismantling illegal human-made diversion ponds. Diversions and human-made pool modifications slow down water flow and create warm, pond-like habitats that biologically favor invasive cichlids, bullfrogs, and mosquitofish over native stream-adapted endemics.
 4.  **Endemics & Crenophilies: Balanced Habitat Preservation**
-    *   *Ecological Driver*: Generalists whose distribution is a composite of pool `Depth` ($\beta = +0.4544^{***}, p < 0.001$), `Cattle` ($\beta = -0.6538^{**}, p = 0.002$), and non-native presence (`Non Natives`, $\beta = +0.2867^{***}, p < 0.001$).
+    *   *Ecological Driver*: Generalists whose distribution is a composite of pool `Depth` ($\beta = +0.4544^{\ast\ast\ast}, p < 0.001$), `Cattle` ($\beta = -0.6538^{\ast\ast}, p = 0.002$), and non-native presence (`Non Natives`, $\beta = +0.2867^{\ast\ast\ast}, p < 0.001$).
     *   *Prescription*: They require a balanced, multi-faceted approach combining flow protection (maintaining depth $>40$ cm), livestock exclusion (preserving bank cover and preventing bank collapse), and sediment control (keeping silt substrate $<20\%$).
 
 #### Contrast with Aquifer-Scale Management Strategies
