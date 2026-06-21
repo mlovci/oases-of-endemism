@@ -557,6 +557,19 @@ A striking result of our out-of-sample (OOS) validation is the relatively low $R
 3.  **Conservation Takeaways: The Necessity of Adaptive Management**
     *   The lack of high deterministic predictability means conservationists **cannot manage desert springs using simplistic, rigid formulas** (e.g., "adding exactly 10 cm of depth will yield exactly 0.5 more species"). Instead, the models provide general *directional prescriptions* (e.g., depth is positive, silt is negative). Conservation must be structured under an **adaptive management framework**, where physical interventions are implemented as experiments, followed by continuous monitoring (eDNA/surveys) and iterative adjustments.
 
+### 7. Comparison with Parallel Global Systems & Ecological Theory
+
+To test the generality of our findings, we compare the Great Basin spring dynamics against parallel desert spring systems globally and established ecological theories:
+
+1.  **The Invasion-Diversity Paradox & Biotic Acceptance**
+    Our finding of a strong positive correlation between endemic richness and non-native richness ($r_s = 0.597$) within Regional Aquifer oases supports the landscape-scale "invasion paradox" described by Stohlgren et al. (1999, 2003). While small-scale experiments often suggest that species-rich communities resist invaders via competitive exclusion (biotic resistance), our large-scale observational results show that both natives and non-natives respond positively to the same high-resource, stable environmental conditions (biotic acceptance).
+2.  **Niche Opportunity and Environmental Filtering**
+    According to the community assembly framework of Shea and Chesson (2002), the success of non-native invaders is determined by "niche opportunities" created by relaxed environmental filters. In ephemeral cold runoff springs and highly geothermal springs, harsh abiotic conditions (freezing, seasonal drying, or temperature extremes) act as severe filters that exclude most species. In contrast, regional aquifer springs act as relaxed abiotic filters, providing a stable thermal and hydrological buffer that permits both native endemics and warm-adapted non-native invaders to establish permanent populations.
+3.  **Parallel Global Arid Oases**
+    The hydrological and substrate dependencies we identify are highly concordant with other isolated groundwater-dependent ecosystems globally:
+    *   *Great Artesian Basin (GAB) Springs, Australia*: Studies on Australian mound springs (e.g., Fensham et al. 2011; Rossini et al. 2018) demonstrate that endemic gastropod and macroinvertebrate richness is primarily driven by spring permanence and discharge rates. This mirrors our supervised model results showing that pool depth (permanence threshold of $>30\text{ cm}$) is the single most critical driver of richness.
+    *   *Cuatro Ciénegas Basin, Mexico*: Research in Chihuahuan desert springs (e.g., Souza et al. 2006) shows that extreme evolutionary isolation and chemical stability drive high local endemism. However, anthropogenic water diversion and habitat degradation (such as substrate compaction and siltation) disrupt these stable niches, leading to species extirpations. This aligns with our finding that benthic siltation ($\beta_{std} = -0.2538, p = 0.014$) acts as a severe independent threat, decoupling benthic grazers like springsnails from the rest of the aquatic community.
+
 ---
 
 ## Environmental Conditions That Preserve Endemic Taxa
@@ -598,7 +611,7 @@ Our synthesis of unsupervised axes, bootstrapped regressions, and partial depend
 
 ## 4. Conservation and Management Recommendations
 
-The primary goal of this work is to preserve endemic taxa. Based on our synthesis of latent and supervised analyses, we propose three key conservation strategies:
+The primary goal of this work is to preserve endemic taxa. Based on our synthesis of latent and supervised analyses, we propose four key conservation strategies:
 
 ### 1. Protect Regional Aquifer Flows to Maintain Pool Depth
 *   **Rationale**: Pool depth is the single most critical physical factor driving endemic richness. Because regional springs rely on deep carbonate aquifers, groundwater pumping and surface water diversions directly threaten pool depth.
@@ -611,6 +624,14 @@ The primary goal of this work is to preserve endemic taxa. Based on our synthesi
 ### 3. Adopt Nuanced Non-Native Species Management
 *   **Rationale**: The positive coupling between endemics and non-natives shows that stable refugia support both. Simple eradication efforts (e.g., using chemical treatments or intensive mechanical removal) must be carefully designed so they do not inadvertently disrupt the physical habitat or harm the sensitive endemics that share the same pools.
 *   **Action**: Focus on non-disruptive, species-specific control methods (such as physical trapping of non-native fish or hand-removal of bullfrog egg masses) rather than broad-spectrum habitat modifications. Prioritize habitat complexity (e.g., adding cobble and maintaining bank cover) to allow endemics and non-natives to co-exist with minimized predation.
+
+### 4. Implement Robust Aquatic Biosecurity Protocols
+*   **Rationale**: Because regional aquifer springs are stable, high-permanence resource patches, they are highly vulnerable to biological invasion. Furthermore, moving between isolated spring pools can easily spread microscopic pathogens or invasive snails. Physical cattle fencing cannot block aquatic invaders or pathogens, necessitating strict biosecurity protocols for researchers, managers, and visitors.
+*   **Action**: 
+    - **Check, Clean, Dry Decontamination**: Before leaving any spring site, inspect and physically clean all footwear, nets, and sampling equipment to remove mud, organic debris, and seeds. Use stiff-bristle brushes to thoroughly clear boot treads.
+    - **Chemical Disinfection**: Submerge all waders, boots, and sampling equipment in a **3% bleach solution** (or equivalent quaternary ammonium compound) for at least 10 minutes to kill pathogens like chytrid fungus (*Batrachochytrium dendrobatidis*) and Ranavirus, as well as invasive larvae. Rinse equipment with clean, pathogen-free water away from the spring, disposing of rinse water at least 100 feet away from natural water sources.
+    - **Dedicated Site Gear**: Dedicate specific sets of waders, nets, and measuring equipment for use *only* at the highest-value oases (such as Springs 5, 8, 13, 23) to eliminate the risk of cross-contamination entirely.
+    - **Early Detection and Rapid Response (EDRR)**: Set up seasonal environmental DNA (eDNA) monitoring grids at these key strongholds to detect early arrivals of non-native species (like New Zealand mudsnails) before they can establish reproducing populations.
 
 ---
 
