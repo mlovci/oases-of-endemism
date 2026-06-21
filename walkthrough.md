@@ -50,6 +50,7 @@ This parsed 1123 rows x 22 columns, embedded metadata, auto-adjusted column widt
 
 ### Step 3: Structured Validation Check
 We verified the generated spreadsheet using a diagnostic python script:
+
 - **Sheet Name**: `Data Table S5`
 - **Spreadsheet Size**: `1123 rows x 22 columns` (matching the source table).
 - **Header Rows**: Correctly preserved as string representations.
@@ -63,6 +64,7 @@ We verified the generated spreadsheet using a diagnostic python script:
 
 ### A. Recreated Paper Analysis (`recreate_analysis.py`)
 Running the analysis script reproduced the three-way spring categorization (Local Cold, Local Geothermal, Regional Aquifer Thermal) and confirmed that Regional Aquifer springs support disproportionate endemic species richness:
+
 - **Mean Endemic Richness**: Regional Aquifer ($\mu = 2.64$) vs. Local Geothermal ($\mu = 0.34$) and Local Cold ($\mu = 0.11$).
 - **Kruskal-Wallis Significance**: Very highly significant for all species counts ($p < 10^{-20}$).
 - **PCA Biplot**: Saved to ![Supplementary Figure S2: PCA Biplot](figures/Figure_S2_PCA_Biplot.png). In the paper's Figure 5a, PC1 represents a Hydrological Permanence and Biological Richness axis, and PC2 represents a substrate grain-size and chemical axis. To match the paper's coordinate convention exactly, we flipped the signs of both PC1 and PC2 (since eigenvector signs in PCA are mathematically arbitrary). Biological loading vectors (Endemics, Crenophiles, Springsnails, etc.) and Regional Aquifer springs are now correctly oriented on the left side (negative PC1), while Local Cold and Local Hot springs cluster on the right (positive PC1), aligning with the paper.
@@ -72,6 +74,7 @@ Running the analysis script reproduced the three-way spring categorization (Loca
 
 ### B. Latent Pattern Discovery (`discover_latent_patterns.py`)
 We uncovered and plotted three latent patterns:
+
 1. **Invasion-Diversity Oasis Coupling (Shared Abiotic Filtering)**:
    - Within Regional Aquifer oases, there is a strong positive correlation ($R = 0.574$) between endemic richness and non-native counts.
    - Standardized Poisson GLM (Log link): `Non Natives` is highly significant ($\beta_{std} = 0.3687, \text{HC3 SE} = 0.0950, z = 3.8792, p = 1.048 \times 10^{-4}$).
@@ -90,6 +93,7 @@ We uncovered and plotted three latent patterns:
 
 ### C. Non-parametric Validation (`non_parametric_analysis.py`)
 To ensure that the log-linear assumptions of the Poisson GLM do not bias our conclusions, we ran three distribution-free non-parametric checks:
+
 1. **Spearman Rank Correlations ($r_s$)**:
    - Confirmed `Depth` has the strongest non-parametric relationship with Endemics ($r_s = 0.514, p = 3.045 \times 10^{-4}$), followed by `Silt` ($r_s = -0.370, p = 1.242 \times 10^{-2}$) and `Temperature` ($r_s = 0.305, p = 4.153 \times 10^{-2}$).
    - `Endemics` and `Non Natives` have a highly significant rank correlation of $r_s = 0.597$ ($p = 1.527 \times 10^{-5}$), verifying their robust positive co-occurrence.
@@ -101,8 +105,10 @@ To ensure that the log-linear assumptions of the Poisson GLM do not bias our con
    - Plotted locally weighted scatterplot smoothing (LOWESS) curves directly on coordinates.
    - LOWESS trends confirm the monotonic, non-linear decline of endemics with increased siltation, and the monotonic increase with non-native count.
    - Visualized in ![Supplementary Figure S4: LOWESS Invasion](figures/Figure_S4_LOWESS_Invasion.png) and ![Supplementary Figure S5: LOWESS Siltation](figures/Figure_S5_LOWESS_Siltation.png)
+
 ### D. Bootstrap Regressor Validation & Box Plots (`analyze_all_aquifers.py`)
 We implemented a robust bootstrap regression workflow to calculate feature importances and their variance over $N=1000$ splits independently for each aquifer type:
+
 1.  **Validation Metrics**:
     - **Regional Aquifer Springs** ($N=45$): Median OOB $R^2 = +0.0568$, mean MSE $= 3.9782$.
     - **Local Hot Springs** ($N=62$): Median OOB $R^2 = -0.0819$, mean MSE $= 0.5552$.
@@ -118,6 +124,7 @@ We implemented a robust bootstrap regression workflow to calculate feature impor
 
 ### E. Partial Dependence Plots (`analyze_all_aquifers.py`)
 We computed and plotted one-dimensional partial dependence plots (PDPs) for all 16 features within each aquifer type independently:
+
 1.  **Response Ranges (Max Response Deltas $\Delta$)**:
     - **Regional Aquifer Springs** ($N=45$):
       - **`Depth`** ($\Delta = 1.0516$): Expected endemics increase from $2.24$ species (at $4\text{ cm}$) to $3.30$ species (at $>60\text{ cm}$).
@@ -140,6 +147,7 @@ We computed and plotted one-dimensional partial dependence plots (PDPs) for all 
 
 ### F. Unsupervised Decomposition & Manifold Learning (`unsupervised_analysis.py`)
 We ran unsupervised decomposition to explore the latent conditions preserving endemic taxa:
+
 1.  **Regional Aquifer Factor Analysis (Benthic Habitat Quality Factor)**:
     - Analyzed three latent environmental factors: Factor 1 ($r_s = 0.085, p = 0.581$, Not Significant), Factor 2 ($r_s = 0.346, p = 0.020$, Statistically Significant), and Factor 3 ($r_s = 0.156, p = 0.307$, Not Significant).
     - Focused on the only significant factor, **Factor 2**, which loads heavily on high temperature ($+0.630$), coarse substrate (cobble $+0.659$, gravel $+0.410$), and very low silt ($-0.839$).
@@ -191,9 +199,11 @@ We ran unsupervised decomposition to explore the latent conditions preserving en
 ## 4. Synthesis and Findings Files
 
 The findings are organized into two main documents to accommodate different presentation preferences:
+
 - **[results.md](results.md)**: A comprehensive report including a Letter to the Editor prologue, detailed methods, non-linear modeling discussion, and site-specific restoration targets.
 - **[manuscript.md](manuscript.md)**: A clean, formal, dry scientific paper structured for publication with Abstract, Introduction, Methods, Results, Discussion, and Conservation Implications.
 
 Both documents are integrated into the compilation pipeline and rendered into publication-quality formats:
+
 - **[publication.html](publication.html)** (fully styled, including responsive layout, interactive data downloads, custom legends, and aligned figures).
 

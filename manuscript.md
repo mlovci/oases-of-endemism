@@ -9,6 +9,7 @@ This study provides a rigorous statistical reanalysis and ecological extension o
 Desert springs in the Great Basin and Mojave Desert regions represent isolated, evolutionary islands that serve as vital refugia for endemic aquatic taxa (Hubbs & Miller 1948; Hershler & Sada 2002). The regional census of 1,121 springs by Forrest et al. (2026) established a critical baseline, classifying springs by aquifer type: stable Regional Aquifer springs, geothermal Local Hot springs, and ephemeral Local Cold runoff springs. 
 
 While linear ordination methods (such as Principal Component Analysis) provide useful descriptive overviews of environmental gradients, they are structurally limited in modeling non-linear ecological thresholds and the zero-inflation characteristic of species richness counts across highly skewed habitats. In this reanalysis, we build upon the original catalog by implementing a multi-tiered statistical framework:
+
 1. **Unsupervised Latent Axis Discovery**: Applying Factor Analysis (FA) to isolate clean benthic microhabitats from general land-use degradation, and t-SNE manifold learning to map environmental niche distinctiveness.
 2. **Scale-Dependent Species Co-occurrence**: Evaluating how multi-species clustering reorganizes from the regional aquifer scale to the global landscape scale.
 3. **Parametric Count Modeling & Threshold Identification**: Fitting standardized Poisson GLMs with robust standard errors (HC3) to evaluate taxon-specific environmental filters, calculating Variance Inflation Factors (VIFs) to diagnose multicollinearity, and using non-parametric Partial Dependence Plots (PDPs) to identify physical habitat targets.
@@ -58,12 +59,14 @@ Comparing Figures 6 and 7 reveals a scale-dependent ecological shift. Globally, 
 
 ### H. Similarity Percentages (SIMPER) and Model Selection Statistics (AIC / BIC)
 SIMPER analysis confirms that community dissimilarity is driven by crenophiles and endemics:
+
 *   *Regional vs. Cold* (Dissimilarity $= 79.39\%$): Crenophilies contribute $29.83\%$ and Endemics $28.24\%$.
 *   *Regional vs. Hot* (Dissimilarity $= 80.29\%$): Crenophilies contribute $30.08\%$ and Endemics $26.37\%$.
 *   *Hot vs. Cold* (Dissimilarity $= 58.81\%$): Crenophilies contribute $31.27\%$ and Springsnails $28.40\%$.
 
 #### Methodological Choice and Limitations of OLS
 In Supplementary S1, the original study explicitly noted that traditional ordinary least squares (OLS) linear regression models are mathematically inappropriate and poor predictors for species richness count data. Because OLS assumes continuous, normally distributed errors and constant variance (homoscedasticity), the original authors rejected OLS in favor of non-parametric distance-based linear models (DistLM) to draw their ecological conclusions. We build upon this logic by detailing the core statistical limitations of applying OLS to count distributions:
+
 1. *Heteroskedasticity*: The variance of count data typically increases with the mean, violating the homoscedasticity assumption.
 2. *Invalid Predictions*: Linear models predict continuous values and can yield impossible negative species counts.
 3. *Skewness and Zeros*: High proportions of zeros result in non-normal residuals, invalidating OLS hypothesis testing.
@@ -133,8 +136,10 @@ We performed parallelized bootstrap Random Forest regressions (1,000 splits) and
 
 #### 1. Substrate-Driven Compositional Multicollinearity
 Substrate fractions (`Silt`, `Sand`, `Gravel`, `Cobble`) represent compositional data, mathematically guaranteeing collinearity. VIF diagnostics confirm elevated collinearity for substrate variables:
+
 *   *Full Dataset ($N=1121$)*: `Silt` VIF $= 10.59$ (exceeding the standard collinearity threshold of 10.0), `Gravel` VIF $= 5.32$, `Sand` VIF $= 4.31$.
 *   *Regional Aquifer Subset ($N=45$)*: `Silt` VIF $= 7.70$, `Cobble` VIF $= 4.42$, `Gravel` VIF $= 3.69$, and `Sand` VIF $= 3.50$.
+
 All other environmental variables display VIF values below $2.9$.
 
 #### 2. Physical Covariation and GLM Suppression Effects
@@ -142,6 +147,7 @@ Pool `Depth` and `Width` are positively correlated ($r = 0.52$ globally). When f
 
 #### 3. High Stochasticity and Low Predictability in Regional Oases
 Out-of-sample (OOS) validation reveals low predictive power for the Regional Aquifer Random Forest models ($R^2_{median} = 0.063$ for Endemics, $0.105$ for Crenophilies). 
+
 *   *Ecological Context*: From an island biogeography perspective, these isolated desert spring oases are small habitat islands in a desert sea. Species presence is heavily shaped by stochastic colonization bottlenecks, historical migration barriers, and ecological drift (stochastic extinction events) rather than pure environmental determinism.
 *   *Statistical Constraint*: The small sample size ($N=45$) and the narrow environmental envelopes within oases mathematically restrict OOS validation performance.
 *   *Gini Bias*: Gini feature importance is biased in favor of continuous environmental variables (like pool dimensions or substrate percentages) over discrete or categorical variables (like grazing indices), deflating the apparent importance of management interventions.
@@ -175,6 +181,7 @@ Our supervised models translate qualitative observations into concrete managemen
 
 ### D. Comparison with Parallel Global Systems & Ecological Theory
 To test the generality of our findings, we compare the Great Basin spring dynamics against parallel desert spring systems globally and established ecological theories:
+
 1. **The Invasion-Diversity Paradox & Biotic Acceptance**: Our finding of a strong positive correlation between endemic richness and non-native richness ($r_s = 0.597$) within Regional Aquifer oases supports the landscape-scale "invasion paradox" described by Stohlgren et al. (1999, 2003). While small-scale experiments often suggest that species-rich communities resist invaders via competitive exclusion (biotic resistance), our large-scale observational results show that both natives and non-natives respond positively to the same high-resource, stable environmental conditions (biotic acceptance).
 2. **Niche Opportunity and Environmental Filtering**: According to the community assembly framework of Shea and Chesson (2002), the success of non-native invaders is determined by "niche opportunities" created by relaxed environmental filters. In ephemeral cold runoff springs and highly geothermal springs, harsh abiotic conditions (freezing, seasonal drying, or temperature extremes) act as severe filters that exclude most species. In contrast, regional aquifer springs act as relaxed abiotic filters, providing a stable thermal and hydrological buffer that permits both native endemics and warm-adapted non-native invaders to establish permanent populations.
 3. **Parallel Global Arid Oases**: The hydrological and substrate dependencies we identify are highly concordant with other isolated groundwater-dependent ecosystems globally:
@@ -209,6 +216,7 @@ Based on our synthesis of latent and supervised analyses, we propose four target
 
 ### E. Prioritized Sites for Field Re-Survey and Restoration
 Because these ecological censuses are based on static historical field surveys, targeted field re-surveys are critical to verify the current hydrological and biological status of the highest-value sites prior to physical interventions:
+
 1. **Spring 5 (9 Endemics - Primary Stronghold)**: Urgently monitor to verify that its high pool depth ($100\text{ cm}$) is intact, and that the level 1 diversion has not introduced new non-native invaders.
 2. **Spring 23 (8 Endemics - Highest Threat)**: Severely threatened by water extraction (Diversion $= 4$) and shallow pool depth ($20\text{ cm}$). Re-survey to check for drying and prioritize for flow restoration and silt clearing.
 3. **Spring 8 (5 Endemics - Smothered Benthic Zone)**: Retains 5 endemics but is completely smothered by $100\%$ silt. Prioritize for livestock exclusion fencing and manual gravel flushing.
@@ -217,6 +225,7 @@ Because these ecological censuses are based on static historical field surveys, 
 
 ### F. Technological Advancements in Monitoring (2026 Outlook)
 To maximize the efficiency of desert spring monitoring across remote basins, conservation programs should leverage four key technologies:
+
 1. **Environmental DNA (eDNA) Metabarcoding**: Non-invasively detecting endemic and non-native presence from water samples, dropping survey costs by 80% and eliminating habitat disturbance.
 2. **Multispectral UAV (Drone) Remote Sensing**: Using thermal and multispectral sensors to screen remote spring surface areas, drying trends, and riparian bank damage from the air.
 3. **LoRaWAN IoT Fence Breach Sensors**: Installing tilt and vibration sensors on exclusion fences to alert land managers of livestock breaches in real-time.
