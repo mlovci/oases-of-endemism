@@ -85,8 +85,8 @@ def main():
             shutil.copy2(src, dst)
             print(f"  Copied {ef}")
             
-    # Copy walkthrough.md, results.md, and methods.md back to brain root to keep them in sync
-    for md_file in ["walkthrough.md", "results.md", "methods.md"]:
+    # Copy walkthrough.md, results.md, methods.md, and manuscript.md back to brain root to keep them in sync
+    for md_file in ["walkthrough.md", "results.md", "methods.md", "manuscript.md"]:
         src = os.path.join(workspace_dir, md_file)
         dst = os.path.join(brain_dir, md_file)
         if os.path.exists(src):
