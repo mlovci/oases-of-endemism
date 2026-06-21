@@ -71,8 +71,8 @@ In Supplementary S1, the original study explicitly noted that traditional ordina
 2. *Invalid Predictions*: Linear models predict continuous values and can yield impossible negative species counts.
 3. *Skewness and Zeros*: High proportions of zeros result in non-normal residuals, invalidating OLS hypothesis testing.
 
-#### Methodological Incommensurability of AIC/BIC
-The model selection metrics (AIC/BIC) reported in our Poisson GLMs cannot be directly compared to the AICc/BIC values in the published Table S1. DistLM models a multivariate resemblance matrix by partitioning the distance-based sum of squares across environmental axes, calculating a pseudo-likelihood based on the residual sum of squares ($RSS$). Our Poisson GLMs are univariate models that fit a parametric Poisson probability mass function to raw count values. Because their likelihood formulations differ, their AIC/BIC values occupy completely different scales.
+#### Methodological Incommensurability of AIC/AICc/BIC
+The model selection metrics (AIC/AICc/BIC) reported in our Poisson GLMs cannot be directly compared to the AICc/BIC values in the published Table S1. DistLM models a multivariate resemblance matrix by partitioning the distance-based sum of squares across environmental axes, calculating a pseudo-likelihood based on the residual sum of squares ($RSS$). Our Poisson GLMs are univariate models that fit a parametric Poisson probability mass function to raw count values. Because their likelihood formulations differ, their AIC/AICc/BIC values occupy completely different scales.
 
 Our Poisson GLMs yield residual deviance-to-degrees of freedom ratios ($\chi^2 / \text{df}$) well below $1.0$ (e.g., $21.18 / 28 = 0.75$ for endemics; $10.09 / 28 = 0.36$ for springsnails), indicating that the count models are well-fit and free of overdispersion.
 

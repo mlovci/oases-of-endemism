@@ -674,6 +674,7 @@ The partial dependence function shows the marginal effect of one or two features
             <li><a href="#f-unsupervised-decomposition-manifold-learning-unsupervised_analysispy" class="nav-sub-link sub-h3" title="F. Unsupervised Decomposition &amp; Manifold Learning">F. Unsupervised Decomposition &amp; Manifold Learning</a></li>
             <li><a href="#g-community-dissimilarity-model-goodness-of-fit-simper-and-aicbic" class="nav-sub-link sub-h3" title="G. Community Dissimilarity &amp; Model Goodness-of-Fit">G. Community Dissimilarity &amp; Model Goodness-of-Fit</a></li>
             <li><a href="#4-synthesis-and-findings-files" class="nav-sub-link sub-h2" title="4. Synthesis and Findings Files">4. Synthesis and Findings Files</a></li>
+            <li><a href="#5-markdown-line-breaks-and-bulleted-list-repair" class="nav-sub-link sub-h2" title="5. Markdown Line Breaks and Bulleted List Repair">5. Markdown Line Breaks and Bulleted List Repair</a></li>
         </ul>
             </div>
         </nav>
@@ -1090,10 +1091,10 @@ The partial dependence function shows the marginal effect of one or two features
 <li>
 <p><strong>Goodness-of-Fit Advantages</strong>: By fitting Poisson GLMs with a log link (which model counts as an exponential process), we dramatically improve model fit. Below are the goodness-of-fit statistics for our Regional Aquifer models ($N=45$):</p>
 <ul>
-<li><strong>Endemics</strong>: $\text{AIC} = 167.45$, $\text{BIC (Standard)} = 85.89$, $\text{Residual Deviance} = 21.18$ (with 28 degrees of freedom).</li>
-<li><strong>Crenophilies</strong>: $\text{AIC} = 172.52$, $\text{BIC (Standard)} = 80.74$, $\text{Residual Deviance} = 16.03$ (with 28 degrees of freedom).</li>
-<li><strong>Springsnails</strong>: $\text{AIC} = 148.61$, $\text{BIC (Standard)} = 74.80$, $\text{Residual Deviance} = 10.09$ (with 28 degrees of freedom).</li>
-<li><strong>Native Fish</strong>: $\text{AIC} = 110.94$, $\text{BIC (Standard)} = 77.01$, $\text{Residual Deviance} = 12.29$ (with 28 degrees of freedom).</li>
+<li><strong>Endemics</strong>: $\text{AIC} = 167.45$, $\text{AICc} = 190.12$, $\text{BIC (Standard)} = 85.89$, $\text{Residual Deviance} = 21.18$ (with 28 degrees of freedom).</li>
+<li><strong>Crenophilies</strong>: $\text{AIC} = 172.52$, $\text{AICc} = 195.19$, $\text{BIC (Standard)} = 80.74$, $\text{Residual Deviance} = 16.03$ (with 28 degrees of freedom).</li>
+<li><strong>Springsnails</strong>: $\text{AIC} = 148.61$, $\text{AICc} = 171.28$, $\text{BIC (Standard)} = 74.80$, $\text{Residual Deviance} = 10.09$ (with 28 degrees of freedom).</li>
+<li><strong>Native Fish</strong>: $\text{AIC} = 110.94$, $\text{AICc} = 133.61$, $\text{BIC (Standard)} = 77.01$, $\text{Residual Deviance} = 12.29$ (with 28 degrees of freedom).</li>
 </ul>
 </li>
 <li>
@@ -2378,6 +2379,11 @@ $$\text{Contribution } \% = \frac{\bar{\delta}^k}{\bar{\Delta}} \times 100$$</p>
 <p>$$\text{AIC} = -2\ln(L) + 2k$$
   where $k$ is the number of estimated parameters (predictors plus the intercept; $k=17$ for models including the biological co-predictor, $k=16$ for the non-native model).</p>
 <ul>
+<li><strong>AICc (Small-Sample Correction)</strong>: Corrects for overfitting bias when the ratio $n/k$ is small (under 40; here $n/k \approx 45/17 = 2.65$):</li>
+</ul>
+<p>$$\text{AICc} = \text{AIC} + \frac{2k(k+1)}{n - k - 1}$$
+  where $n$ is the sample size ($n=45$ for regional oases).</p>
+<ul>
 <li><strong>BIC (Deviance-Based)</strong>: Measures fit relative to a saturated model with a penalty for complexity:</li>
 </ul>
 <p>$$\text{BIC}_{\text{deviance}} = D - (n - k)\ln(n)$$</p>
@@ -2391,8 +2397,8 @@ $$\text{Contribution } \% = \frac{\bar{\delta}^k}{\bar{\Delta}} \times 100$$</p>
 <li>
 <p><strong>Methodological Comparison to Published Work (Table S1)</strong>:</p>
 <ul>
-<li><strong>Incommensurability of AIC/BIC</strong>: In Table S1, the original publication by Forrest et al. (2026) employs <strong>Distance-based Linear Models (DistLM)</strong> to evaluate environmental influences. DistLM models a multivariate biological distance matrix (resemblance matrix) using pseudo-F statistics and selects models using multivariate AICc (AIC with a correction for small sample size) or BIC. </li>
-<li>Because our Poisson GLMs model independent univariate count responses using a Poisson probability mass function while the published DistLM models a multivariate resemblance matrix using distance-based sum-of-squares, <strong>their AIC/BIC values are mathematically incommensurable and cannot be directly compared numerically</strong>.</li>
+<li><strong>Incommensurability of AIC/AICc/BIC</strong>: In Table S1, the original publication by Forrest et al. (2026) employs <strong>Distance-based Linear Models (DistLM)</strong> to evaluate environmental influences. DistLM models a multivariate biological distance matrix (resemblance matrix) using pseudo-F statistics and selects models using multivariate AICc (AIC with a correction for small sample size) or BIC. </li>
+<li>Because our Poisson GLMs model independent univariate count responses using a Poisson probability mass function while the published DistLM models a multivariate resemblance matrix using distance-based sum-of-squares, <strong>their AIC/AICc/BIC values are mathematically incommensurable and cannot be directly compared numerically</strong>.</li>
 <li><strong>Concordance of Variable Selection</strong>: Despite the difference in likelihood frameworks, the models show strong qualitative concordance. The published DistLM best-fit model selected 11 of the 15 environmental parameters (depth, width, temperature, conductivity, silt, sand, bank cover, emergent cover, cattle, equine, diversion) to explain biological variation. Similarly, our supervised models identify pool <code>Depth</code> (permanence), <code>Temperature</code> (thermal buffer), <code>Silt</code> (substrate clog), and <code>Cattle</code>/<code>Equine</code> (grazing/trampling) as the primary significant predictors of endemic and springsnail richness.</li>
 <li><strong>Goodness-of-Fit Advantages</strong>: Our Poisson GLMs yield residual deviance-to-degrees of freedom ratios ($\chi^2/\text{df}$) well below $1.0$ (e.g., $21.18/28 = 0.75$ for endemics, and $10.09/28 = 0.36$ for springsnails), proving that they are highly fit, free of overdispersion, and represent a major statistical advancement over standard linear models (which predict impossible negative counts for species richness).</li>
 </ul>
@@ -2605,10 +2611,10 @@ $$\text{Contribution } \% = \frac{\bar{\delta}^k}{\bar{\Delta}} \times 100$$</p>
 </li>
 <li><strong>Model selection and Goodness-of-Fit</strong>:<ul>
 <li>We evaluated model goodness-of-fit statistics for the Poisson GLM count models:</li>
-<li><strong>Endemics</strong>: AIC = 167.45, BIC = 85.89, Deviance = 21.18, Pearson $\chi^2$ = 18.09</li>
-<li><strong>Crenophilies</strong>: AIC = 172.52, BIC = 80.74, Deviance = 16.03</li>
-<li><strong>Springsnails</strong>: AIC = 148.61, BIC = 74.80, Deviance = 10.09</li>
-<li><strong>Native Fish</strong>: AIC = 110.94, BIC = 77.01, Deviance = 12.29</li>
+<li><strong>Endemics</strong>: AIC = 167.45, AICc = 190.12, BIC = 85.89, Deviance = 21.18, Pearson $\chi^2$ = 18.09</li>
+<li><strong>Crenophilies</strong>: AIC = 172.52, AICc = 195.19, BIC = 80.74, Deviance = 16.03</li>
+<li><strong>Springsnails</strong>: AIC = 148.61, AICc = 171.28, BIC = 74.80, Deviance = 10.09</li>
+<li><strong>Native Fish</strong>: AIC = 110.94, AICc = 133.61, BIC = 77.01, Deviance = 12.29</li>
 <li>We documented the mathematical incommensurability of these AIC/BIC values with the paper's multivariate DistLM selection criteria (Table S1), alongside the high concordance in environmental variable selections (which both highlight pool depth, temperature, substrate grain-size, and livestock disturbances as key ecological drivers).</li>
 </ul>
 </li>
@@ -2624,6 +2630,15 @@ $$\text{Contribution } \% = \frac{\bar{\delta}^k}{\bar{\Delta}} \times 100$$</p>
 <ul>
 <li><strong><a href="publication.html">publication.html</a></strong> (fully styled, including responsive layout, interactive data downloads, custom legends, and aligned figures).</li>
 </ul>
+<hr />
+<h2 id="5-markdown-line-breaks-and-bulleted-list-repair">5. Markdown Line Breaks and Bulleted List Repair</h2>
+<p>We resolved formatting issues where paragraph text, headers, and bulleted lists were smashed together due to missing blank lines in the raw markdown files:</p>
+<ol>
+<li><strong>Diagnostic Identification</strong>: Run scan showing missing blank lines before list blocks, before headers, and after lists.</li>
+<li><strong>Indentation and Nested List Corrections</strong>: Corrected parent-child indentation from 6 spaces to 8 spaces for nested blocks under 4-space parents in <code>results.md</code> (e.g., <code>Methodological Choice</code> and <code>Methodological Incommensurability</code>). Added missing blank lines.</li>
+<li><strong>HTML Structural Verification</strong>: Verified that compiled HTML (<code>publication.html</code> and <code>index.html</code>) correctly uses nested <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, and <code>&lt;li&gt;</code> elements, resolving issues where sub-lists were rendered as plain paragraph text or flattened bullets.</li>
+<li><strong>Git Integration</strong>: Committed changes to <code>fix-smashed-formatting</code> and merged using the GitHub CLI pull request flow.</li>
+</ol>
         </section>
     </main>
 
