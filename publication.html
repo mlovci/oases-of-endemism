@@ -2160,6 +2160,7 @@ where $x_{C,i}$ are the values of the other features for observation $i$, and $n
 <li><strong><a href="visualize_cooccurrence.py">visualize_cooccurrence.py</a></strong>: Performs average-linkage hierarchical clustering with Optimal Leaf Ordering (OLO) on the Spearman correlation coefficients of the five biological variables (Endemics, Crenophilies, Springsnails, Non Natives, Native Fish) in Regional Aquifer springs, complete with environmental driver overlays.</li>
 <li><strong><a href="visualize_tsne_grid.py">visualize_tsne_grid.py</a></strong>: Fits a distance-weighted KNN regressor ($k=25$) on the 2D coordinates for each of the 15 environmental variables, interpolates values across a $150 \times 150$ grid, paints the background contour map, and overlays actual spring coordinates to map environmental drivers onto the t-SNE manifold.</li>
 <li><strong><a href="visualize_sites_clustermap.py">visualize_sites_clustermap.py</a></strong>: Performs hierarchical clustering on both rows (1121 springs) and columns (5 biological standardized richness variables) using average linkage and Optimal Leaf Ordering (OLO) to group springs based on their biological communities and validate their hydrogeological categories.</li>
+<li><strong><a href="manuscript.md">manuscript.md</a></strong>: A new, formal scientific paper written in a clean, dry, and structured academic format (Abstract, Introduction, Results, Discussion, and Conservation Implications), containing all exact statistical values, figures, and tables, but with zero preambles or meta-commentary.</li>
 </ol>
 <hr />
 <h2 id="2-verification-and-testing-results">2. Verification and Testing Results</h2>
@@ -2309,9 +2310,11 @@ where $x_{C,i}$ are the values of the other features for observation $i$, and $n
 </li>
 </ol>
 <hr />
-<h2 id="4-synthesis-and-findings-file">4. Synthesis and Findings File</h2>
-<p>A comprehensive scientific report has been written to <strong><a href="results.md">results.md</a></strong>. It synthesizes the PCA, Factor Analysis, t-SNE coordinates, Random Forest importances, bootstrapped Poisson GLMs, and Partial Dependence Plots. It concludes with three major conservation and management recommendations for these desert spring oases, followed by a targeted, site-specific conservation section identifying priority springs (Springs 5, 23, 8, 30, 29, 13, 32, 25, 96, 510, 529, 514) for direct management actions.</p>
-<p>The complete scientific article was rendered successfully into publication-quality format:
+<h2 id="4-synthesis-and-findings-files">4. Synthesis and Findings Files</h2>
+<p>The findings are organized into two main documents to accommodate different presentation preferences:
+- <strong><a href="results.md">results.md</a></strong>: A comprehensive report including a Letter to the Editor prologue, detailed methods, non-linear modeling discussion, and site-specific restoration targets.
+- <strong><a href="manuscript.md">manuscript.md</a></strong>: A clean, formal, dry scientific paper structured for publication with Abstract, Introduction, Methods, Results, Discussion, and Conservation Implications.</p>
+<p>Both documents are integrated into the compilation pipeline and rendered into publication-quality formats:
 - <strong><a href="publication.html">publication.html</a></strong> (fully styled, including responsive layout, interactive data downloads, custom legends, and aligned figures).</p>
         </section>
     </main>

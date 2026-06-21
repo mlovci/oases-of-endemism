@@ -25,6 +25,7 @@ We created or modified the following files in the workspace:
 10. **[visualize_cooccurrence.py](visualize_cooccurrence.py)**: Performs average-linkage hierarchical clustering with Optimal Leaf Ordering (OLO) on the Spearman correlation coefficients of the five biological variables (Endemics, Crenophilies, Springsnails, Non Natives, Native Fish) in Regional Aquifer springs, complete with environmental driver overlays.
 11. **[visualize_tsne_grid.py](visualize_tsne_grid.py)**: Fits a distance-weighted KNN regressor ($k=25$) on the 2D coordinates for each of the 15 environmental variables, interpolates values across a $150 \times 150$ grid, paints the background contour map, and overlays actual spring coordinates to map environmental drivers onto the t-SNE manifold.
 12. **[visualize_sites_clustermap.py](visualize_sites_clustermap.py)**: Performs hierarchical clustering on both rows (1121 springs) and columns (5 biological standardized richness variables) using average linkage and Optimal Leaf Ordering (OLO) to group springs based on their biological communities and validate their hydrogeological categories.
+13. **[manuscript.md](manuscript.md)**: A new, formal scientific paper written in a clean, dry, and structured academic format (Abstract, Introduction, Results, Discussion, and Conservation Implications), containing all exact statistical values, figures, and tables, but with zero preambles or meta-commentary.
 
 
 ---
@@ -186,10 +187,12 @@ We ran unsupervised decomposition to explore the latent conditions preserving en
 
 ---
 
-## 4. Synthesis and Findings File
+## 4. Synthesis and Findings Files
 
-A comprehensive scientific report has been written to **[results.md](results.md)**. It synthesizes the PCA, Factor Analysis, t-SNE coordinates, Random Forest importances, bootstrapped Poisson GLMs, and Partial Dependence Plots. It concludes with three major conservation and management recommendations for these desert spring oases, followed by a targeted, site-specific conservation section identifying priority springs (Springs 5, 23, 8, 30, 29, 13, 32, 25, 96, 510, 529, 514) for direct management actions.
+The findings are organized into two main documents to accommodate different presentation preferences:
+- **[results.md](results.md)**: A comprehensive report including a Letter to the Editor prologue, detailed methods, non-linear modeling discussion, and site-specific restoration targets.
+- **[manuscript.md](manuscript.md)**: A clean, formal, dry scientific paper structured for publication with Abstract, Introduction, Methods, Results, Discussion, and Conservation Implications.
 
-The complete scientific article was rendered successfully into publication-quality format:
+Both documents are integrated into the compilation pipeline and rendered into publication-quality formats:
 - **[publication.html](publication.html)** (fully styled, including responsive layout, interactive data downloads, custom legends, and aligned figures).
 
