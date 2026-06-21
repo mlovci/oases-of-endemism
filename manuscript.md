@@ -37,7 +37,7 @@ To align with the PCA loading conventions of Forrest et al. (2026), we projected
 *Supplementary Figure S2: Replicated PCA Biplot of environmental variables and spring categories. [Download Print-Quality PDF](figures/Figure_S2_PCA_Biplot.pdf)*
 
 ### D. Manifold Learning: t-SNE Cluster Analysis
-Applying t-SNE to the 15 environmental parameters reveals that Regional Aquifer springs form a tight, isolated cluster in environmental parameter space (see Figure 5). This confirms that their biological uniqueness is a direct consequence of their highly distinct physical niche (stable warm temperature, high depth, coarse substrates, and dense bank cover) rather than overlapping environmentally with local geothermal runoff.
+Applying t-SNE to the 15 environmental parameters reveals that Regional Aquifer springs form a tight, isolated cluster (see Figure 5). Because t-SNE groups points based on high-dimensional similarity, this tight clustering confirms that their biological uniqueness is a direct consequence of their highly distinct physical niche (the rare intersection of stable warm temperature, high depth, coarse substrates, and dense bank cover) rather than overlapping environmentally with local geothermal runoff.
 
 ![Figure 5: Global tSNE Endemics](figures/Figure_5_Global_tSNE_Endemics.png)
 *Figure 5: Global t-SNE projection colored by endemic richness, isolating regional carbonate springs. [Download Print-Quality PDF](figures/Figure_5_Global_tSNE_Endemics.pdf)*

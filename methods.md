@@ -547,7 +547,7 @@ We project the 15-dimensional environmental space of all 1121 springs into a 2D 
     using gradient descent. This preserves local neighborhood similarities, grouping ecologically similar springs close together.
 
 *   **Results**: High-endemic springs (mainly Regional Aquifer springs) form a tight, distinct, and highly localized cluster in the t-SNE manifold.
-*   **Ecological Interpretation**: This highlights that the environmental conditions preserving high endemic richness are highly specific, narrow, and rare. They represent distinct oases that are completely separated from the typical ephemeral cold springs of the landscape.
+*   **Ecological Interpretation**: Because t-SNE groups points based on local similarity in the high-dimensional space, this tight clustering demonstrates that the environmental conditions required to preserve high levels of endemism are extremely specific, narrow, and ecologically rare (representing a highly distinct, restricted region of the 15-dimensional environmental parameter space). These conditions represent distinct oases that are completely separated from the typical ephemeral cold springs of the landscape.
 *   **Generated Figure**:
 
     ![Figure 5: Global t-SNE Manifold & Environmental Driver Gradients](figures/Figure_5_Global_tSNE_Endemics.png)
