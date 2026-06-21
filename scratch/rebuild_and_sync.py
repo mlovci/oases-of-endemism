@@ -85,16 +85,25 @@ def main():
             shutil.copy2(src, dst)
             print(f"  Copied {ef}")
             
-    # Copy walkthrough.md back to brain root to keep them in sync
-    walkthrough_src = os.path.join(workspace_dir, "walkthrough.md")
-    walkthrough_dst = os.path.join(brain_dir, "walkthrough.md")
-    if os.path.exists(walkthrough_src):
-        shutil.copy2(walkthrough_src, walkthrough_dst)
-        print("  Synced walkthrough.md to brain root")
+    # Copy walkthrough.md, results.md, and methods.md back to brain root to keep them in sync
+    for md_file in ["walkthrough.md", "results.md", "methods.md"]:
+        src = os.path.join(workspace_dir, md_file)
+        dst = os.path.join(brain_dir, md_file)
+        if os.path.exists(src):
+            shutil.copy2(src, dst)
+            print(f"  Synced {md_file} to brain root")
             
-    # 5. Compile final HTML publication
+    # 5. Compile final HTML publication in workspace
     run_script("render_publication.py")
-    
+
+    # Copy index.html and publication.html back to brain root to keep them in sync
+    for html_file in ["index.html", "publication.html"]:
+        src = os.path.join(workspace_dir, html_file)
+        dst = os.path.join(brain_dir, html_file)
+        if os.path.exists(src):
+            shutil.copy2(src, dst)
+            print(f"  Synced {html_file} to brain root")
+            
     print("\nPipeline execution, cleanup, and sync completed successfully!")
 
 if __name__ == "__main__":
