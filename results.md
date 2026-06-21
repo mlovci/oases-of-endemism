@@ -680,50 +680,50 @@ To translate landscape-scale patterns into direct field action, we must identify
 Regional Aquifer springs house the vast majority of endemic desert spring species. We target nine specific oases based on their extreme biological value and threat levels:
 
 1. **Spring 5 (9 Endemics - Primary Stronghold)**
-   - *Current State*: High depth ($100\text{ cm}$) and low siltation ($10\%$). However, water diversion is already present (Diversion $= 1$).
-   - *Action*: Strictly prohibit further water diversion. Maintain the hydrological integrity of the spring head to prevent any loss of pool volume.
+    - *Current State*: High depth ($100\text{ cm}$) and low siltation ($10\%$). However, water diversion is already present (Diversion $= 1$).
+    - *Action*: Strictly prohibit further water diversion. Maintain the hydrological integrity of the spring head to prevent any loss of pool volume.
 
 2. **Spring 23 (8 Endemics - Highest Threat / Urgent Restoration)**
-   - *Current State*: Houses 8 endemic species, but is critically threatened by severe water extraction (Diversion $= 4$) and is extremely shallow ($20\text{ cm}$). Siltation has accumulated to $40\%$.
-   - *Action*: Renegotiate water rights and restrict active diversion to allow pool depth to recover to the optimal $>40\text{ cm}$ threshold. Conduct careful, hand-based benthic silt clearing and lay clean gravel to restore snails' substrate.
+    - *Current State*: Houses 8 endemic species, but is critically threatened by severe water extraction (Diversion $= 4$) and is extremely shallow ($20\text{ cm}$). Siltation has accumulated to $40\%$.
+    - *Action*: Renegotiate water rights and restrict active diversion to allow pool depth to recover to the optimal $>40\text{ cm}$ threshold. Conduct careful, hand-based benthic silt clearing and lay clean gravel to restore snails' substrate.
 
 3. **Spring 8 (5 Endemics - Smothered Benthic Zone)**
-   - *Current State*: Extremely biodiverse (5 endemics) and moderately deep ($40\text{ cm}$), but is completely smothered by $100\%$ silt substrate.
-   - *Action*: Silt removal is the top priority. Exclude livestock, restore bank-stabilizing vegetation, and manually flush fine silts to expose the underlying cobble and gravel.
+    - *Current State*: Extremely biodiverse (5 endemics) and moderately deep ($40\text{ cm}$), but is completely smothered by $100\%$ silt substrate.
+    - *Action*: Silt removal is the top priority. Exclude livestock, restore bank-stabilizing vegetation, and manually flush fine silts to expose the underlying cobble and gravel.
 
 4. **Spring 30 (5 Endemics - Hydrologically Severed)**
-   - *Current State*: Houses 5 endemics but is choked by $90\%$ silt and severely impacted by water extraction (Diversion $= 4$). Pool depth is restricted to $25\text{ cm}$.
-   - *Action*: Immediate flow restoration by removing/bypassing diversions and stabilizing surrounding slopes to mitigate erosion.
+    - *Current State*: Houses 5 endemics but is choked by $90\%$ silt and severely impacted by water extraction (Diversion $= 4$). Pool depth is restricted to $25\text{ cm}$.
+    - *Action*: Immediate flow restoration by removing/bypassing diversions and stabilizing surrounding slopes to mitigate erosion.
 
 5. **Spring 33 & Spring 29 (5 Endemics each - Highly Impacted)**
-   - *Current State*: Both hold 5 endemics but are heavily degraded. Spring 33 suffers from $50\%$ silt and level 3 diversion. Spring 29 has $75\%$ silt and level 2 diversion.
-   - *Action*: Install horse/cattle exclusion fencing to prevent bank collapse and erosion, and restrict diversion rates.
+    - *Current State*: Both hold 5 endemics but are heavily degraded. Spring 33 suffers from $50\%$ silt and level 3 diversion. Spring 29 has $75\%$ silt and level 2 diversion.
+    - *Action*: Install horse/cattle exclusion fencing to prevent bank collapse and erosion, and restrict diversion rates.
 
 6. **Spring 13 (4 Endemics - Hydrological Collapse)**
-   - *Current State*: Retains 4 endemics but is critically endangered by extreme shallowing (pool depth of only $2.0\text{ cm}$) and $50\%$ siltation.
-   - *Action*: This site is on the verge of drying out. Urgently require artificial flow enhancement, bypass of upstream diversions, and complete fencing.
+    - *Current State*: Retains 4 endemics but is critically endangered by extreme shallowing (pool depth of only $2.0\text{ cm}$) and $50\%$ siltation.
+    - *Action*: This site is on the verge of drying out. Urgently require artificial flow enhancement, bypass of upstream diversions, and complete fencing.
 
 7. **Spring 32 (4 Endemics - Active Grazing Trampling)**
-   - *Current State*: Deep and stable ($150\text{ cm}$), but suffers from active livestock disturbance (Cattle $= 2$) and high siltation ($75\%$).
-   - *Action*: Reinforce and repair exclusion fencing. The deep pool provides an excellent hydrologic buffer, but trampling is active and must be stopped to reduce siltation.
+    - *Current State*: Deep and stable ($150\text{ cm}$), but suffers from active livestock disturbance (Cattle $= 2$) and high siltation ($75\%$).
+    - *Action*: Reinforce and repair exclusion fencing. The deep pool provides an excellent hydrologic buffer, but trampling is active and must be stopped to reduce siltation.
 
 8. **Spring 25 (4 Endemics - Highly Silted)**
-   - *Current State*: Choked by $80\%$ silt and diverted (Diversion $= 2$), restricting depth to $20\text{ cm}$.
-   - *Action*: Flow restoration and grazing exclusion.
+    - *Current State*: Choked by $80\%$ silt and diverted (Diversion $= 2$), restricting depth to $20\text{ cm}$.
+    - *Action*: Flow restoration and grazing exclusion.
 
 ### B. Targeted Local Aquifer Refugia
 
 While local springs generally support fewer endemics, several key geothermal (Hot) and ephemeral (Cold) sites host unique populations and must be targeted:
 
 1. **Spring 96 (Local Hot - 4 Endemics)**
-   - *Current State*: Geothermal oasis hosting 4 endemics, but is actively degraded by cattle grazing (Cattle $= 2$) and water diversion (Diversion $= 1$).
-   - *Action*: Complete fencing to exclude livestock. Local hot springs are extremely rare evolutionary islands; protecting this site's bank cover is highly cost-effective.
+    - *Current State*: Geothermal oasis hosting 4 endemics, but is actively degraded by cattle grazing (Cattle $= 2$) and water diversion (Diversion $= 1$).
+    - *Action*: Complete fencing to exclude livestock. Local hot springs are extremely rare evolutionary islands; protecting this site's bank cover is highly cost-effective.
 
 2. **Spring 510 (Local Cold - 3 Endemics - Severe Grazing Damage)**
-   - *Current State*: Houses 3 endemics despite being a local cold spring. It is heavily degraded by livestock (Cattle $= 3$, the highest score) and silted ($55\%$).
-   - *Action*: Urgent livestock exclusion fencing. This site proves that cold springs can act as refugia if physical structure is maintained, but it will lose its endemics if trampling continues.
+    - *Current State*: Houses 3 endemics despite being a local cold spring. It is heavily degraded by livestock (Cattle $= 3$, the highest score) and silted ($55\%$).
+    - *Action*: Urgent livestock exclusion fencing. This site proves that cold springs can act as refugia if physical structure is maintained, but it will lose its endemics if trampling continues.
 
 3. **Spring 529 & Spring 514 (Local Cold - 3 Endemics each - Diverted)**
-   - *Current State*: Both hold 3 endemics but are heavily diverted (Diversion $= 3$ and $4$, respectively).
-   - *Action*: Protect water flows. In cold runoff springs, diversion directly causes seasonal dry-outs, wiping out isolated communities.
+    - *Current State*: Both hold 3 endemics but are heavily diverted (Diversion $= 3$ and $4$, respectively).
+    - *Action*: Protect water flows. In cold runoff springs, diversion directly causes seasonal dry-outs, wiping out isolated communities.
 

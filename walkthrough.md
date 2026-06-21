@@ -17,11 +17,11 @@ We created or modified the following files in the workspace:
 7. **[unsupervised_analysis.py](unsupervised_analysis.py)**: Performs Factor Analysis (FA), global PCA, and global t-SNE coordinates mapping to investigate latent oases conditions.
 8. **[results.md](results.md)**: Synthesizes all supervised and unsupervised findings and delivers concrete conservation recommendations for desert spring endemic species.
 9. **[generate_tables.py](generate_tables.py)**: Extracts the data from the generated Excel sheet, computes comparative and validation statistics, and exports five beautifully styled Excel sheets containing full column descriptions and scientific metadata:
-   - **Table 1: Descriptive Statistics by Aquifer Type**: [Download Excel Table 1](Table_1_Group_Statistics.xlsx)
-   - **Table 2: Kruskal-Wallis Tests**: [Download Excel Table 2](Table_2_Kruskal_Wallis.xlsx)
-   - **Table 3: Spearman Correlations**: [Download Excel Table 3](Table_3_Spearman_Correlations.xlsx)
-   - **Table 4: Random Forest Performance and Importances**: [Download Excel Table 4](Table_4_Bootstrap_Performance.xlsx)
-   - **Table 5: Partial Dependence Response Ranges**: [Download Excel Table 5](Table_5_Partial_Dependence.xlsx)
+    - **Table 1: Descriptive Statistics by Aquifer Type**: [Download Excel Table 1](Table_1_Group_Statistics.xlsx)
+    - **Table 2: Kruskal-Wallis Tests**: [Download Excel Table 2](Table_2_Kruskal_Wallis.xlsx)
+    - **Table 3: Spearman Correlations**: [Download Excel Table 3](Table_3_Spearman_Correlations.xlsx)
+    - **Table 4: Random Forest Performance and Importances**: [Download Excel Table 4](Table_4_Bootstrap_Performance.xlsx)
+    - **Table 5: Partial Dependence Response Ranges**: [Download Excel Table 5](Table_5_Partial_Dependence.xlsx)
 10. **[visualize_cooccurrence.py](visualize_cooccurrence.py)**: Performs average-linkage hierarchical clustering with Optimal Leaf Ordering (OLO) on the Spearman correlation coefficients of the five biological variables (Endemics, Crenophilies, Springsnails, Non Natives, Native Fish) in Regional Aquifer springs, complete with environmental driver overlays.
 11. **[visualize_tsne_grid.py](visualize_tsne_grid.py)**: Fits a distance-weighted KNN regressor ($k=25$) on the 2D coordinates for each of the 15 environmental variables, interpolates values across a $150 \times 150$ grid, paints the background contour map, and overlays actual spring coordinates to map environmental drivers onto the t-SNE manifold.
 12. **[visualize_sites_clustermap.py](visualize_sites_clustermap.py)**: Performs hierarchical clustering on both rows (1121 springs) and columns (5 biological standardized richness variables) using average linkage and Optimal Leaf Ordering (OLO) to group springs based on their biological communities and validate their hydrogeological categories.
@@ -76,35 +76,35 @@ Running the analysis script reproduced the three-way spring categorization (Loca
 We uncovered and plotted three latent patterns:
 
 1. **Invasion-Diversity Oasis Coupling (Shared Abiotic Filtering)**:
-   - Within Regional Aquifer oases, there is a strong positive correlation ($R = 0.574$) between endemic richness and non-native counts.
-   - Standardized Poisson GLM (Log link): `Non Natives` is highly significant ($\beta_{std} = 0.3687, \text{HC3 SE} = 0.0950, z = 3.8792, p = 1.048 \times 10^{-4}$).
-   - Non-parametric bootstrapping (2000 resamples) yields a 95% confidence interval entirely above zero ($[0.1872, 0.5963]$).
-   - Controlling for spring size (`Depth` and `Width`) in the multi-variable model shows `Non Natives` remains highly significant ($p = 0.005$). Residual serial autocorrelation is absent (Durbin-Watson $\approx 1.90$).
-   - Visualized in ![Figure 15: Regional Invasion-Diversity Coupling](figures/Figure_15_Regional_Invasion_Diversity_Coupling.png) using non-linear fitted Poisson curves.
+    - Within Regional Aquifer oases, there is a strong positive correlation ($R = 0.574$) between endemic richness and non-native counts.
+    - Standardized Poisson GLM (Log link): `Non Natives` is highly significant ($\beta_{std} = 0.3687, \text{HC3 SE} = 0.0950, z = 3.8792, p = 1.048 \times 10^{-4}$).
+    - Non-parametric bootstrapping (2000 resamples) yields a 95% confidence interval entirely above zero ($[0.1872, 0.5963]$).
+    - Controlling for spring size (`Depth` and `Width`) in the multi-variable model shows `Non Natives` remains highly significant ($p = 0.005$). Residual serial autocorrelation is absent (Durbin-Watson $\approx 1.90$).
+    - Visualized in ![Figure 15: Regional Invasion-Diversity Coupling](figures/Figure_15_Regional_Invasion_Diversity_Coupling.png) using non-linear fitted Poisson curves.
 2. **Conservation/Management Disconnect**:
-   - Comparison of averages shows that conservation fencing/exclusion has successfully minimized cattle disturbance in Regional Aquifer springs ($\mu = 1.16$ vs. $2.47$ in cold springs).
-   - However, they remain highly invaded by non-native aquatic species ($\mu = 1.27$ species vs. $0.04$ in cold springs) because the high environmental stability allows invaders to establish permanent populations.
-   - Visualized in ![Figure 16: The Conservation Disconnect](figures/Figure_16_Conservation_Disconnect.png).
+    - Comparison of averages shows that conservation fencing/exclusion has successfully minimized cattle disturbance in Regional Aquifer springs ($\mu = 1.16$ vs. $2.47$ in cold springs).
+    - However, they remain highly invaded by non-native aquatic species ($\mu = 1.27$ species vs. $0.04$ in cold springs) because the high environmental stability allows invaders to establish permanent populations.
+    - Visualized in ![Figure 16: The Conservation Disconnect](figures/Figure_16_Conservation_Disconnect.png).
 3. **Siltation-Driven Endemic Decline**:
-   - Silt percentage is significantly negatively correlated with endemic richness in regional springs ($R = -0.356$).
-   - Standardized Poisson GLM (Log link) shows a statistically significant negative effect ($\beta_{std} = -0.2538, \text{HC3 SE} = 0.1034, z = -2.4555, p = 0.014$).
-   - Non-parametric bootstrapping (2000 resamples) confirms this robust negative impact with a 95% confidence interval entirely below zero ($[-0.4755, -0.0472]$). Autocorrelation check: Durbin-Watson $\approx 1.52$.
-   - Visualized in ![Figure 8: Regional Siltation Decline](figures/Figure_8_Regional_Siltation_Decline.png) using non-linear fitted Poisson curves.
+    - Silt percentage is significantly negatively correlated with endemic richness in regional springs ($R = -0.356$).
+    - Standardized Poisson GLM (Log link) shows a statistically significant negative effect ($\beta_{std} = -0.2538, \text{HC3 SE} = 0.1034, z = -2.4555, p = 0.014$).
+    - Non-parametric bootstrapping (2000 resamples) confirms this robust negative impact with a 95% confidence interval entirely below zero ($[-0.4755, -0.0472]$). Autocorrelation check: Durbin-Watson $\approx 1.52$.
+    - Visualized in ![Figure 8: Regional Siltation Decline](figures/Figure_8_Regional_Siltation_Decline.png) using non-linear fitted Poisson curves.
 
 ### C. Non-parametric Validation (`non_parametric_analysis.py`)
 To ensure that the log-linear assumptions of the Poisson GLM do not bias our conclusions, we ran three distribution-free non-parametric checks:
 
 1. **Spearman Rank Correlations ($r_s$)**:
-   - Confirmed `Depth` has the strongest non-parametric relationship with Endemics ($r_s = 0.514, p = 3.045 \times 10^{-4}$), followed by `Silt` ($r_s = -0.370, p = 1.242 \times 10^{-2}$) and `Temperature` ($r_s = 0.305, p = 4.153 \times 10^{-2}$).
-   - `Endemics` and `Non Natives` have a highly significant rank correlation of $r_s = 0.597$ ($p = 1.527 \times 10^{-5}$), verifying their robust positive co-occurrence.
+    - Confirmed `Depth` has the strongest non-parametric relationship with Endemics ($r_s = 0.514, p = 3.045 \times 10^{-4}$), followed by `Silt` ($r_s = -0.370, p = 1.242 \times 10^{-2}$) and `Temperature` ($r_s = 0.305, p = 4.153 \times 10^{-2}$).
+    - `Endemics` and `Non Natives` have a highly significant rank correlation of $r_s = 0.597$ ($p = 1.527 \times 10^{-5}$), verifying their robust positive co-occurrence.
 2. **Random Forest Regression Importance**:
-   - Trained a Random Forest Regressor ($N=500$) to predict endemic richness.
-   - Identified pool `Depth` as the single most critical feature (Gini importance $= 0.281$), highlighting hydrological stability as the primary driver of endemic survival.
-   - Visualized in ![Supplementary Figure S3: Random Forest Feature Importance](figures/Figure_S3_Random_Forest_Importance.png)
+    - Trained a Random Forest Regressor ($N=500$) to predict endemic richness.
+    - Identified pool `Depth` as the single most critical feature (Gini importance $= 0.281$), highlighting hydrological stability as the primary driver of endemic survival.
+    - Visualized in ![Supplementary Figure S3: Random Forest Feature Importance](figures/Figure_S3_Random_Forest_Importance.png)
 3. **LOWESS Smoothing Curves**:
-   - Plotted locally weighted scatterplot smoothing (LOWESS) curves directly on coordinates.
-   - LOWESS trends confirm the monotonic, non-linear decline of endemics with increased siltation, and the monotonic increase with non-native count.
-   - Visualized in ![Supplementary Figure S4: LOWESS Invasion](figures/Figure_S4_LOWESS_Invasion.png) and ![Supplementary Figure S5: LOWESS Siltation](figures/Figure_S5_LOWESS_Siltation.png)
+    - Plotted locally weighted scatterplot smoothing (LOWESS) curves directly on coordinates.
+    - LOWESS trends confirm the monotonic, non-linear decline of endemics with increased siltation, and the monotonic increase with non-native count.
+    - Visualized in ![Supplementary Figure S4: LOWESS Invasion](figures/Figure_S4_LOWESS_Invasion.png) and ![Supplementary Figure S5: LOWESS Siltation](figures/Figure_S5_LOWESS_Siltation.png)
 
 ### D. Bootstrap Regressor Validation & Box Plots (`analyze_all_aquifers.py`)
 We implemented a robust bootstrap regression workflow to calculate feature importances and their variance over $N=1000$ splits independently for each aquifer type:
