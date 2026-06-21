@@ -664,6 +664,11 @@ To evaluate the mathematical validity and goodness-of-fit of our univariate regr
       $$\text{AIC} = -2\ln(L) + 2k$$
       where $k$ is the number of estimated parameters (predictors plus the intercept; $k=17$ for models including the biological co-predictor, $k=16$ for the non-native model).
 
+    - **AICc (Small-Sample Correction)**: Corrects for overfitting bias when the ratio $n/k$ is small (under 40; here $n/k \approx 45/17 = 2.65$):
+
+      $$\text{AICc} = \text{AIC} + \frac{2k(k+1)}{n - k - 1}$$
+      where $n$ is the sample size ($n=45$ for regional oases).
+
     - **BIC (Deviance-Based)**: Measures fit relative to a saturated model with a penalty for complexity:
 
       $$\text{BIC}\_{\text{deviance}} = D - (n - k)\ln(n)$$
@@ -675,8 +680,8 @@ To evaluate the mathematical validity and goodness-of-fit of our univariate regr
       $$D = 2 \sum\_{i=1}^n \left[ y\_i \ln\left(\frac{y\_i}{\lambda\_i}\right) - (y\_i - \lambda\_i) \right]$$
 
 *   **Methodological Comparison to Published Work (Table S1)**:
-    - **Incommensurability of AIC/BIC**: In Table S1, the original publication by Forrest et al. (2026) employs **Distance-based Linear Models (DistLM)** to evaluate environmental influences. DistLM models a multivariate biological distance matrix (resemblance matrix) using pseudo-F statistics and selects models using multivariate AICc (AIC with a correction for small sample size) or BIC. 
-    - Because our Poisson GLMs model independent univariate count responses using a Poisson probability mass function while the published DistLM models a multivariate resemblance matrix using distance-based sum-of-squares, **their AIC/BIC values are mathematically incommensurable and cannot be directly compared numerically**.
+    - **Incommensurability of AIC/AICc/BIC**: In Table S1, the original publication by Forrest et al. (2026) employs **Distance-based Linear Models (DistLM)** to evaluate environmental influences. DistLM models a multivariate biological distance matrix (resemblance matrix) using pseudo-F statistics and selects models using multivariate AICc (AIC with a correction for small sample size) or BIC. 
+    - Because our Poisson GLMs model independent univariate count responses using a Poisson probability mass function while the published DistLM models a multivariate resemblance matrix using distance-based sum-of-squares, **their AIC/AICc/BIC values are mathematically incommensurable and cannot be directly compared numerically**.
     - **Concordance of Variable Selection**: Despite the difference in likelihood frameworks, the models show strong qualitative concordance. The published DistLM best-fit model selected 11 of the 15 environmental parameters (depth, width, temperature, conductivity, silt, sand, bank cover, emergent cover, cattle, equine, diversion) to explain biological variation. Similarly, our supervised models identify pool `Depth` (permanence), `Temperature` (thermal buffer), `Silt` (substrate clog), and `Cattle`/`Equine` (grazing/trampling) as the primary significant predictors of endemic and springsnail richness.
     - **Goodness-of-Fit Advantages**: Our Poisson GLMs yield residual deviance-to-degrees of freedom ratios ($\chi^2/\text{df}$) well below $1.0$ (e.g., $21.18/28 = 0.75$ for endemics, and $10.09/28 = 0.36$ for springsnails), proving that they are highly fit, free of overdispersion, and represent a major statistical advancement over standard linear models (which predict impossible negative counts for species richness).
 

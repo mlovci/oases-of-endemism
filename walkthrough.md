@@ -188,10 +188,10 @@ We ran unsupervised decomposition to explore the latent conditions preserving en
       - *Local Hot vs. Local Cold (Dissimilarity = 58.81%)*: Driven by Crenophilies (31.27%) and Springsnails (28.40%).
 2.  **Model selection and Goodness-of-Fit**:
     - We evaluated model goodness-of-fit statistics for the Poisson GLM count models:
-      - **Endemics**: AIC = 167.45, BIC = 85.89, Deviance = 21.18, Pearson $\chi^2$ = 18.09
-      - **Crenophilies**: AIC = 172.52, BIC = 80.74, Deviance = 16.03
-      - **Springsnails**: AIC = 148.61, BIC = 74.80, Deviance = 10.09
-      - **Native Fish**: AIC = 110.94, BIC = 77.01, Deviance = 12.29
+      - **Endemics**: AIC = 167.45, AICc = 190.12, BIC = 85.89, Deviance = 21.18, Pearson $\chi^2$ = 18.09
+      - **Crenophilies**: AIC = 172.52, AICc = 195.19, BIC = 80.74, Deviance = 16.03
+      - **Springsnails**: AIC = 148.61, AICc = 171.28, BIC = 74.80, Deviance = 10.09
+      - **Native Fish**: AIC = 110.94, AICc = 133.61, BIC = 77.01, Deviance = 12.29
     - We documented the mathematical incommensurability of these AIC/BIC values with the paper's multivariate DistLM selection criteria (Table S1), alongside the high concordance in environmental variable selections (which both highlight pool depth, temperature, substrate grain-size, and livestock disturbances as key ecological drivers).
 
 ---

@@ -327,10 +327,10 @@ To validate the multi-species ordination and compare model performance, we run t
 
     - **Goodness-of-Fit Advantages**: By fitting Poisson GLMs with a log link (which model counts as an exponential process), we dramatically improve model fit. Below are the goodness-of-fit statistics for our Regional Aquifer models ($N=45$):
 
-        - **Endemics**: $\text{AIC} = 167.45$, $\text{BIC (Standard)} = 85.89$, $\text{Residual Deviance} = 21.18$ (with 28 degrees of freedom).
-        - **Crenophilies**: $\text{AIC} = 172.52$, $\text{BIC (Standard)} = 80.74$, $\text{Residual Deviance} = 16.03$ (with 28 degrees of freedom).
-        - **Springsnails**: $\text{AIC} = 148.61$, $\text{BIC (Standard)} = 74.80$, $\text{Residual Deviance} = 10.09$ (with 28 degrees of freedom).
-        - **Native Fish**: $\text{AIC} = 110.94$, $\text{BIC (Standard)} = 77.01$, $\text{Residual Deviance} = 12.29$ (with 28 degrees of freedom).
+        - **Endemics**: $\text{AIC} = 167.45$, $\text{AICc} = 190.12$, $\text{BIC (Standard)} = 85.89$, $\text{Residual Deviance} = 21.18$ (with 28 degrees of freedom).
+        - **Crenophilies**: $\text{AIC} = 172.52$, $\text{AICc} = 195.19$, $\text{BIC (Standard)} = 80.74$, $\text{Residual Deviance} = 16.03$ (with 28 degrees of freedom).
+        - **Springsnails**: $\text{AIC} = 148.61$, $\text{AICc} = 171.28$, $\text{BIC (Standard)} = 74.80$, $\text{Residual Deviance} = 10.09$ (with 28 degrees of freedom).
+        - **Native Fish**: $\text{AIC} = 110.94$, $\text{AICc} = 133.61$, $\text{BIC (Standard)} = 77.01$, $\text{Residual Deviance} = 12.29$ (with 28 degrees of freedom).
 
     - Comparing our residual deviances (e.g., 21.18 for endemics) to the degrees of freedom (28 df) yields a ratio ($\chi^2 / \text{df}$) well below $1.0$. This demonstrates that the Poisson GLMs are extremely well-fit, free of overdispersion, and represent a major statistical advancement over standard linear models that predict impossible negative species counts.
 
