@@ -19,6 +19,7 @@ The source dataset corresponds to **Data Table S5** from the following peer-revi
 ## 1. Overview of the Pipeline
 
 The conversion process is executed via a Python-based pipeline that leverages two core libraries:
+
 - **`python-docx`**: Parses the underlying Word Open XML document structure to extract table data.
 - **`openpyxl`**: Constructs the Excel workbook, populates the cells with typed data, and applies professional formatting.
 
@@ -185,6 +186,7 @@ text.replace('\xa0', ' ').strip()
 To enable filtering, sorting, and spreadsheet formulas (like `SUM` or `AVERAGE`), numeric strings are cast to Python `int` or `float` objects using regular expressions before writing them to the spreadsheet. 
 
 For instance:
+
 * `30.3` is cast to `30.3` (`float`).
 * `3400` is cast to `3400` (`int`).
 * `Regional Aq` remains `"Regional Aq"` (`str`).
@@ -269,12 +271,14 @@ The script [recreate_analysis.py](recreate_analysis.py) reproduces the key analy
 
 ### A. Spring Characterization and Group Statistics
 The dataset's `Aquifer Type` divides the 1121 springs into three types:
+
 1. **Local Cold Springs** ($N=1014$): Ambient runoff springs with cold temperatures ($\mu \approx 15.2^\circ\text{C}$), shallow depths ($\mu \approx 9.8\text{ cm}$), and low average endemic richness ($\mu \approx 0.11$ species).
 2. **Local Hot Springs (Geothermal)** ($N=62$): Geothermal springs with warm temperatures ($\mu \approx 34.1^\circ\text{C}$), deeper pools ($\mu \approx 23.9\text{ cm}$), and low average endemic richness ($\mu \approx 0.34$ species).
 3. **Regional Aquifer Springs** ($N=45$): Stable thermal oases with stable temperatures ($\mu \approx 26.4^\circ\text{C}$), deep pools ($\mu \approx 23.1\text{ cm}$), and exceptionally high endemic richness ($\mu \approx 2.64$ species).
 
 ### B. Non-Parametric Group Differences (Kruskal-Wallis ANOVA)
 To test whether biological metrics (endemics, crenophilies, springsnails, non-natives, and native fish) differ significantly across the three spring categories, we perform **Kruskal-Wallis $H$-tests**.
+
 *   **Methodology**: Unlike standard parametric one-way ANOVA (which assumes normal distributions and equal variances), the Kruskal-Wallis test is a non-parametric, rank-based test. This is critical for species richness data, which is highly skewed, non-negative, and contains a large proportion of zeros. It ranks all observations globally and evaluates whether the median ranks of the groups differ significantly.
 *   **Results**:
     *   **Endemics**: $H$-statistic $= 274.502, p = 2.470 \times 10^{-60}$
@@ -286,17 +290,23 @@ To test whether biological metrics (endemics, crenophilies, springsnails, non-na
 
 ### C. Principal Component Analysis (PCA)
 We run a global PCA on all 20 standardized variables (15 environmental parameters + 5 biological species richness counts) to replicate the paper's Figure 5a exactly.
+
 *   **Methodology**: PCA is a linear dimensionality reduction technique that finds orthogonal axes (Principal Components) that maximize the variance of the projected data. Eigenvector sign orientation is mathematically arbitrary; to align our biplot orientation and points exactly with the paper, we multiply both PC1 and PC2 coordinates and loadings by $-1$.
 *   **PC1 (18.41% explained variance)**: Represents a **Hydrological Permanence & Biological Richness Axis**. It loads negatively on biological counts (`Crenophilies` $-0.478$, `Endemics` $-0.461$, `Native Fish` $-0.410$, `Springsnails` $-0.387$, `Non Natives` $-0.336$), `Temperature` ($-0.200$), and `Depth` ($-0.177$), and loads positively on `Cattle Grazing` ($+0.160$). Springs with highly negative PC1 scores represent biodiverse, deep, stable regional aquifer oases, while positive PC1 scores correspond to species-poor, highly grazed springs.
 *   **PC2 (10.94% explained variance)**: Represents a **Substrate Grain Size & Structural Axis**. It loads positively on coarse substrates (`Gravel` $+0.498$, `Cobble` $+0.333$, `Sand` $+0.266$) and negatively on fine silt (`Silt` $-0.642$) and `Emerge Cover` ($-0.201$). This separates gravel/cobble-dominated channels from silt-choked pools.
 *   **Generated Figures**:
     *   **PCA Biplot**: Shows PCA clustering and vector loadings.
+
         ![Supplementary Figure S2: PCA Biplot](figures/Figure_S2_PCA_Biplot.png)
 *Supplementary Figure S2: PCA Biplot of Springs showing separation of the three categories. [Download Print-Quality PDF](figures/Figure_S2_PCA_Biplot.pdf)*
+
     *   **Biodiversity by Spring Type Boxplot**: Boxplot showing endemic richness distribution.
+
         ![Figure 1: Biodiversity by Type](figures/Figure_1_Biodiversity_by_Type.png)
 *Figure 1: Biodiversity by Type. Endemic species richness boxplot. [Download Print-Quality PDF](figures/Figure_1_Biodiversity_by_Type.pdf)*
+
     *   **Disturbance Correlation Matrix**: Pearson correlation heatmap.
+
         ![Figure 2: Disturbance Correlation Matrix](figures/Figure_2_Disturbance_Correlation.png)
 *Figure 2: Disturbance Correlation Heatmap. [Download Print-Quality PDF](figures/Figure_2_Disturbance_Correlation.pdf)*
 
@@ -308,6 +318,7 @@ The script [discover_latent_patterns.py](discover_latent_patterns.py) uncovers t
 
 ### Modeling Counts: Why Standard Linear Regression Fails
 To evaluate these relationships rigorously, we avoid traditional Ordinary Least Squares (OLS) linear regressions. In Supplementary S1, the original authors (Forrest et al. 2026) explicitly noted that OLS is mathematically inappropriate for species richness count data, which motivated their use of non-parametric distance-based linear models (DistLM). We expand on this rationale by detailing the core statistical limitations of applying OLS to count distributions:
+
 1.  **Impossible Predictions**: A linear equation ($Y = \beta_0 + \beta_1 X$) will eventually predict a negative number of species at extreme values of $X$, which is biologically impossible.
 2.  **Heteroscedasticity**: The variance of count data typically scales with its mean (the Poisson property), violating the OLS assumption of constant variance and biasing standard error calculations.
 
@@ -322,9 +333,11 @@ This results in the smooth exponential curves fitted in our visualizations. The 
 
 ### Advanced Statistical Adjustments for Small Samples & Overdispersion
 To ensure the model is robust and statistically sound, we implement several advanced corrections:
+
 1.  **Robust Sandwich Covariance Estimators (HC3)**: To control for potential overdispersion (where the variance of counts exceeds the mean) and minor spatial or serial autocorrelation, we calculate robust standard errors using the HC3 sandwich estimator. This corrects standard errors for heteroscedasticity, ensuring our $p$-values are not artificially inflated.
 2.  **Non-Parametric Bootstrapping**: For small sample sizes (such as the $N=45$ Regional Aquifer group), asymptotic normal theory ($z$-tests) can fail. We run $2000$ bootstrap iterations, sampling the dataset with replacement, fitting the Poisson GLM, and extracting the coefficient. We then construct empirical 95% confidence intervals from the 2.5th and 97.5th percentiles of the bootstrap distribution.
 3.  **Durbin-Watson Test**: We evaluate residual serial correlation using the Durbin-Watson statistic on the Pearson residuals:
+
     $$DW = \frac{\sum_{t=2}^n (e_t - e_{t-1})^2}{\sum_{t=1}^n e_t^2}$$
     A value close to $2.0$ indicates that residuals are independent and free of serial autocorrelation.
 
@@ -332,25 +345,31 @@ To ensure the model is robust and statistically sound, we implement several adva
 
 ### A. Pattern 1: The Invasion-Diversity Oasis Coupling (Shared Abiotic Filtering & Carrying Capacity)
 We discover a strong *positive* co-occurrence between endemics and non-natives within regional oases ($R = 0.574$). 
+
 *   **Statistical Results**: The standardized non-native coefficient in our Poisson GLM is highly significant ($\beta_{std} = 0.3687, \text{HC3 SE} = 0.0950, z = 3.879, p = 1.048 \times 10^{-4}$), and non-parametric bootstrapping yields a robust 95% confidence interval entirely above zero ($[0.1872, 0.5963]$). Residuals are independent ($\text{DW} \approx 1.90$).
 *   **Mechanism (Shared Abiotic Filtering)**: While sometimes described as the "Invasion-Diversity Paradox" in management, it is not a true ecological paradox. Rather, it represents **shared abiotic filtering**. Both endemics and non-natives are aquatic organisms that share a fundamental physical requirement for **hydrological permanence and environmental stability**. In regional aquifer springs, extreme ecological permanence and habitat size support both high native/endemic diversity and high non-native establishment, which is absent in ephemeral cold springs ($R = 0.022$). Even after controlling for spring dimensions (`Depth` and `Width`), this positive coupling remains highly significant ($p = 0.005$).
 *   **Visualized in**:
+
     ![Figure 15: Regional Invasion-Diversity Coupling](figures/Figure_15_Regional_Invasion_Diversity_Coupling.png)
     *Figure 15: Invasion-Diversity Positive Coupling in Regional Springs. [Download Print-Quality PDF](figures/Figure_15_Regional_Invasion_Diversity_Coupling.pdf)*
 
 ### B. Pattern 2: The Conservation/Management Disconnect (Abiotic Dominance)
 An analysis of average disturbance pressures reveals a management disconnect where terrestrial fencing cannot prevent aquatic invasions:
+
 *   **Cattle Grazing**: Successfully controlled in Regional Aquifer springs ($\mu = 1.16$) compared to Local Cold springs ($\mu = 2.47$), likely due to conservation fencing and protected lands (e.g. Wildlife Refuges).
 *   **Invasions**: Despite low grazing disturbance, Regional Aquifer oases are heavily invaded by non-native aquatic species ($\mu = 1.27$ species vs. $0.04$ in cold springs) because the high environmental stability allows warm-adapted invaders (e.g., cichlids, bullfrogs) to establish year-round. This demonstrates that abiotic stability overrides land-use management in structuring biological communities.
 *   **Visualized in**:
+
     ![Figure 16: The Conservation Disconnect](figures/Figure_16_Conservation_Disconnect.png)
     *Figure 16: The Conservation Disconnect and Endemic Species Richness across spring types. [Download Print-Quality PDF](figures/Figure_16_Conservation_Disconnect.pdf)*
 
 ### C. Pattern 3: Benthic Siltation Impact in Regional Springs
 Siltation represents a major latent physical threat to endemic richness in regional springs ($R = -0.356$).
+
 *   **Statistical Results**: The standardized siltation coefficient is significant ($\beta_{std} = -0.2538, \text{HC3 SE} = 0.1034, z = -2.455, p = 0.014$), and bootstrapping confirms this negative impact with a 95% confidence interval entirely below zero ($[-0.4755, -0.0472]$). Residual independence is confirmed ($\text{DW} \approx 1.52$).
 *   **Mechanism**: Increased silt accumulation clogs interstitial spaces in coarse substrate (gravel/cobble), directly reducing habitat availability for small benthic endemics (e.g., springsnails). For every 10% increase in silt percentage, average endemic richness declines by $\approx 0.19$ species.
 *   **Visualized in**:
+
     ![Figure 8: Regional Siltation Decline](figures/Figure_8_Regional_Siltation_Decline.png)
     *Figure 8: Regional Siltation Decline. Fitted Poisson curve showing siltation decline. [Download Print-Quality PDF](figures/Figure_8_Regional_Siltation_Decline.pdf)*
 
@@ -375,23 +394,29 @@ where $d_i$ is the difference between the ranks of each observation's variables,
 
 ### B. Machine Learning: Random Forest Feature Importance
 A Random Forest Regressor ($N_{estimators} = 500$) is fitted to predict endemic richness within regional springs.
+
 *   **Methodology**: Random Forest is a non-parametric ensemble method that builds numerous decision trees and averages their predictions. Because it is non-parametric, it makes no distribution assumptions and automatically handles high-dimensional, non-linear interactions. We evaluate feature importance using **Gini Importance** (or Mean Decrease in Impurity), which measures how much each feature decreases the split impurity (weighted variance of the target variable) across all decision trees.
 *   **Results**: `Depth` is identified as the single most critical environmental predictor (Gini importance $= 0.281$), followed by `Conductivity` ($0.108$), `Width` ($0.108$), `Bank Cover` ($0.096$), and `Temperature` ($0.075$).
 *   **Interpretation**: Pool depth is a primary physical proxy for habitat volume and hydrological permanence (resistance to drying/freezing), which are critical for endemic benthos survival.
 *   **Generated Figure**:
+
     ![Supplementary Figure S3: Random Forest Feature Importance](figures/Figure_S3_Random_Forest_Importance.png)
 *Supplementary Figure S3: Random Forest Gini Feature Importance. [Download Print-Quality PDF](figures/Figure_S3_Random_Forest_Importance.pdf)*
 
 ### C. LOWESS Local Regression Curve Fitting
 We fit non-parametric LOWESS (Locally Weighted Scatterplot Smoothing) curves (fraction $= 0.6$) directly to the raw data points.
+
 *   **Methodology**: LOWESS is a fully non-parametric smoothing technique that fits simple linear regression models to localized subsets of the data. For each point along the curve, a weighted linear regression is fitted, where observations closer to the target point receive higher weights. This allows the curve to flex and capture local non-linear trends without imposing a rigid global functional form (like a polynomial).
 *   **Invasion LOWESS**: Captures the monotonic positive slope of Endemics as Non-Natives increase.
 *   **Siltation LOWESS**: Captures the non-linear, monotonic decline of Endemics as Silt substrate increases from 0% to 100%.
 *   **Generated Figures**:
     *   **LOWESS Invasion Overlay**:
+
         ![Supplementary Figure S4: LOWESS Invasion](figures/Figure_S4_LOWESS_Invasion.png)
 *Supplementary Figure S4: Non-parametric LOWESS Curve of Endemics vs Non-Natives. [Download Print-Quality PDF](figures/Figure_S4_LOWESS_Invasion.pdf)*
+
     *   **LOWESS Siltation Overlay**:
+
         ![Supplementary Figure S5: LOWESS Siltation](figures/Figure_S5_LOWESS_Siltation.png)
 *Supplementary Figure S5: Non-parametric LOWESS Curve of Endemic Decline with Siltation. [Download Print-Quality PDF](figures/Figure_S5_LOWESS_Siltation.pdf)*
 
@@ -403,6 +428,7 @@ The script [analyze_all_aquifers.py](analyze_all_aquifers.py) builds regularized
 
 ### Bootstrap Validation Architecture
 For each aquifer type independently, we run $N = 1000$ bootstrap iterations:
+
 1.  **Bootstrap Training Set**: We draw a sample with replacement of size equal to the group sample size ($N_{obs} = 45$ for Regional Aq, $N_{obs} = 62$ for Local Hot, $N_{obs} = 1014$ for Local Cold).
 2.  **Out-of-Bag (OOB) Hold-out Set**: The unselected observations ($\approx 36.8\%$ of the dataset) are held out as the validation set.
 3.  **Model Fitting**: We fit a `RandomForestRegressor` (with 100 trees, regularized with `max_depth=4` and `max_features="sqrt"` to prevent overfitting on the small samples) on the standardized bootstrap training set.
@@ -415,15 +441,21 @@ For each aquifer type independently, we run $N = 1000$ bootstrap iterations:
 
 ### Bootstrap Feature Importance Distribution
 Mean Gini importance scores across the 1000 splits reveal different ecological drivers for each aquifer type:
+
 *   **Regional Aquifer Springs**: `Depth` ($0.1364$), `Non Natives` ($0.1338$), `Temperature` ($0.0880$), `Silt` ($0.0878$), and `Conductivity` ($0.0875$). Both pool size (`Depth`) and the co-occurrence of invaders (`Non Natives`) dominate predictions in stable oases.
 *   **Local Hot Springs**: `Non Natives` ($0.1040$), `Temperature` ($0.1034$), `Conductivity` ($0.0982$), `Depth` ($0.0938$), and `pH` ($0.0726$).
 *   **Local Cold Springs**: `Depth` ($0.2217$), `Conductivity` ($0.1206$), `Temperature` ($0.0922$), `pH` ($0.0761$), and `Width` ($0.0752$). In cold, ephemeral springs, pool depth is overwhelmingly the most important variable (0.22 importance) as it determines water presence.
 *   **Generated Figures**:
     *   **Figure 9: Regional Aquifer Feature Importances**:
+
         ![Figure 9: Regional Aquifer Feature Importances](figures/Figure_9_Bootstrap_Importance_Regional_Aq.png)
+
     *   **Figure 11: Local Hot Feature Importances**:
+
         ![Figure 11: Local Hot Feature Importances](figures/Figure_11_Bootstrap_Importance_Local_Hot.png)
+
     *   **Figure 13: Local Cold Feature Importances**:
+
         ![Figure 13: Local Cold Feature Importances](figures/Figure_13_Bootstrap_Importance_Local_Cold.png)
 
 ---
@@ -461,12 +493,17 @@ The tables below display the features ranked by their **maximum response delta**
 
 *   **Generated Figures (4x4 grids of PDP subplots)**:
     *   **Figure 10: Regional Aquifer PDP Grid**:
+
         ![Figure 10: Regional Aquifer PDP Grid](figures/Figure_10_PDP_Regional_Aq.png)
 *Figure 10: Partial Dependence Plots for Regional Aquifer Springs. [Download Print-Quality PDF](figures/Figure_10_PDP_Regional_Aq.pdf)*
+
     *   **Figure 12: Local Hot PDP Grid**:
+
         ![Figure 12: Local Hot PDP Grid](figures/Figure_12_PDP_Local_Hot.png)
 *Figure 12: Partial Dependence Plots for Local Hot Springs. [Download Print-Quality PDF](figures/Figure_12_PDP_Local_Hot.pdf)*
+
     *   **Figure 14: Local Cold PDP Grid**:
+
         ![Figure 14: Local Cold PDP Grid](figures/Figure_14_PDP_Local_Cold.png)
 *Figure 14: Partial Dependence Plots for Local Cold Springs. [Download Print-Quality PDF](figures/Figure_14_PDP_Local_Cold.pdf)*
 
@@ -478,72 +515,93 @@ The script [unsupervised_analysis.py](unsupervised_analysis.py) runs unsupervise
 
 ### A. Factor Analysis vs. PCA
 We use Factor Analysis (FA) as well as PCA. 
+
 *   **The Difference**: PCA is a variance-maximization technique that projects data into orthogonal axes (PCs) representing total variance. Factor Analysis, in contrast, models *latent variables* by partitioning variance into common variance (shared among variables) and unique variance (error/specific variance). This makes FA ideal for identifying underlying ecological structures like "Benthic Habitat Quality" from observed variables.
 *   **Factor Analysis (Regional Aquifers, $N=45$)**: Latent Factor 2 correlates significantly with endemic species richness ($r_s = 0.346, p = 0.020$).
 *   **Loadings**: High positive loadings for coarse substrates (`Cobble` $+0.659$, `Gravel` $+0.410$) and `Temperature` ($+0.630$), with a strong negative loading for `Silt` ($-0.839$) and emergent vegetation (`Emerge Cover` $-0.553$).
 *   **Ecological Interpretation**: This represents a **Benthic Habitat Quality Factor** where stable thermal oases with rocky substrates and low silt accumulation provide ideal microhabitats for benthic endemic herbivores.
 *   **Poisson GLM Verification**: A Poisson GLM fitted on Factor 2 shows that the latent factor is a statistically significant positive predictor of endemic richness.
 *   **Generated Figure**:
+
     ![Figure 3: Benthic Habitat Quality Factor vs Endemic Richness](figures/Figure_3_Regional_FA_Benthic_Quality.png)
 *Figure 3: Benthic Habitat Quality Factor vs Endemic Richness in Regional Springs. [Download Print-Quality PDF](figures/Figure_3_Regional_FA_Benthic_Quality.pdf)*
 
 ### B. Global PCA: The Grazing & Habitat Degradation Axis ($N=1121$)
 PCA is fitted globally to extract major axes of environmental variance across all desert springs.
+
 *   **Latent PC3** has a highly significant negative correlation with endemic richness ($r_s = -0.159, p = 9.522 \times 10^{-8}$).
 *   **Loadings**: Positive loadings for anthropogenic disturbances (`Cattle` $+0.542$, `Diversion` $+0.276$, `Equine` $+0.251$), and negative loadings for bank structure and volume (`Bank Cover` $-0.527$, `Depth` $-0.307$).
 *   **Ecological Interpretation**: PC3 captures the **Grazing & Habitat Degradation Axis**. Springs experiencing high cattle and horse activity suffer from bank cover destruction, channel shallowing, and water diversion, which directly correlates with endemic biodiversity loss.
 *   **Poisson GLM Verification**: A Poisson GLM fitted on PC3 shows a highly significant negative association with endemic richness.
 *   **Generated Figure**:
+
     ![Figure 4: Grazing & Habitat Degradation PC3 vs Endemic Richness](figures/Figure_4_Global_PCA_Habitat_Degradation.png)
 *Figure 4: Grazing & Habitat Degradation PC3 vs Endemic Richness. Shows the PC3 environmental loading inset bar plot. [Download Print-Quality PDF](figures/Figure_4_Global_PCA_Habitat_Degradation.pdf)*
 
 ### C. Manifold Learning: t-SNE Cluster Projection ($N=1121$)
 We project the 15-dimensional environmental space of all 1121 springs into a 2D space using t-Distributed Stochastic Neighbor Embedding (t-SNE).
+
 *   **Methodology**: t-SNE is a non-linear manifold learning technique designed for high-dimensional visualization. It computes a probability distribution over pairs of high-dimensional objects such that similar objects have a high probability of being picked, and defines a similar distribution over the low-dimensional map. It then minimizes the **Kullback-Leibler (KL) divergence** between the two distributions:
+
     $$KL(P \parallel Q) = \sum_i \sum_j p_{j|i} \log \frac{p_{j|i}}{q_{j|i}}$$
     using gradient descent. This preserves local neighborhood similarities, grouping ecologically similar springs close together.
+
 *   **Results**: High-endemic springs (mainly Regional Aquifer springs) form a tight, distinct, and highly localized cluster in the t-SNE manifold.
 *   **Ecological Interpretation**: This highlights that the environmental conditions preserving high endemic richness are highly specific, narrow, and rare. They represent distinct oases that are completely separated from the typical ephemeral cold springs of the landscape.
 *   **Generated Figure**:
+
     ![Figure 5: Global t-SNE Manifold & Environmental Driver Gradients](figures/Figure_5_Global_tSNE_Endemics.png)
 *Figure 5: Global t-SNE Manifold and Environmental Driver Gradients ($N=1121$). **Panel A** maps endemic species richness using a discrete 9-color scale, with points scaled by size (base size 30, increasing by 35 per taxon) and shaped by aquifer type (circles: Regional Aquifer, downward triangles: Local Geothermal/Hot, diamonds: Local Cold). **Panel B** projects environmental vectors (linear gradients fitted via the envfit algorithm) onto a light background of aquifer-coded spring locations, with arrow lengths proportional to correlation strength ($\sqrt{R^2}$) and color-coded by feature class (Green: Physical/Chemistry, Purple: Substrate, Orange: Disturbance). [Download Print-Quality PDF](figures/Figure_5_Global_tSNE_Endemics.pdf)*
 
 *   **Environmental Vector Fitting (envfit)**:
     - To show the interactions and directions of all 15 environmental variables in the same 2D projection, we fit a linear gradient for each feature across the centered t-SNE coordinates.
     - For each environmental variable, we fit the linear regression model:
+
       $$y_i = \beta_1 \cdot \text{tSNE}\_{1,i} + \beta_2 \cdot \text{tSNE}\_{2,i} + \beta_0$$
       where $y_i$ is the observed feature value for spring $i$, and $\text{tSNE}\_{1,i}, \text{tSNE}\_{2,i}$ are the coordinates.
+
     - The direction of the vector is defined by the normalized regression coefficients:
+
       $$\tilde{\beta} = \frac{(\beta_1, \beta_2)}{\sqrt{\beta_1^2 + \beta_2^2}}$$
+
     - The length of the vector in the biplot is scaled by the correlation $R = \sqrt{R^2}$ of the fit:
+
       $$\mathbf{v} = \tilde{\beta} \cdot \sqrt{R^2}$$
       where $R^2$ represents the coefficient of determination (goodness-of-fit) of the linear gradient in the 2D space.
+
     - Arrows are plotted starting from the origin $(0, 0)$ and scaled by a global factor ($S = 28.0$) to fit the coordinate range of $[-40, 40]$. Only variables with $R > 0.05$ are shown.
     - **Methodological Limitations**: Because t-SNE is a non-linear manifold mapping algorithm, the projection of linear gradients represents an approximation. Fitting linear vector arrows onto a highly distorted, non-linear coordinate space assumes that environmental variables vary linearly across the entire space. Thus, the vectors in Figure 5b serve purely as qualitative summaries of the average trend (directional cosines). For mathematically rigorous, localized non-linear surface mappings of these variables, K-Nearest Neighbors (KNN) surface interpolation (described below) must be used instead.
 
 *   **Environmental Grid Interpolation (Supplementary Figure S1)**:
     - To map and understand how the 15 environmental parameters vary across this 2D latent space, we fit a distance-weighted K-Nearest Neighbors (KNN) regressor ($k=25$, weights scaled inversely by Euclidean distance in t-SNE space) to interpolate each environmental feature across a $150 \times 150$ dense grid.
     - Let $z_i$ be the observed value of an environmental parameter at spring coordinate $X_i \in \mathbb{R}^2$ in the t-SNE space. For a grid point $x \in \mathbb{R}^2$, the interpolated value $\hat{z}(x)$ is computed as:
+
       $$\hat{z}(x) = \frac{\sum_{i \in N_k(x)} w_i(x) z_i}{\sum_{i \in N_k(x)} w_i(x)}$$
       where $N_k(x)$ is the set of $k=25$ nearest observed spring coordinates to $x$, and the weight is $w_i(x) = \frac{1}{\|X_i - x\|_2}$ (with a small epsilon to prevent division by zero).
+
     - Contours are painted using the `viridis` colormap at 15 distinct levels, and the actual spring points are overlaid as semi-transparent shapes (circles for Regional Aquifer, downward triangles for Local Geothermal/Hot, and diamonds for Local Cold) scaled by size proportional to endemic richness, and color-coded by their observed values to validate the interpolation's accuracy and highlight local densities.
     - **Generated Grid Figure**:
+
       ![Supplementary Figure S1: t-SNE Environmental Gradients Grid](figures/Figure_S1_tSNE_Environmental_Grid.png)
 *Supplementary Figure S1: 15-Variable Environmental Gradient Grid mapped onto t-SNE space. A distance-weighted K-Nearest Neighbors (KNN) regressor ($k=25$) was used to interpolate continuous background contours for each variable, overlaid with the observed spring coordinates. Points are shaped by aquifer type (circles for Regional Aquifer, downward triangles for Local Geothermal/Hot, and diamonds for Local Cold) and scaled by size proportional to endemic richness. [Download Print-Quality PDF](figures/Figure_S1_tSNE_Environmental_Grid.pdf)*
 
 ### D. Global Spring Site-Clustering Heatmap ([visualize_sites_clustermap.py](visualize_sites_clustermap.py))
 
 To investigate how the 1121 springs group together based on their biological communities and validate our three-way hydrogeological classification, we perform average-linkage hierarchical clustering on both rows (spring sites, N=1121) and columns (the 5 standardized biological richness variables) using the Euclidean distance metric for rows and correlation distance for columns. 
+
 *   **Methodology**: To ensure optimal ordering of clusters, we apply the **Optimal Leaf Ordering (OLO)** algorithm to both row and column linkage trees. The biological features are z-score standardized to ensure they are on the same visual scale (Z-score limits from -2.5 to 2.5). We map row side-colors to indicate the spring aquifer types (Teal: Regional Aquifer, Red: Local Geothermal/Hot, Dark Blue: Local Cold) and include custom legend elements. The y-labels are hidden due to overcrowding.
 *   **Generated Figure**:
+
     ![Figure 6: Global Spring Site-Clustering Heatmap](figures/Figure_6_Global_Site_Clustering.png)
 *Figure 6: Global Spring Site-Clustering Heatmap ($N=1121$). Clustermap represents average-linkage hierarchical clustering optimized via Optimal Leaf Ordering (OLO) on 1121 springs across 5 standardized biological variables. Row side-colors code the spring aquifer groups (Teal: Regional Aquifer, Red: Local Geothermal/Hot, Dark Blue: Local Cold). [Download Print-Quality PDF](figures/Figure_6_Global_Site_Clustering.pdf)*
 
 ### E. Biological Taxa Co-occurrence Clustermap ([visualize_cooccurrence.py](visualize_cooccurrence.py))
 
 To evaluate how the five biological richness variables (Endemics, Crenophilies, Springsnails, Non Natives, Native Fish) co-occur and group together within the stable Regional Aquifer oases ($N=45$), we compute their Spearman rank correlation matrix ($r_s$) and perform average-linkage hierarchical clustering.
+
 *   **Methodology**: We define pairwise distances using correlation distance ($d(u,v) = 1 - r_s(u,v)$). We apply the OLO algorithm to order the branches and leaves of the dendrogram. The y-ticks of the heatmap include tick lines directly connecting labels to the dendrogram leaf ends. The top three environmental drivers for each biological variable are annotated on the right, color-coded by relationship type: green for positive correlates, red for negative filters, and orange for anthropogenic disturbances.
 *   **Generated Figure**:
+
     ![Figure 7: Biological Taxa Co-occurrence Clustermap](figures/Figure_7_Biological_Cooccurrence.png)
 *Figure 7: Biological Taxa Co-occurrence Heatmap in Regional Aquifer Springs ($N=45$). Warmth of color indicates Spearman correlation ($r_s$). The dendrogram on the left represents average-linkage hierarchical clustering optimized via Optimal Leaf Ordering (OLO). On the right, top environmental drivers are color-coded (Green: Positive, Red: Negative, Orange: Anthropogenic). [Download Print-Quality PDF](figures/Figure_7_Biological_Cooccurrence.pdf)*
 
@@ -552,16 +610,21 @@ To evaluate how the five biological richness variables (Endemics, Crenophilies, 
 ### F. Multi-Taxon Regression and Feature Importance Analysis ([taxa_regression_analysis.py](taxa_regression_analysis.py))
 
 To map and compare the physical habitat requirements, environmental drivers, and anthropogenic threats across different biological groups in Regional Aquifer oases ($N=45$), we performed parallelized bootstrap Random Forest regression and standardized Poisson Generalized Linear Models (GLMs) for each of the five biological richness variables independently.
+
 *   **Methodology**:
     - **Target Variables**: `Endemics`, `Crenophilies`, `Springsnails`, `Non Natives`, and `Native Fish`.
     - **Predictor Variables**: The 15 standardized physical, chemical, and anthropogenic parameters:
+
       `["Depth", "Width", "Temperature", "Conductivity", "pH", "Emerge Cover", "Bank Cover", "Silt", "Sand", "Gravel", "Cobble", "Diversion", "Equine", "Cattle", "Recreate"]`
+
     - **Bootstrap Random Forest Regressor**: Fits a Random Forest regressor ($N_{estimators}=100, max\_depth=4, max\_features="sqrt"$) over 1,000 bootstrap replicates with out-of-bag (OOB) validation. We calculate out-of-sample $R^2$, MSE, and mean Gini importance scores.
     - **Poisson GLM with HC3 Covariance**: Standardizes all 15 environmental predictors and fits a Poisson GLM with a log link, using heteroskedasticity-consistent standard errors (HC3 sandwich estimator) to evaluate the parametric direction, magnitude, and statistical significance of each driver.
 *   **Generated Figure & Spreadsheet**:
     - **Figure S6: Taxa Feature Importances**:
+
       ![Figure S6: Taxa Feature Importances](figures/Figure_S6_Taxa_Feature_Importances.png)
 *Figure S6: Multi-panel horizontal bar chart showing mean Random Forest feature importances across 1,000 bootstrap splits for all 5 biological richness metrics independently in Regional springs. [Download Print-Quality PDF](figures/Figure_S6_Taxa_Feature_Importances.pdf)*
+
     - **Table 6 Excel Spreadsheet**: Exports GLM coefficients, mean Gini importances, and validation performance statistics across sheets. [Download Table 6 Excel Spreadsheet](Table_6_Taxa_Regression.xlsx)
 
 ---
@@ -569,15 +632,20 @@ To map and compare the physical habitat requirements, environmental drivers, and
 ### G. Similarity Percentages (SIMPER) Analysis ([run_simper.py](scratch/run_simper.py))
 
 To identify the specific biological variables driving community dissimilarity between the different aquifer spring classifications (Regional Aquifer, Local Hot, and Local Cold), we replicated the Similarity Percentages (SIMPER) methodology standard in PRIMER-E software:
+
 *   **Bray-Curtis Dissimilarity Contribution**: For any two spring groups $A$ and $B$, of sizes $n_A$ and $n_B$, the contribution of biological variable $k$ (out of $P=5$ biological richness measures) to the dissimilarity between sample $i \in A$ and sample $j \in B$ is defined as:
+
     $$\delta_{ij}^k = \frac{|y_{ik} - y_{jk}|}{\sum_{r=1}^P (y_{ir} + y_{jr})}$$
     where $y_{ik}$ is the richness value of group $k$ at site $i$.
+
 *   **Mean and Cumulative Dissimilarity**: The overall average dissimilarity contribution of variable $k$ across all pairs is:
+
     $$\bar{\delta}^k = \frac{1}{n_A n_B} \sum_{i=1}^{n_A} \sum_{j=1}^{n_B} \delta_{ij}^k$$
     The total average dissimilarity between groups $A$ and $B$ is the sum over all variables:
     $$\bar{\Delta} = \sum_{k=1}^P \bar{\delta}^k$$
     The percentage contribution of variable $k$ to the total community dissimilarity is:
     $$\text{Contribution } \% = \frac{\bar{\delta}^k}{\bar{\Delta}} \times 100$$
+
 *   **Ecological Insight**: This provides a quantitative description of whether group splits are driven by endemic accumulations (typical of Regional Aquifers) or shifts in common taxa (like springsnails or generalist crenophiles).
 
 ---
@@ -585,18 +653,27 @@ To identify the specific biological variables driving community dissimilarity be
 ### H. Model Selection & Goodness-of-Fit Comparisons ([check_aic_bic.py](scratch/check_aic_bic.py))
 
 To evaluate the mathematical validity and goodness-of-fit of our univariate regression models, we calculate the Akaike Information Criterion (AIC), Bayesian Information Criterion (BIC), and residual deviance metrics for each of the fitted Poisson GLMs:
+
 *   **Poisson Likelihood Function**: For count variable $y\_i$ with expected value $\lambda\_i = \exp(\mathbf{x}\_i^T \boldsymbol{\beta})$, the log-likelihood is:
+
     $$\ln(L(\boldsymbol{\beta})) = \sum\_{i=1}^n \left( y\_i \mathbf{x}\_i^T \boldsymbol{\beta} - \exp(\mathbf{x}\_i^T \boldsymbol{\beta}) - \ln(y\_i!) \right)$$
+
 *   **Information Criteria**:
     - **AIC**: Optimizes prediction error and is defined as:
+
       $$\text{AIC} = -2\ln(L) + 2k$$
       where $k$ is the number of estimated parameters (predictors plus the intercept; $k=17$ for models including the biological co-predictor, $k=16$ for the non-native model).
+
     - **BIC (Deviance-Based)**: Measures fit relative to a saturated model with a penalty for complexity:
+
       $$\text{BIC}\_{\text{deviance}} = D - (n - k)\ln(n)$$
+
     - **BIC (Standard/Absolute)**: Computes absolute Bayesian Information Criterion:
+
       $$\text{BIC}\_{\text{standard}} = D + k\ln(n)$$
       where $D$ is the residual deviance, calculated as:
       $$D = 2 \sum\_{i=1}^n \left[ y\_i \ln\left(\frac{y\_i}{\lambda\_i}\right) - (y\_i - \lambda\_i) \right]$$
+
 *   **Methodological Comparison to Published Work (Table S1)**:
     - **Incommensurability of AIC/BIC**: In Table S1, the original publication by Forrest et al. (2026) employs **Distance-based Linear Models (DistLM)** to evaluate environmental influences. DistLM models a multivariate biological distance matrix (resemblance matrix) using pseudo-F statistics and selects models using multivariate AICc (AIC with a correction for small sample size) or BIC. 
     - Because our Poisson GLMs model independent univariate count responses using a Poisson probability mass function while the published DistLM models a multivariate resemblance matrix using distance-based sum-of-squares, **their AIC/BIC values are mathematically incommensurable and cannot be directly compared numerically**.

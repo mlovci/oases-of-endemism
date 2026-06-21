@@ -57,6 +57,7 @@ The foundational study parameters and hydroecological covariates are established
 
 ### Objectives and Conceptual Extensions of the Analysis
 The foundational work by Forrest et al. (2026) established a vital baseline and provided an essential regional catalog. To maximize the utility of these insights for site-specific conservation planning, our reanalysis builds upon this catalog by introducing several complementary analytical extensions:
+
 1. **Complementing Linear Ordinations**: The published work utilized standard scale-standardization to address differing measurement ranges. Because ecological relationships often exhibit non-linear thresholds (such as critical pool depths below which species richness drops precipitously), we expand on this linear foundation by integrating non-linear manifold learning (t-SNE) and non-parametric regression to map these thresholds directly.
 2. **Deconstructing Scale-Dependent Relationships**: The original paper identified an interesting positive correlation between non-native invaders and native endemics, framing it as an "invasion-diversity paradox." By partitioning the springs into distinct hydrological units and running controlled regressions, we build upon this finding to show that it is a classic case of **shared abiotic filtering**—where extreme hydrological stability in Regional Aquifer springs supports both rich endemic communities and non-native invaders.
 3. **Enhancing Robustness for Small Sub-Samples**: For highly localized sub-populations (such as the $N=45$ Regional Aquifer springs), we supplement standard asymptotic statistical tests with non-parametric bootstrapping (2,000 resamples). This protects findings from assumptions of large-sample normal distributions, ensuring robust confidence intervals.
@@ -217,6 +218,7 @@ A t-SNE projection maps the multi-dimensional environmental space into 2D, color
 *Figure 5: Global t-SNE Manifold and Environmental Driver Gradients ($N=1121$). **Panel A** maps endemic species richness using a discrete 9-color scale, with points scaled by size (base size 30, increasing by 35 per taxon) and shaped by aquifer type (circles: Regional Aquifer, downward triangles: Local Geothermal/Hot, diamonds: Local Cold). **Panel B** projects environmental vectors (linear gradients fitted via the envfit algorithm) onto a light background of aquifer-coded spring locations, with arrow lengths proportional to correlation strength ($\sqrt{R^2}$) and color-coded by feature class (Green: Physical/Chemistry, Purple: Substrate, Orange: Disturbance). [Download Print-Quality PDF](figures/Figure_5_Global_tSNE_Endemics.pdf)*
 
 **Ecological Vector Interactions in t-SNE Space**:
+
 - **Symmetrical Substrate Sorting (Dimension 1)**: Substrate composition variables align horizontally along t-SNE Dimension 1. Fine silt (`Silt` vector length $0.81$, pointing right) and `Sand` point in the positive direction, whereas coarse, stable substrates like `Gravel` (vector length $0.59$) and `Cobble` (vector length $0.52$) point in the opposite direction (left). This horizontal alignment shows that substrate particle sorting represents a major axis of spring habitat variation.
 - **Anthropogenic Disturbance Axis (Dimension 2)**: Disturbance indices align vertically along t-SNE Dimension 2. `Cattle` grazing (vector length $0.55$) and water `Diversion` (vector length $0.39$) point upwards, while `Bank Cover` (vector length $0.37$) points downwards. This vertical gradient directly corresponds to the "Grazing & Habitat Degradation Axis" identified in our global PCA (PC3).
 - **Oasis Niche Mapping**: The high-endemic Regional Aquifer cluster (cyan circles in the left region of the manifold) corresponds to the intersection of the `Temperature`, pool `Depth`, `Bank Cover`, and `Gravel`/`Cobble` vectors, and lies opposite to the `Cattle` and `Silt` vectors. This visually demonstrates the joint environmental niche preserving these evolutionary refugia: deep, stable, thermally buffered waters with rocky substrates and low disturbance.
@@ -286,36 +288,50 @@ To validate the multi-species ordination and compare model performance, we run t
 *   **Similarity Percentages (SIMPER) Analysis (Comparison to Table S2)**:
     - Replicating the PRIMER-E software approach used in the published work, we ran a SIMPER analysis on the biological dataset to identify which specific taxa drive the differences between spring aquifer types.
     - **Concordance with Table S2**: Our results show a perfect quantitative and qualitative alignment with the published values in Supporting Information Table S2A–C:
-      1. *Regional Aquifer vs. Local Cold (Dissimilarity = 79.39% ; Table S2B)*: Driven primarily by **Crenophilies** (29.83% contribution) and **Endemics** (28.24% contribution), which together explain **58.07%** of the community dissimilarity.
-      2. *Regional Aquifer vs. Local Hot (Dissimilarity = 80.29% ; Table S2A)*: Driven by **Crenophilies** (30.08% contribution) and **Endemics** (26.37% contribution).
-      3. *Local Hot vs. Local Cold (Dissimilarity = 58.81% ; Table S2C)*: Driven by **Crenophilies** (31.27% contribution) and **Springsnails** (28.40% contribution).
+        1. *Regional Aquifer vs. Local Cold (Dissimilarity = 79.39% ; Table S2B)*: Driven primarily by **Crenophilies** (29.83% contribution) and **Endemics** (28.24% contribution), which together explain **58.07%** of the community dissimilarity.
+        2. *Regional Aquifer vs. Local Hot (Dissimilarity = 80.29% ; Table S2A)*: Driven by **Crenophilies** (30.08% contribution) and **Endemics** (26.37% contribution).
+        3. *Local Hot vs. Local Cold (Dissimilarity = 58.81% ; Table S2C)*: Driven by **Crenophilies** (31.27% contribution) and **Springsnails** (28.40% contribution).
     - These results provide a robust quantitative baseline showing that regional aquifer oases are distinguished primarily by high concentrations of native crenophilic and endemic species, whereas local geothermal and ambient springs differ primarily due to springsnails and crenophiles.
 
-*   **Model Selection and Goodness-of-Fit Comparisons (Comparison to Table S1)**:
-    - **Methodological Choice and Limitations of OLS**: 
-      In Supplementary S1, the original study explicitly noted that traditional ordinary least squares (OLS) linear regression models are mathematically inappropriate and poor predictors for species richness count data. Because OLS assumes continuous, normally distributed errors and constant variance (homoscedasticity), the original authors rejected OLS in favor of non-parametric distance-based linear models (DistLM) to draw their ecological conclusions. We build upon this logic by detailing the core statistical limitations of applying OLS to count distributions:
-      1. *Heteroskedasticity*: The variance of count data typically increases with the mean, violating the homoscedasticity assumption.
-      2. *Invalid Predictions*: Linear models predict continuous values and can yield impossible negative species counts (e.g., predicting $-1.5$ endemic species for heavily silted or highly degraded springs).
-      3. *Skewness and Zeros*: A massive proportion of springs in the dataset have exactly zero endemics, resulting in highly non-normal residuals that invalidate OLS hypothesis testing ($p$-values).
+*   **Model Selection and Goodness-of-Fit Comparisons**:
+    - **Methodological Choice and Limitations of OLS**:
+
+        In Supplementary S1, the original study explicitly noted that traditional ordinary least squares (OLS) linear regression models are mathematically inappropriate and poor predictors for species richness count data. Because OLS assumes continuous, normally distributed errors and constant variance (homoscedasticity), the original authors rejected OLS in favor of non-parametric distance-based linear models (DistLM) to draw their ecological conclusions. We build upon this logic by detailing the core statistical limitations of applying OLS to count distributions:
+
+        1. *Heteroskedasticity*: The variance of count data typically increases with the mean, violating the homoscedasticity assumption.
+        2. *Invalid Predictions*: Linear models predict continuous values and can yield impossible negative species counts (e.g., predicting $-1.5$ endemic species for heavily silted or highly degraded springs).
+        3. *Skewness and Zeros*: A massive proportion of springs in the dataset have exactly zero endemics, resulting in highly non-normal residuals that invalidate OLS hypothesis testing ($p$-values).
+
     - **Methodological Incommensurability of AIC/BIC**:
-      The model selection metrics (AIC/BIC) reported in our Poisson GLMs cannot be directly compared to the AICc/BIC values in Supporting Information Table S1:
-      1. *Different Likelihood Formulations*: The published Table S1 uses a **multivariate distance-based linear model (DistLM)**. DistLM models a multivariate resemblance matrix (e.g., Bray-Curtis dissimilarities calculated from the biological matrix of 5 taxa across all sites) by partitioning the distance-based sum of squares across environmental axes, calculating a pseudo-likelihood based on the residual sum of squares ($RSS$). Our **Poisson GLMs** are univariate models that fit a parametric Poisson probability mass function to the raw count values of a single target taxon at a time.
-      2. *Univariate vs. Multivariate Responses*: The response variable in DistLM is a multivariate distance matrix representing community-wide dissimilarity, whereas the response in each of our Poisson GLMs is a single, one-dimensional count vector of richness for a specific taxonomic group.
-      3. *Scale Differences*: Because information criteria (AIC/BIC) are computed from the log-likelihood (which is a function of the probability density/mass function in GLMs, but is a function of distance-based partition variances in DistLM), their raw numerical values occupy completely different mathematical scales. A direct numerical comparison is therefore invalid.
+
+        The model selection metrics (AIC/BIC) reported in our Poisson GLMs cannot be directly compared to the AICc/BIC values in Supporting Information Table S1:
+
+        1. *Different Likelihood Formulations*: The published Table S1 uses a **multivariate distance-based linear model (DistLM)**. DistLM models a multivariate resemblance matrix (e.g., Bray-Curtis dissimilarities calculated from the biological matrix of 5 taxa across all sites) by partitioning the distance-based sum of squares across environmental axes, calculating a pseudo-likelihood based on the residual sum of squares ($RSS$). Our **Poisson GLMs** are univariate models that fit a parametric Poisson probability mass function to the raw count values of a single target taxon at a time.
+        2. *Univariate vs. Multivariate Responses*: The response variable in DistLM is a multivariate distance matrix representing community-wide dissimilarity, whereas the response in each of our Poisson GLMs is a single, one-dimensional count vector of richness for a specific taxonomic group.
+        3. *Scale Differences*: Because information criteria (AIC/BIC) are computed from the log-likelihood (which is a function of the probability density/mass function in GLMs, but is a function of distance-based partition variances in DistLM), their raw numerical values occupy completely different mathematical scales. A direct numerical comparison is therefore invalid.
+
     - **Concordance of Variable Selection**:
-      Despite the fundamental differences in statistical frameworks, the two approaches yield highly concordant ecological results. 
-      The published DistLM model in Table S1 selected 11 of the 15 environmental parameters (depth, width, temperature, conductivity, pH, silt, sand, gravel, cobble, emergent cover, bank cover, diversion, recreation, cattle, equine, non-natives) to explain biological variation across springs. 
-      Similarly, our univariate Poisson GLMs and bootstrap Random Forest feature importances identify:
-      1. *Hydrological Volume/Permanence*: Pool `Depth` (the top environmental driver across all models, indicating that deeper pools buffer against desiccation and freezing).
-      2. *Physicochemical Stability*: `Temperature` (reflecting thermal buffering of regional aquifers).
-      3. *Substrate Clogging*: `Silt` (a major negative filter for benthic endemics and springsnails).
-      4. *Anthropogenic Disturbance*: `Cattle` and `Equine` grazing indices (representing direct bank trampling and siltation).
-      This indicates that whether modeling the community structure multivariately (via DistLM distance matrices) or modeling taxon-specific richness parametrically (via Poisson GLMs), the same core physical, chemical, and disturbance features emerge as the drivers of Great Basin desert spring endemism.
+
+        Despite the fundamental differences in statistical frameworks, the two approaches yield highly concordant ecological results. 
+
+        The published DistLM model in Table S1 selected 11 of the 15 environmental parameters (depth, width, temperature, conductivity, pH, silt, sand, gravel, cobble, emergent cover, bank cover, diversion, recreation, cattle, equine, non-natives) to explain biological variation across springs. 
+
+        Similarly, our univariate Poisson GLMs and bootstrap Random Forest feature importances identify:
+
+        1. *Hydrological Volume/Permanence*: Pool `Depth` (the top environmental driver across all models, indicating that deeper pools buffer against desiccation and freezing).
+        2. *Physicochemical Stability*: `Temperature` (reflecting thermal buffering of regional aquifers).
+        3. *Substrate Clogging*: `Silt` (a major negative filter for benthic endemics and springsnails).
+        4. *Anthropogenic Disturbance*: `Cattle` and `Equine` grazing indices (representing direct bank trampling and siltation).
+
+        This indicates that whether modeling the community structure multivariable (via DistLM distance matrices) or modeling taxon-specific richness parametrically (via Poisson GLMs), the same core physical, chemical, and disturbance features emerge as the drivers of Great Basin desert spring endemism.
+
     - **Goodness-of-Fit Advantages**: By fitting Poisson GLMs with a log link (which model counts as an exponential process), we dramatically improve model fit. Below are the goodness-of-fit statistics for our Regional Aquifer models ($N=45$):
-      - **Endemics**: $\text{AIC} = 167.45$, $\text{BIC (Standard)} = 85.89$, $\text{Residual Deviance} = 21.18$ (with 28 degrees of freedom).
-      - **Crenophilies**: $\text{AIC} = 172.52$, $\text{BIC (Standard)} = 80.74$, $\text{Residual Deviance} = 16.03$ (with 28 degrees of freedom).
-      - **Springsnails**: $\text{AIC} = 148.61$, $\text{BIC (Standard)} = 74.80$, $\text{Residual Deviance} = 10.09$ (with 28 degrees of freedom).
-      - **Native Fish**: $\text{AIC} = 110.94$, $\text{BIC (Standard)} = 77.01$, $\text{Residual Deviance} = 12.29$ (with 28 degrees of freedom).
+
+        - **Endemics**: $\text{AIC} = 167.45$, $\text{BIC (Standard)} = 85.89$, $\text{Residual Deviance} = 21.18$ (with 28 degrees of freedom).
+        - **Crenophilies**: $\text{AIC} = 172.52$, $\text{BIC (Standard)} = 80.74$, $\text{Residual Deviance} = 16.03$ (with 28 degrees of freedom).
+        - **Springsnails**: $\text{AIC} = 148.61$, $\text{BIC (Standard)} = 74.80$, $\text{Residual Deviance} = 10.09$ (with 28 degrees of freedom).
+        - **Native Fish**: $\text{AIC} = 110.94$, $\text{BIC (Standard)} = 77.01$, $\text{Residual Deviance} = 12.29$ (with 28 degrees of freedom).
+
     - Comparing our residual deviances (e.g., 21.18 for endemics) to the degrees of freedom (28 df) yields a ratio ($\chi^2 / \text{df}$) well below $1.0$. This demonstrates that the Poisson GLMs are extremely well-fit, free of overdispersion, and represent a major statistical advancement over standard linear models that predict impossible negative species counts.
 
 ---
@@ -327,6 +343,7 @@ To validate the causal mechanisms of these latent axes, we integrate them with t
 ### A. The Siltation-Driven Endemic Decline
 
 The Benthic Habitat Quality axis (FA Factor 2) highlighted siltation as a major negative factor. This is verified by both the parametric and non-parametric regressions:
+
 *   **Poisson GLM (Regional Aquifers)**: Siltation has a statistically significant negative effect on endemics ($\beta_{std} = -0.2538, \text{HC3 SE} = 0.1034, z = -2.4555, p = 0.014$). Non-parametric bootstrapping (2000 resamples) yields a 95% confidence interval entirely below zero ($[-0.4755, -0.0472]$).
 *   **Spearman Rank Correlation**: Siltation is significantly negatively correlated with endemics ($r_s = -0.370, p = 0.012$; see Table 3a; see Figure 8). [Download Table 3 Excel Spreadsheet: Spearman Correlation Matrices](Table_3_Spearman_Correlations.xlsx)
 *   **Partial Dependence (PDP)**: Increasing silt substrate from 0% to 100% causes a marginal decrease in expected endemics from $2.95$ to $2.45$ species ($\Delta = -0.50$ species).
@@ -341,6 +358,7 @@ The Benthic Habitat Quality axis (FA Factor 2) highlighted siltation as a major 
 ### B. Hydrological Permanence (Pool Depth)
 
 Both the PCA (PC3) and Random Forest feature importances identify pool depth as the most critical physical parameter:
+
 *   **Bootstrap Random Forest Importance**:
     *   *Regional Aquifers*: `Depth` is the top physical predictor (importance $= 0.1364$).
     *   *Local Cold Springs*: `Depth` is the overwhelmingly dominant predictor (importance $= 0.2217$).
@@ -376,6 +394,7 @@ Both the PCA (PC3) and Random Forest feature importances identify pool depth as 
 ### C. The Invasion-Diversity Oasis Coupling (Shared Abiotic Filtering & Carrying Capacity)
 
 The positive coupling between endemic and non-native species is one of the most interesting latent patterns in the dataset:
+
 *   **Parametric Poisson GLM**: Non-native presence is highly significant and positive ($\beta_{std} = 0.3687, \text{HC3 SE} = 0.0950, z = 3.8792, p = 1.048 \times 10^{-4}$), with a bootstrap 95% CI of $[0.1872, 0.5963]$.
 *   **Spearman Rank Correlation**: Strong positive correlation ($r_s = 0.597, p < 10^{-5}$).
 *   **Partial Dependence (PDP)**: Expected endemics rise from $2.34$ to $3.32$ as non-native richness increases from 0 to $>3$ species ($\Delta = +0.98$ species).
@@ -397,6 +416,7 @@ The positive coupling between endemic and non-native species is one of the most 
 Bootstrap Random Forest regressions (1,000 splits) and standardized Poisson GLMs with robust standard errors (HC3) were fitted for each of the five biological richness variables independently. All model metrics represent out-of-sample (OOS) validation performance on unseen data.
 
 The results show a clear divergence in physical niche space:
+
 1.  **Water-Column Swimming Taxa (Native Fish)**:
     *   *Predictability*: $R^2_{median} = 0.464$, mean MSE $= 0.801$.
     *   *Top Drivers*: `Depth` (Gini $= 0.197$) and `Non Natives` ($0.137$).
@@ -449,18 +469,23 @@ In executing multivariable regressions such as the standardized Poisson GLMs (Ta
 
 #### 1. Substrate-Driven Compositional Multicollinearity
 In sedimentological and habitat characterization, substrate fractions (Silt %, Sand %, Gravel %, Cobble %) represent compositional data (they sum to a fixed total or depend directly on one another). This structural dependency mathematically guarantees elevated collinearity. To diagnose this, we computed Variance Inflation Factors (VIFs) across the 15 environmental parameters:
+
 *   **Full Dataset ($N=1121$)**: Substrate variables exhibit strong collinearity, with `Silt` showing a VIF of **$10.59$** (exceeding the standard statistical threshold of 10.0), followed by `Gravel` (**$5.32$**) and `Sand` (**$4.31$**).
 *   **Regional Aquifer Subset ($N=45$)**: Within the stable regional oases, the collinearity is slightly lower but remains substantial: `Silt` VIF $= \mathbf{7.70}$, `Cobble` VIF $= \mathbf{4.42}$, `Gravel` VIF $= \mathbf{3.69}$, and `Sand` VIF $= \mathbf{3.50}$.
+
 All other environmental variables (e.g., pH, conductivity, temperature, bank cover, and cattle disturbance) display VIF values below **$2.9$** (ranging from $1.45$ to $2.85$), showing they do not suffer from severe multicollinearity.
 
 #### 2. Physical Covariation and GLM Suppression Effects
 A key artifact of this multicollinearity is visible in Table 6 for pool physical dimensions. Pool `Depth` and `Width` are positively correlated ($r = 0.52$ globally) because larger regional oases tend to be both wider and deeper. When fitted simultaneously in a Poisson GLM:
+
 *   Pool `Depth` exhibits a highly significant positive effect on endemic richness ($\beta = +0.4140, p < 0.001$).
 *   Pool `Width` exhibits a negative, non-significant coefficient ($\beta = -0.0674, p = 0.449$).
+
 This negative coefficient for width is a classic **suppression effect** caused by multicollinearity: because depth and width share information regarding water volume, the model assigns the positive effect of pool size entirely to `Depth` and a compensatory negative slope to `Width`. In reality, wider pools support more species. Therefore, managers and ecologists are cautioned against interpreting individual multivariable GLM coefficients in Table 6 as isolated physical slopes, but must evaluate them as a joint physical profile representing oasis permanence.
 
 #### 3. High Stochasticity and Low Predictability in Regional Oases
 Although the bootstrap Random Forest models successfully identify pool depth and temperature as top predictors of richness, their out-of-sample (OOS) predictive power is low:
+
 *   **Out-of-Sample $R^2$**: The median OOS $R^2$ is **$0.063$** for the Endemics model and **$0.105$** for the Crenophiles model.
 *   **Ecological Meaning**: This low predictability is a hallmark of **island biogeography and ecological drift** in desert springs. These isolated springs act as aquatic islands in a desert sea. Community assembly is not a purely deterministic process governed by local environmental variables, but is highly stochastic, shaped by historical colonization bottlenecks, dispersal limitations, and random extinction-recolonization events.
 *   **Methodological Bias of Gini Importance**: Gini (impurity-based) feature importances calculated from Random Forest models are known to be biased in favor of continuous variables (such as pool depth, width, or temperature) over discrete or categorical variables (such as fencing presence or grazing disturbance ranks). This bias artificially deflates the apparent importance of management interventions. Therefore, the Random Forest feature importances must be interpreted as qualitative rankings of physical environmental gradients, rather than absolute indicators of management efficacy.
@@ -496,16 +521,19 @@ Our integration of unsupervised ordination with predictive machine learning and 
 
 ### 1. Resolution of the "Invasion-Diversity Paradox" via Abiotic Filtering
 A major finding in our reanalysis is the strong positive co-occurrence between native endemics and non-native invaders in Regional Aquifer springs ($R = 0.574, p < 10^{-4}$; Figure 15). 
+
 *   **Contrast with Literature**: In classical invasion ecology, Elton’s Biotic Resistance Hypothesis (Elton 1958) posits that species-rich native communities are highly resistant to biological invasion due to niche saturation. Conversely, macro-scale observational studies often reveal a positive correlation between native and exotic richness—a phenomenon known as the **Invasion-Diversity Paradox** (Fridley et al. 2007).
 *   **Our Contribution**: By checking the relationship across spring categories, we demonstrate that this positive coupling is **not a true ecological paradox**. Rather, it is a direct consequence of **shared abiotic filtering** (Stohlgren et al. 2003). In desert spring systems, the extreme physical environment (ephemerality and freezing in runoff springs; geothermal stress in hot springs) acts as an primary filter that excludes both natives and exotics. In contrast, the perennial, stable, and thermally buffered Regional Aquifer oases represent high-resource patches that support high native diversity while simultaneously facilitating non-native establishment. By controlling for physical dimensions (`Depth` and `Width`) in our Poisson GLM, we confirmed that non-native presence remains a highly significant positive predictor ($p = 0.005$), validating that environmental stability, rather than direct biological facilitation, drives this coupling.
 
 ### 2. The Conservation/Management Disconnect (Abiotic Dominance)
 Comparing average disturbances across aquifer types (Figure 16) reveals a critical disconnect in current management practices:
+
 *   **The Disconnect**: Conservation fencing and terrestrial exclusions successfully reduce cattle grazing in Regional Aquifer springs ($\mu_{Cattle} = 1.16$ vs. $2.47$ in cold springs). However, despite this terrestrial protection, these oases remain the most heavily invaded by aquatic non-native species ($\mu_{NonNatives} = 1.27$ species vs. $0.04$ in cold springs).
 *   **Ecological Meaning**: This demonstrates **abiotic dominance** over terrestrial land-use management. Perennial stability overrides grazing protection when structuring the aquatic community. Fencing protects riparian banks from livestock trampling, but it is entirely ineffective at stopping the dispersal and establishment of warm-adapted aquatic invaders (such as cichlids and bullfrogs) which are biologically favored by the stable thermal regimes. Conservationists must recognize that terrestrial fencing is only half the battle; managing aquatic invasions requires direct aquatic-focused biosecurity and physical monitoring.
 
 ### 3. Quantitative Thresholds vs. Qualitative Descriptions
 While the source paper by Forrest et al. (2026) descriptively notes the importance of permanent springs and bank structure, our use of supervised Partial Dependence Plots (PDPs) translates these qualitative observations into concrete, actionable management thresholds:
+
 *   **Pool Depth Threshold**: We identify a critical threshold for pool depth at **$30\text{ cm}$ to $40\text{ cm}$** (Figures 10, 12, 14). Below this threshold, expected endemic richness drops precipitously. Once depth exceeds $40\text{ cm}$, species richness plateaus. This identifies a clear target for flow restoration and groundwater extraction limits.
 *   **Benthic Siltation Smothering**: We isolate substrate siltation as a major independent latent threat. The source paper did not separate siltation from general grazing. Our Factor Analysis (Factor 2) and bootstrapped GLM ($\beta_{std} = -0.254, p = 0.014$, CI: $[-0.476, -0.047]$) show that siltation acts as an independent benthic filter, likely by smothering interstitial spaces in cobble/gravel beds and burying the algae that springsnails feed on.
 
@@ -513,6 +541,7 @@ While the source paper by Forrest et al. (2026) descriptively notes the importan
 Because these ecological censuses are based on historical field surveys, they represent a static snapshot of a rapidly changing landscape. Desert springs are highly dynamic and vulnerable to sudden environmental shifts. In basins experiencing active groundwater pumping or climate-driven drought, some of these oases may have already dried out, and others may have been completely overrun by non-native species since the original data collection. 
 
 Before committing limited conservation resources to physical interventions, it is critical to perform targeted **field re-surveys** to verify the current hydrological and biological status of the highest-value sites. We prioritize the following spring sites for immediate re-survey:
+
 *   **Urgent Hydrologic Verification (Spring 13 and Spring 23)**: These two oases hold exceptionally high endemic richness (4 and 8 endemics, respectively) but were documented as extremely shallow (Spring 13: $2\text{ cm}$ pool depth; Spring 23: $20\text{ cm}$ pool depth under level 4 diversion). Re-surveying these sites is the highest priority to determine if they have completely dried out or if their isolated endemic populations are still extant.
 *   **Benthic Quality Assessments (Spring 8 and Spring 30)**: Both springs support 5 endemic species but are severely choked by fine substrates (Spring 8: $100\%$ silt; Spring 30: $90\%$ silt). Field re-surveys should focus on benthic sampling to verify if these silt levels have completely smothered the rocky-gravel microhabitats required by springsnails, or if localized gravel beds remain.
 *   **Primary Stronghold Monitoring (Spring 5)**: As the most biodiverse spring in the entire database (9 endemic species), Spring 5 is the primary evolutionary stronghold. A re-survey is needed to verify that its high pool depth ($100\text{ cm}$) is intact, and that the level 1 diversion has not expanded or introduced new non-native aquatic invaders.
@@ -538,6 +567,7 @@ Our multi-taxon regression and feature importance analysis (Section D) reveals t
 
 #### Contrast with Aquifer-Scale Management Strategies
 These taxon-specific needs must be integrated with the broader environmental realities of the three aquifer spring types:
+
 *   **Regional Aquifer Springs (Thermal Oases)**: These are the high-diversity, warm, stable hotspots. However, they are also the most heavily invaded ($\mu_{NonNatives} = 1.27$). Management must prioritize **aquifer flow volume protection** (to maintain pool depth and prevent drying) and **biosecurity/recreational limits** (to prevent non-native establishment), combined with **benthic silt cleaning** to protect the high density of endemics.
 *   **Local Hot Springs (Geothermal Islands)**: These geothermal springs represent isolated, warm islands under high livestock disturbance ($\mu_{Cattle} = 2.26$). Because geothermal springs have high grazing pressure and host rare endemics, **livestock exclusion fencing** represents a high-yield, cost-effective conservation investment to protect their fragile banks.
 *   **Local Cold Springs (Ephemeral Runoff)**: Governed by ephemerality ($\mu_{NonNatives} = 0.04$, but $\mu_{Cattle} = 2.47$). Management must focus on **preventing local water diversions** that would trigger complete seasonal dry-outs and **riparian restoration** (fencing and bank revegetation) to recover habitats from severe livestock grazing.
@@ -562,11 +592,17 @@ A striking result of our out-of-sample (OOS) validation is the relatively low $R
 To test the generality of our findings, we compare the Great Basin spring dynamics against parallel desert spring systems globally and established ecological theories:
 
 1.  **The Invasion-Diversity Paradox & Biotic Acceptance**
+
     Our finding of a strong positive correlation between endemic richness and non-native richness ($r_s = 0.597$) within Regional Aquifer oases supports the landscape-scale "invasion paradox" described by Stohlgren et al. (1999, 2003). While small-scale experiments often suggest that species-rich communities resist invaders via competitive exclusion (biotic resistance), our large-scale observational results show that both natives and non-natives respond positively to the same high-resource, stable environmental conditions (biotic acceptance).
+
 2.  **Niche Opportunity and Environmental Filtering**
+
     According to the community assembly framework of Shea and Chesson (2002), the success of non-native invaders is determined by "niche opportunities" created by relaxed environmental filters. In ephemeral cold runoff springs and highly geothermal springs, harsh abiotic conditions (freezing, seasonal drying, or temperature extremes) act as severe filters that exclude most species. In contrast, regional aquifer springs act as relaxed abiotic filters, providing a stable thermal and hydrological buffer that permits both native endemics and warm-adapted non-native invaders to establish permanent populations.
+
 3.  **Parallel Global Arid Oases**
+
     The hydrological and substrate dependencies we identify are highly concordant with other isolated groundwater-dependent ecosystems globally:
+
     *   *Great Artesian Basin (GAB) Springs, Australia*: Studies on Australian mound springs (e.g., Fensham et al. 2011; Rossini et al. 2018) demonstrate that endemic gastropod and macroinvertebrate richness is primarily driven by spring permanence and discharge rates. This mirrors our supervised model results showing that pool depth (permanence threshold of $>30\text{ cm}$) is the single most critical driver of richness.
     *   *Cuatro Ciénegas Basin, Mexico*: Research in Chihuahuan desert springs (e.g., Souza et al. 2006) shows that extreme evolutionary isolation and chemical stability drive high local endemism. However, anthropogenic water diversion and habitat degradation (such as substrate compaction and siltation) disrupt these stable niches, leading to species extirpations. This aligns with our finding that benthic siltation ($\beta_{std} = -0.2538, p = 0.014$) acts as a severe independent threat, decoupling benthic grazers like springsnails from the rest of the aquatic community.
 
