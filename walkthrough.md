@@ -26,6 +26,7 @@ We created or modified the following files in the workspace:
 11. **[visualize_tsne_grid.py](visualize_tsne_grid.py)**: Fits a distance-weighted KNN regressor ($k=25$) on the 2D coordinates for each of the 15 environmental variables, interpolates values across a $150 \times 150$ grid, paints the background contour map, and overlays actual spring coordinates to map environmental drivers onto the t-SNE manifold.
 12. **[visualize_sites_clustermap.py](visualize_sites_clustermap.py)**: Performs hierarchical clustering on both rows (1121 springs) and columns (5 biological standardized richness variables) using average linkage and Optimal Leaf Ordering (OLO) to group springs based on their biological communities and validate their hydrogeological categories.
 13. **[manuscript.md](manuscript.md)**: A new, formal scientific paper written in a clean, dry, and structured academic format (Abstract, Introduction, Results, Discussion, and Conservation Implications), containing all exact statistical values, figures, and tables, but with zero preambles or meta-commentary.
+14. **[proposal.md](proposal.md)**: A standalone budget and technological proposal, separating future outlook, data pre-processing directions, and the 3-Year Implementation budget from the main scientific results.
 
 
 ---
