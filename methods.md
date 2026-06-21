@@ -364,6 +364,7 @@ The script [non_parametric_analysis.py](non_parametric_analysis.py) runs fully n
 Spearman correlation evaluates monotonic relationships and is robust to non-normal distributions and outliers. Unlike Pearson correlation (which measures linear relations), Spearman ranks the data values and calculates the Pearson correlation coefficient of those ranks:
 $$r_s = 1 - \frac{6 \sum d_i^2}{n(n^2 - 1)}$$
 where $d_i$ is the difference between the ranks of each observation's variables, and $n$ is the sample size. Within the Regional Aquifer springs:
+
 *   **Endemics vs. Physical Features**:
     *   `Depth`: $r_s = 0.514, p = 3.045 \times 10^{-4}$ (strong positive relationship)
     *   `Silt`: $r_s = -0.370, p = 1.242 \times 10^{-2}$ (statistically significant negative relationship)

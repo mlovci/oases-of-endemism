@@ -627,6 +627,7 @@ To evaluate these relationships rigorously, we avoid traditional Ordinary Least 
             <li><a href="#c-pattern-3-benthic-siltation-impact-in-regional-springs" class="nav-sub-link sub-h3" title="C. Pattern 3: Benthic Siltation Impact in Regional Springs">C. Pattern 3: Benthic Siltation Impact in Regional Springs</a></li>
             <li><a href="#8-non-parametric-exploratory-analyses-non_parametric_analysispy" class="nav-sub-link sub-h2" title="8. Non-parametric Exploratory Analyses">8. Non-parametric Exploratory Analyses</a></li>
             <li><a href="#a-spearman-rank-correlation-r_s" class="nav-sub-link sub-h3" title="A. Spearman Rank Correlation">A. Spearman Rank Correlation</a></li>
+            <li><a href="#b-machine-learning-random-forest-feature-importance" class="nav-sub-link sub-h3" title="B. Machine Learning: Random Forest Feature Importance">B. Machine Learning: Random Forest Feature Importance</a></li>
             <li><a href="#c-lowess-local-regression-curve-fitting" class="nav-sub-link sub-h3" title="C. LOWESS Local Regression Curve Fitting">C. LOWESS Local Regression Curve Fitting</a></li>
             <li><a href="#9-bootstrap-regression-and-feature-importance-analysis-analyze_all_aquiferspy" class="nav-sub-link sub-h2" title="9. Bootstrap Regression and Feature Importance Analysis">9. Bootstrap Regression and Feature Importance Analysis</a></li>
             <li><a href="#bootstrap-validation-architecture" class="nav-sub-link sub-h3" title="Bootstrap Validation Architecture
@@ -1953,14 +1954,20 @@ This results in the smooth exponential curves fitted in our visualizations. The 
 <h3 id="a-spearman-rank-correlation-r_s">A. Spearman Rank Correlation ($r_s$)</h3>
 <p>Spearman correlation evaluates monotonic relationships and is robust to non-normal distributions and outliers. Unlike Pearson correlation (which measures linear relations), Spearman ranks the data values and calculates the Pearson correlation coefficient of those ranks:
 $$r_s = 1 - \frac{6 \sum d_i^2}{n(n^2 - 1)}$$
-where $d_i$ is the difference between the ranks of each observation's variables, and $n$ is the sample size. Within the Regional Aquifer springs:
-*   <strong>Endemics vs. Physical Features</strong>:
-    *   <code>Depth</code>: $r_s = 0.514, p = 3.045 \times 10^{-4}$ (strong positive relationship)
-    *   <code>Silt</code>: $r_s = -0.370, p = 1.242 \times 10^{-2}$ (statistically significant negative relationship)
-    *   <code>Diversion</code>: $r_s = 0.337, p = 2.354 \times 10^{-2}$ (positive co-occurrence)
-    *   <code>Temperature</code>: $r_s = 0.305, p = 4.153 \times 10^{-2}$ (significant positive thermal coupling)
-*   <strong>Endemics vs. Non Natives</strong>:
-    *   A very strong positive rank correlation ($r_s = 0.597, p = 1.527 \times 10^{-5}$) confirms that species-rich regional oases support high numbers of both endemic and non-native taxa.</p>
+where $d_i$ is the difference between the ranks of each observation's variables, and $n$ is the sample size. Within the Regional Aquifer springs:</p>
+<ul>
+<li><strong>Endemics vs. Physical Features</strong>:<ul>
+<li><code>Depth</code>: $r_s = 0.514, p = 3.045 \times 10^{-4}$ (strong positive relationship)</li>
+<li><code>Silt</code>: $r_s = -0.370, p = 1.242 \times 10^{-2}$ (statistically significant negative relationship)</li>
+<li><code>Diversion</code>: $r_s = 0.337, p = 2.354 \times 10^{-2}$ (positive co-occurrence)</li>
+<li><code>Temperature</code>: $r_s = 0.305, p = 4.153 \times 10^{-2}$ (significant positive thermal coupling)</li>
+</ul>
+</li>
+<li><strong>Endemics vs. Non Natives</strong>:<ul>
+<li>A very strong positive rank correlation ($r_s = 0.597, p = 1.527 \times 10^{-5}$) confirms that species-rich regional oases support high numbers of both endemic and non-native taxa.</li>
+</ul>
+</li>
+</ul>
 <h3 id="b-machine-learning-random-forest-feature-importance">B. Machine Learning: Random Forest Feature Importance</h3>
 <p>A Random Forest Regressor ($N_{estimators} = 500$) is fitted to predict endemic richness within regional springs.
 *   <strong>Methodology</strong>: Random Forest is a non-parametric ensemble method that builds numerous decision trees and averages their predictions. Because it is non-parametric, it makes no distribution assumptions and automatically handles high-dimensional, non-linear interactions. We evaluate feature importance using <strong>Gini Importance</strong> (or Mean Decrease in Impurity), which measures how much each feature decreases the split impurity (weighted variance of the target variable) across all decision trees.
