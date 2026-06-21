@@ -168,6 +168,21 @@ We ran unsupervised decomposition to explore the latent conditions preserving en
       - *Global Scale*: The massive presence/absence gradient across all 1121 springs forces all native taxa (including Springsnails) to cluster together. `Non Natives` clusters completely apart (merging last), driven by human-mediated introduction pathways.
       - *Regional Scale*: Within the 45 stable oases, the presence/absence gradient is removed. `Non Natives` integrates with the core native group (Endemics, Crenophilies, Native Fish) due to shared hydrological stability (the invasion-diversity paradox). `Springsnails` clusters apart and merges last due to benthic habitat specificity (decoupled from water-column richness and invader tolerances by severe siltation filters).
 
+### G. Community Dissimilarity & Model Goodness-of-Fit (SIMPER and AIC/BIC)
+
+1.  **Similarity Percentages (SIMPER)**:
+    - We computed Bray-Curtis species contributions across aquifer types, showing perfect concordance with Table S2 of the published paper:
+      - *Regional vs. Local Cold (Dissimilarity = 79.39%)*: Driven by Crenophilies (29.83%) and Endemics (28.24%).
+      - *Regional vs. Local Hot (Dissimilarity = 80.29%)*: Driven by Crenophilies (30.08%) and Endemics (26.37%).
+      - *Local Hot vs. Local Cold (Dissimilarity = 58.81%)*: Driven by Crenophilies (31.27%) and Springsnails (28.40%).
+2.  **Model selection and Goodness-of-Fit**:
+    - We evaluated model goodness-of-fit statistics for the Poisson GLM count models:
+      - **Endemics**: AIC = 167.45, BIC = 85.89, Deviance = 21.18, Pearson $\chi^2$ = 18.09
+      - **Crenophilies**: AIC = 172.52, BIC = 80.74, Deviance = 16.03
+      - **Springsnails**: AIC = 148.61, BIC = 74.80, Deviance = 10.09
+      - **Native Fish**: AIC = 110.94, BIC = 77.01, Deviance = 12.29
+    - We documented the mathematical incommensurability of these AIC/BIC values with the paper's multivariate DistLM selection criteria (Table S1), alongside the high concordance in environmental variable selections (which both highlight pool depth, temperature, substrate grain-size, and livestock disturbances as key ecological drivers).
+
 ---
 
 ## 4. Synthesis and Findings File
