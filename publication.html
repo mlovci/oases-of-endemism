@@ -700,24 +700,36 @@ The partial dependence function shows the marginal effect of one or two features
 <p>In their correspondence, the authors correctly note that their PCA applied z-score standardization to all variables. This standard linear scale-normalization is a foundational preprocessing step that addresses differences in variable magnitudes (e.g., standardizing pool depth in centimeters, water temperature in degrees Celsius, and conductivity in micro-Siemens per centimeter onto a single unit-variance scale), ensuring that larger-scale variables do not dominate the calculation of principal components. </p>
 <p>However, we distinguish here between <strong>linear scale-standardization</strong> (z-scoring) and <strong>modeling non-linear ecological structures and thresholds</strong>. While PCA identifies orthogonal axes of maximum <em>linear</em> variance, it is structurally unable to model non-linear relationships, unimodal tolerances, and zero-inflation. By introducing non-linear manifold learning (t-SNE), Factor Analysis (FA), count-appropriate Poisson GLMs, and bootstrap Random Forest regressions, our reanalysis uncovers <strong>six key differences in ecological and conservation conclusions</strong> compared to the published work:</p>
 <ol>
-<li><strong>Substrate-Specific Siltation Decoupling (Factor Analysis &amp; GLM)</strong>:</li>
+<li><strong>Substrate-Specific Siltation Decoupling (Factor Analysis &amp; GLM)</strong>:<ul>
 <li><em>Published Conclusion</em>: Cattle grazing and general habitat degradation (PC3) represent a single combined pressure.</li>
 <li><em>Extended Conclusion</em>: Our Factor Analysis (Factor 2, Benthic Habitat Quality Axis) and Poisson GLMs isolate <code>Silt %</code> as a highly significant independent negative filter ($\beta = -0.254, p=0.014$, bootstrapped 95% CI $[-0.476, -0.047]$). Increased siltation decouples benthic grazers (springsnails) from water-column native fish, even in deep, stable pools. Traditional cattle fencing is insufficient if historical silt deposits remain, requiring active benthic substrate restoration (gravel/cobble clearing).</li>
-<li><strong>Shared Abiotic Filtering in the "Invasion-Diversity Paradox" (Controlled Regressions)</strong>:</li>
+</ul>
+</li>
+<li><strong>Shared Abiotic Filtering in the "Invasion-Diversity Paradox" (Controlled Regressions)</strong>:<ul>
 <li><em>Published Conclusion</em>: Native endemics and non-native invaders are positively correlated, suggesting coexistence or a biological facilitation paradox.</li>
 <li><em>Extended Conclusion</em>: We show that this positive coupling ($R = 0.574, p &lt; 10^{-4}$) is driven by <strong>shared abiotic filtering</strong> (the positive correlation is highly significant at both global and regional scales, reflecting stable, perennial resource oases that support both groups). Within stable Regional Aquifer springs, the hydrologic permanence and thermal buffering support both rich native endemics and provide a permanent niche for warm-adapted non-native invaders, whereas ephemeral cold runoff springs support neither. Controlling for physical dimensions in our Poisson GLMs reveals that exotics do not directly facilitate natives, but are sorted by the same environmental filters into these stable habitats.</li>
-<li><strong>The Terrestrial-Aquatic Conservation Fencing Disconnect (Management Evaluation)</strong>:</li>
+</ul>
+</li>
+<li><strong>The Terrestrial-Aquatic Conservation Fencing Disconnect (Management Evaluation)</strong>:<ul>
 <li><em>Published Conclusion</em>: Exclusion fencing represents the primary recommended tool for protecting spring biodiversity.</li>
 <li><em>Extended Conclusion</em>: We identify a critical disconnect: while terrestrial fencing is highly successful at reducing cattle/horse disturbance in Regional Aquifers ($\mu_{\text{cattle}} = 1.16$ vs. $2.47$ in cold springs), these same springs remain highly invaded by non-native aquatic species ($\mu_{\text{non-native}} = 1.27$ species vs. $0.04$ in cold springs) because fencing cannot block aquatic invaders. This demonstrates that terrestrial exclusion is necessary but insufficient, requiring a multi-tiered aquatic biosecurity framework.</li>
-<li><strong>Actionable Depth Threshold Targets (Partial Dependence Plots)</strong>:</li>
+</ul>
+</li>
+<li><strong>Actionable Depth Threshold Targets (Partial Dependence Plots)</strong>:<ul>
 <li><em>Published Conclusion</em>: Pool depth is identified generally as a significant factor in PCA biplots.</li>
 <li><em>Extended Conclusion</em>: Our non-parametric Partial Dependence Plots (PDPs) and LOWESS curves reveal a sharp, non-linear <strong>threshold boundary at ~20–30 cm</strong> for water depth. Expected endemic richness remains constrained and low below this range, but increases exponentially above it, giving managers a specific, actionable physical target for excavation and water-rights protection.</li>
-<li><strong>Environmental vs. Biological Distinctiveness (The Oasis Niche)</strong>:</li>
+</ul>
+</li>
+<li><strong>Environmental vs. Biological Distinctiveness (The Oasis Niche)</strong>:<ul>
 <li><em>Published Conclusion</em>: Regional aquifer springs differ from other springs primarily due to biological factors (presence of endemics) and overlap environmentally with local hot springs.</li>
 <li><em>Extended Conclusion</em>: Our non-linear t-SNE manifold learning reveals that regional aquifer springs form a tight, completely isolated cluster in <em>environmental parameter space</em> itself. This demonstrates that their biological uniqueness is a direct product of their unique, rare environmental niche (the intersection of stable warm temperature, high depth, high bank cover, and coarse substrates), rather than overlapping generally with geothermal springs.</li>
-<li><strong>Scale-Dependent Species Co-occurrence and Management Focus</strong>:</li>
+</ul>
+</li>
+<li><strong>Scale-Dependent Species Co-occurrence and Management Focus</strong>:<ul>
 <li><em>Published Conclusion</em>: Springs generally group together, suggesting a uniform positive correlation structure among all native taxa.</li>
 <li><em>Extended Conclusion</em>: Species correlations undergo a scale-dependent reversal. Globally, all native species correlate positively due to a massive landscape-level presence/absence gradient (hotspots vs. dry sites). Regionally within oases, however, springsnails are decoupled from other endemics by siltation sensitivity, and non-natives cluster closely with natives due to shared physical stability. Consequently, conservation cannot rely on a single global "biodiversity hotspot" protection plan, but must target taxon-specific environmental filters (such as substrate desiltation for springsnails).</li>
+</ul>
+</li>
 </ol>
 <p>We present this reanalysis not as a correction of errors, but as a complementary, multi-tiered statistical framework that enhances the predictive utility of the authors' invaluable regional catalog.</p>
 <hr />
