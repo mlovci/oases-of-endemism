@@ -207,3 +207,15 @@ Both documents are integrated into the compilation pipeline and rendered into pu
 
 - **[publication.html](publication.html)** (fully styled, including responsive layout, interactive data downloads, custom legends, and aligned figures).
 
+---
+
+## 5. Markdown Line Breaks and Bulleted List Repair
+
+We resolved formatting issues where paragraph text, headers, and bulleted lists were smashed together due to missing blank lines in the raw markdown files:
+
+1. **Diagnostic Identification**: Run scan showing missing blank lines before list blocks, before headers, and after lists.
+2. **Indentation and Nested List Corrections**: Corrected parent-child indentation from 6 spaces to 8 spaces for nested blocks under 4-space parents in `results.md` (e.g., `Methodological Choice` and `Methodological Incommensurability`). Added missing blank lines.
+3. **HTML Structural Verification**: Verified that compiled HTML (`publication.html` and `index.html`) correctly uses nested `<ul>`, `<ol>`, and `<li>` elements, resolving issues where sub-lists were rendered as plain paragraph text or flattened bullets.
+4. **Git Integration**: Committed changes to `fix-smashed-formatting` and merged using the GitHub CLI pull request flow.
+
+
