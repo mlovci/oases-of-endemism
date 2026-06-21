@@ -553,10 +553,16 @@
 <em>Figure 2: Disturbance Correlation Matrix Heatmap. Pearson correlation coefficients ($r$) between different environmental disturbance metrics (Cattle Grazing, Horse activity, Water Diversion, Recreation, and Siltation). Shows that different disturbances are positively correlated, capturing a general gradient of habitat degradation. <a href="figures/Figure_2_Disturbance_Correlation.pdf">Download Print-Quality PDF</a></em></p>
 <p>Unsupervised methods (Factor Analysis, PCA, t-SNE) project the 15 environmental parameters of the springs into low-dimensional latent spaces to isolate multivariate environmental patterns associated with endemism.</p>
 <h3 id="a-factor-analysis-the-benthic-habitat-quality-axis-regional-aquifers-n45">A. Factor Analysis: The Benthic Habitat Quality Axis (Regional Aquifers, $N=45$)</h3>
-<p>For the 45 high-endemic Regional Aquifer springs, standard linear models are supplemented with a 3-component Factor Analysis to identify underlying environmental conditions. </p>
+<p>For the 45 high-endemic Regional Aquifer springs, standard linear models are supplemented with a 3-component Factor Analysis (FA) to identify underlying environmental structures:</p>
 <ul>
-<li><strong>Latent Factor 2</strong> exhibits a statistically significant positive correlation with endemic richness ($r_s = 0.346, p = 0.020$).</li>
-<li><strong>Ecological Loadings</strong>:<ul>
+<li><strong>Spearman Rank Correlations for All Latent Factors</strong>:<ul>
+<li><strong>Factor 1</strong>: $r_s = 0.085, p = 0.581$ (Not statistically significant).</li>
+<li><strong>Factor 2</strong>: $r_s = 0.346, p = 0.020$ (Statistically significant).</li>
+<li><strong>Factor 3</strong>: $r_s = 0.156, p = 0.307$ (Not statistically significant).</li>
+<li>Because only <strong>Factor 2</strong> correlates significantly with endemic species richness, it is isolated for further analysis as the key benthic quality indicator.</li>
+</ul>
+</li>
+<li><strong>Ecological Loadings for Factor 2</strong>:<ul>
 <li><code>Silt %</code>: <strong>-0.839</strong> (strong negative loading)</li>
 <li><code>Cobble %</code>: <strong>+0.659</strong> (strong positive loading)</li>
 <li><code>Temperature</code>: <strong>+0.630</strong> (positive loading)</li>

@@ -68,10 +68,14 @@ Unsupervised methods (Factor Analysis, PCA, t-SNE) project the 15 environmental 
 
 ### A. Factor Analysis: The Benthic Habitat Quality Axis (Regional Aquifers, $N=45$)
 
-For the 45 high-endemic Regional Aquifer springs, standard linear models are supplemented with a 3-component Factor Analysis to identify underlying environmental conditions. 
+For the 45 high-endemic Regional Aquifer springs, standard linear models are supplemented with a 3-component Factor Analysis (FA) to identify underlying environmental structures:
 
-*   **Latent Factor 2** exhibits a statistically significant positive correlation with endemic richness ($r_s = 0.346, p = 0.020$).
-*   **Ecological Loadings**:
+*   **Spearman Rank Correlations for All Latent Factors**:
+    - **Factor 1**: $r_s = 0.085, p = 0.581$ (Not statistically significant).
+    - **Factor 2**: $r_s = 0.346, p = 0.020$ (Statistically significant).
+    - **Factor 3**: $r_s = 0.156, p = 0.307$ (Not statistically significant).
+    - Because only **Factor 2** correlates significantly with endemic species richness, it is isolated for further analysis as the key benthic quality indicator.
+*   **Ecological Loadings for Factor 2**:
     *   `Silt %`: **-0.839** (strong negative loading)
     *   `Cobble %`: **+0.659** (strong positive loading)
     *   `Temperature`: **+0.630** (positive loading)
@@ -80,6 +84,7 @@ For the 45 high-endemic Regional Aquifer springs, standard linear models are sup
     *   `Gravel %`: **+0.410** (positive loading)
 
 **Ecological Interpretation**: Factor 2 represents a **Benthic Habitat Quality Axis**. Springs with high scores on this axis are characterised by warm, stable water temperatures and coarse, rocky substrate (cobble and gravel) with very low silt accumulation and reduced emergent plant choking. This provides open, rocky interstitial spaces crucial for benthic herbivores like springsnails (*Pyrgulopsis* spp.). The positive correlation indicates that maintaining coarse substrates and warm, open flows is a primary driver of endemic preservation.
+
 
 ![Figure 3: Benthic Habitat Quality Factor vs Endemic Richness](figures/Figure_3_Regional_FA_Benthic_Quality.png)
 *Figure 3: Benthic Habitat Quality Factor vs Endemic Richness in Regional Springs. [Download Print-Quality PDF](figures/Figure_3_Regional_FA_Benthic_Quality.pdf)*

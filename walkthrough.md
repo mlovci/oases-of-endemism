@@ -139,8 +139,9 @@ We computed and plotted one-dimensional partial dependence plots (PDPs) for all 
 ### F. Unsupervised Decomposition & Manifold Learning (`unsupervised_analysis.py`)
 We ran unsupervised decomposition to explore the latent conditions preserving endemic taxa:
 1.  **Regional Aquifer Factor Analysis (Benthic Habitat Quality Factor)**:
-    - Extracted a latent factor (Factor 2) that loads heavily on high temperature ($+0.630$), coarse substrate (cobble $+0.659$, gravel $+0.410$), and very low silt ($-0.839$).
-    - Factor 2 correlates significantly with endemic species richness ($r_s = 0.346, p = 0.020$), confirming that open benthic substrates free of siltation represent the primary environmental condition preserving high endemic levels in regional thermal springs.
+    - Analyzed three latent environmental factors: Factor 1 ($r_s = 0.085, p = 0.581$, Not Significant), Factor 2 ($r_s = 0.346, p = 0.020$, Statistically Significant), and Factor 3 ($r_s = 0.156, p = 0.307$, Not Significant).
+    - Focused on the only significant factor, **Factor 2**, which loads heavily on high temperature ($+0.630$), coarse substrate (cobble $+0.659$, gravel $+0.410$), and very low silt ($-0.839$).
+    - Confirmed that open benthic substrates free of siltation represent the primary environmental condition preserving high endemic levels in regional thermal springs.
     - Fitted Poisson GLM: Verified that Factor 2 is a significant positive predictor.
     - Visualized in: ![Figure 3: Benthic Habitat Quality Factor vs Endemic Richness](figures/Figure_3_Regional_FA_Benthic_Quality.png)
 2.  **Global PCA (Grazing & Habitat Degradation Axis)**:
