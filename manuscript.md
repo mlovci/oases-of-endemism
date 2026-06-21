@@ -230,3 +230,40 @@ To maximize the efficiency of desert spring monitoring across remote basins, con
 2. **Multispectral UAV (Drone) Remote Sensing**: Using thermal and multispectral sensors to screen remote spring surface areas, drying trends, and riparian bank damage from the air.
 3. **LoRaWAN IoT Fence Breach Sensors**: Installing tilt and vibration sensors on exclusion fences to alert land managers of livestock breaches in real-time.
 4. **Real-Time Aquifer Pressure Transducers**: Monitoring groundwater levels and discharge rates via telemetry to trigger immediate regulatory enforcement if groundwater pumping exceeds safe recharge limits.
+
+---
+
+## References
+
+Anderson, M. J. (2001). A new method for non-parametric multivariate analysis of variance. *Austral Ecology*, 26(1), 32–46.
+
+Clarke, K. R. (1993). Non-parametric multivariate analyses of changes in community structure. *Australian Journal of Ecology*, 18(1), 117–143.
+
+Fensham, R. J., Silcock, J. L., Kerezsy, A., & Ponder, W. F. (2011). Four desert waters: Setting arid zone wetland conservation priorities through understanding patterns of endemism. *Biological Conservation*, 144(10), 2459–2467.
+
+Forrest, M. J., Sada, D. W., Edwards, M. S., Burton, R. K., & Norris, R. D. (2026). Oases of endemism: Regional aquifer desert springs serve as biodiversity hotspots preserving vulnerable endemic taxa in the Great Basin and Mojave Desert regions. *Limnology and Oceanography*, 71(6), e70414. https://doi.org/10.1002/lno.70414
+
+Hershler, R., & Sada, D. W. (2002). Biogeography of Great Basin aquatic snails of the genus *Pyrgulopsis*. In: Hershler, R., Madsen, D. B., & Currey, D. R. (Eds.), *Great Basin Aquatic Systems History* (pp. 255–276). Smithsonian Contributions to the Earth Sciences, No. 33.
+
+Hershler, R., Liu, H.-P., & Landye, J. J. (2011). New species and records of springsnails (Caenogastropoda: Cochliopidae: *Tryonia*) from the Chihuahuan Desert (Mexico and United States), an imperiled biodiversity hotspot. *Zootaxa*, 3001(1), 1–32.
+
+Hubbs, C. L., & Miller, R. R. (1948). The Great Basin, with emphasis on glacial and postglacial times. II. The zoological evidence: Correlation between fish distribution and hydrographic history in the desert basins of western United States. *Bulletin of the University of Utah*, 38(20), 18–166.
+
+Legendre, P., & Anderson, M. J. (1999). Distance-based redundancy analysis: testing multispecies responses in multifactorial ecological experiments. *Ecological Monographs*, 69(1), 1–24.
+
+Legendre, P., & Legendre, L. (2012). *Numerical Ecology* (3rd English ed.). Elsevier.
+
+Rossini, R. A., Fensham, R. J., & Walter, G. H. (2018). Spatiotemporal patterns of abundance and co-occurrence in narrow-range endemic macro-invertebrates of Great Artesian Basin springs. *Aquatic Ecology*, 52(1), 67–81.
+
+Sada, D. W., & Pohlmann, K. F. (2006). *U.S. National Park Service Mojave Desert Network Springs Inventory Protocol*. Desert Research Institute, Las Vegas, Nevada.
+
+Sada, D. W., & Vinyard, G. L. (2002). Anthropogenic changes in historical biogeography of Great Basin aquatic biota. In: Hershler, R., Madsen, D. B., & Currey, D. R. (Eds.), *Great Basin Aquatic Systems History* (pp. 277–292). Smithsonian Contributions to the Earth Sciences, No. 33.
+
+Shea, K., & Chesson, P. (2002). Community ecology theory as a framework for biological invasions. *Trends in Ecology & Evolution*, 17(4), 170–176.
+
+Souza, V., Espinosa-Asuar, L., Escalante, A. E., Eguiarte, L. E., Assj, J., Souza, M. V., ... & Elser, J. J. (2006). An endangered oasis of aquatic microbial biodiversity in the Chihuahuan desert. *Proceedings of the National Academy of Sciences*, 103(17), 6565–6570.
+
+Stohlgren, T. J., Binkley, D., Chong, G. W., Kalkhan, M. A., Schell, L. D., Bull, K. A., Otsuki, Y., Newman, G., Bashkin, M. A., & Son, Y. (1999). Exotic plant species invade hot spots of native plant diversity. *Ecological Monographs*, 69(1), 25–46.
+
+Stohlgren, T. J., Barnett, D. T., & Kartesz, J. T. (2003). The rich get richer: Patterns of plant invasions in the United States. *Frontiers in Ecology and the Environment*, 1(1), 11–14.
+
